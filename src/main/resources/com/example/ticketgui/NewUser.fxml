@@ -9,24 +9,24 @@
 
 <AnchorPane prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #9988DD;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ticketgui.NewUser">
    <children>
-      <TextField layoutX="720.0" layoutY="500.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" />
-      <Label layoutX="720.0" layoutY="450.0" minHeight="-Infinity" minWidth="-Infinity" text="User role:">
+      <TextField layoutX="760.0" layoutY="500.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" />
+      <Label layoutX="760.0" layoutY="450.0" minHeight="-Infinity" minWidth="-Infinity" text="Bruger rolle:">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <TextField layoutX="720.0" layoutY="320.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" />
-      <Button layoutX="803.0" layoutY="620.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="232.0" text="Create user">
+      <TextField layoutX="760.0" layoutY="320.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" />
+      <Button layoutX="827.0" layoutY="620.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="232.0" text="Opret bruger">
          <font>
             <Font size="30.0" />
          </font>
       </Button>
-      <Label layoutX="720.0" layoutY="270.0" text="Username:">
+      <Label layoutX="760.0" layoutY="270.0" text="Brugernavn:">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Button layoutX="60.0" layoutY="39.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="185.0" text="Back ➜">
+      <Button layoutX="60.0" layoutY="39.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="185.0" text="Tilbage ➜">
          <font>
             <Font size="30.0" />
          </font>
