@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -20,5 +23,31 @@
             <Font size="36.0" />
          </font>
       </Label>
+      <TableView layoutX="1195.0" layoutY="141.0" prefHeight="720.0" prefWidth="680.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Navn" />
+          <TableColumn minWidth="50.0" prefWidth="75.0" text="Udløbddato" />
+        </columns>
+      </TableView>
+      <Label layoutX="1203.0" layoutY="72.0" text="Kuponer:">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Button layoutX="80.0" layoutY="59.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="185.0" text="Tilbage ➜">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Button>
+      <Button layoutX="816.0" layoutY="590.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="232.0" text="Slet">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Button>
+      <Button layoutX="493.0" layoutY="590.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="232.0" text="Gem">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
