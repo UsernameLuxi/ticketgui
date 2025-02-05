@@ -2,3 +2,39 @@
     -fx-background-color: red;
     -fx-text-fill: white;
 }
+
+.backgroundMain{
+    -fx-background-color: #7766DD;
+
+}
+
+.backgroundLogin{
+    -fx-background-color: #6655CC;
+
+}
+.backgroundOther{
+    -fx-background-color: #9988DD;
+
+}
+
+.dataItem{
+    -fx-background-color: #CCCBCB;
+    -fx-background-radius: 25px;
+}
+.dataItemTitle{
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 2px 0;
+}
+
+.combo-box{
+    -fx-font-size: 16px;
+}
+
+#topBar{
+    -fx-background-color: #CCCBCB;
+}
+#sideMenu{
+    -fx-background-color: #9966DD;
+    -fx-border-style: solid;
+    -fx-border-width: 0 2px 0 0;
+}

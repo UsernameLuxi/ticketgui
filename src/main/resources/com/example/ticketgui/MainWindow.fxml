@@ -7,14 +7,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="108.0" prefWidth="1920.0" style="-fx-background-color: green;">
+      <AnchorPane id="topBar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="108.0" prefWidth="1920.0">
          <children>
             <AnchorPane layoutX="1620.0" layoutY="32.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="130.0">
                <children>
@@ -34,7 +32,7 @@
          </children>
       </AnchorPane>
       <ImageView fitHeight="108.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" />
-      <AnchorPane layoutY="108.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="974.0" prefWidth="355.0" style="-fx-background-color: red;">
+      <AnchorPane id="sideMenu" layoutY="108.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="974.0" prefWidth="355.0">
          <children>
             <Label alignment="CENTER" layoutY="20.0" prefHeight="55.0" prefWidth="355.0" text="Menu" textAlignment="CENTER">
                <font>
@@ -73,12 +71,11 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="355.0" layoutY="108.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="368.0" prefWidth="1948.0" style="-fx-background-color: Blue;">
+      <AnchorPane layoutX="355.0" layoutY="108.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="368.0" prefWidth="1948.0" styleClass="backgroundMain">
          <children>
-            <AnchorPane layoutX="180.0" layoutY="70.0">
+            <AnchorPane layoutX="180.0" layoutY="70.0" styleClass="dataItem">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="235.0" layoutX="2.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: #cccbcb;" width="315.0" />
-                  <Label alignment="CENTER" prefHeight="48.0" prefWidth="315.0" text="Aktive Events" textAlignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="48.0" prefWidth="318.0" styleClass="dataItemTitle" text="Aktive Events" textAlignment="CENTER">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -90,10 +87,9 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="610.0" layoutY="70.0">
+            <AnchorPane layoutX="610.0" layoutY="70.0" styleClass="dataItem">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="235.0" layoutX="2.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: #cccbcb;" width="315.0" />
-                  <Label alignment="CENTER" prefHeight="48.0" prefWidth="315.0" text="Events denne måned" textAlignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="48.0" prefWidth="318.0" styleClass="dataItemTitle" text="Events denne måned" textAlignment="CENTER">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -105,10 +101,9 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="1040.0" layoutY="70.0">
+            <AnchorPane layoutX="1040.0" layoutY="70.0" styleClass="dataItem">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="235.0" layoutX="2.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: #cccbcb;" width="315.0" />
-                  <Label alignment="CENTER" prefHeight="48.0" prefWidth="315.0" text="Events denne uge" textAlignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="48.0" prefWidth="318.0" styleClass="dataItemTitle" text="Events denne uge" textAlignment="CENTER">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -120,10 +115,9 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="1470.0" layoutY="70.0">
+            <AnchorPane layoutX="1470.0" layoutY="70.0" styleClass="dataItem">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="235.0" layoutX="2.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: #cccbcb;" width="315.0" />
-                  <Label alignment="CENTER" prefHeight="48.0" prefWidth="315.0" text="Aktive Kuponer" textAlignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="48.0" prefWidth="318.0" styleClass="dataItemTitle" text="Aktive Kuponer" textAlignment="CENTER">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -137,7 +131,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="355.0" layoutY="476.0" prefHeight="606.0" prefWidth="1136.0" style="-fx-background-color: yellow;">
+      <AnchorPane layoutX="355.0" layoutY="476.0" prefHeight="606.0" prefWidth="1136.0" styleClass="backgroundMain">
          <children>
             <TableView layoutX="26.0" layoutY="160.0" prefHeight="400.0" prefWidth="1109.0">
               <columns>
@@ -156,21 +150,24 @@
                   <Font size="32.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="235.0" layoutY="24.0" text="Event Titel">
+            <Label alignment="CENTER" layoutX="235.0" layoutY="35.0" text="Event Titel">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="450.0" layoutY="24.0" text="Event Type">
+            <Label layoutX="450.0" layoutY="35.0" text="Event Type">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="235.0" layoutY="83.0" />
+            <TextField alignment="CENTER" layoutX="235.0" layoutY="83.0" prefHeight="25.0">
+               <font>
+                  <Font size="16.0" />
+               </font></TextField>
             <ComboBox layoutX="450.0" layoutY="83.0" prefWidth="200.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="1489.0" layoutY="476.0" prefHeight="606.0" prefWidth="431.0" style="-fx-background-color: pink;">
+      <AnchorPane layoutX="1489.0" layoutY="476.0" prefHeight="606.0" prefWidth="431.0" styleClass="backgroundMain">
          <children>
             <Label alignment="CENTER" layoutX="40.0" layoutY="65.0" prefHeight="40.0" prefWidth="150.0" text="Kuponer">
                <font>
