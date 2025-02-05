@@ -160,7 +160,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField alignment="CENTER" layoutX="235.0" layoutY="83.0" prefHeight="25.0">
+            <TextField layoutX="235.0" layoutY="83.0" prefHeight="25.0">
                <font>
                   <Font size="16.0" />
                </font></TextField>
