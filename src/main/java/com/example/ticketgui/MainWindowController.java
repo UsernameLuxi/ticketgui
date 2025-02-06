@@ -100,7 +100,7 @@ public class MainWindowController implements Initializable {
     private Label lblCupons;
     @FXML
     private TableView tblCupons;
-    private List<Region> windowContent;
+    private List<Node> windowContent;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -129,17 +129,14 @@ public class MainWindowController implements Initializable {
         windowContent.add(userInformation);
         windowContent.add(lblUserName);
         windowContent.add(lblUserRole);
-        windowContent.add(imgUserImage);
         windowContent.add(imgLogout);
         windowContent.add(lblMenuTitle);
         windowContent.add(newEvent);
         windowContent.add(imgNewEvent);
         windowContent.add(lblNewEventlbl);
         windowContent.add(newUser);
-        windowContent.add(imgNewUser);
         windowContent.add(lblNewUser);
         windowContent.add(manageCupons);
-        windowContent.add(imgManageCupons);
         windowContent.add(lblManageCupons);
         windowContent.add(data1);
         windowContent.add(lblData1Title);
@@ -162,6 +159,8 @@ public class MainWindowController implements Initializable {
         windowContent.add(cbEventType);
         windowContent.add(cuponsPane);
         windowContent.add(lblCupons);
-        Node jens = new ImageView();
+        windowContent.add(imgManageCupons);
+        windowContent.add(imgNewUser);
+        windowContent.add(imgUserImage);
     }
 }
