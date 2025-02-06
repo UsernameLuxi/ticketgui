@@ -10,119 +10,59 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ticketgui.MainWindowController">
    <children>
-      <AnchorPane id="topBar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="108.0" prefWidth="1920.0">
+      <AnchorPane id="topBar" fx:id="menuBar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="108.0" prefWidth="1920.0">
          <children>
-            <AnchorPane layoutX="1620.0" layoutY="32.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="130.0">
+            <AnchorPane fx:id="userInformation" layoutX="1620.0" layoutY="32.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="130.0">
                <children>
-                  <Text layoutX="63.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+                  <Text fx:id="lblUserName" layoutX="63.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="63.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Role">
+                  <Text fx:id="lblUserRole" layoutX="63.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Role">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Text>
-                  <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="6.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imgUserImage" fitHeight="44.0" fitWidth="44.0" layoutX="6.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="108.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" />
-      <AnchorPane id="sideMenu" layoutY="108.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="974.0" prefWidth="355.0">
+      <ImageView fx:id="imgLogout" fitHeight="108.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" />
+      <AnchorPane id="sideMenu" fx:id="sideMenu" layoutY="108.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="974.0" prefWidth="355.0">
          <children>
-            <Label alignment="CENTER" layoutY="20.0" prefHeight="55.0" prefWidth="355.0" text="Menu" textAlignment="CENTER">
+            <Label fx:id="lblMenuTitle" alignment="CENTER" layoutY="20.0" prefHeight="55.0" prefWidth="355.0" text="Menu" textAlignment="CENTER">
                <font>
                   <Font size="38.0" />
                </font>
             </Label>
-            <AnchorPane layoutY="126.0" prefHeight="60.0" prefWidth="355.0">
+            <AnchorPane fx:id="newEvent" layoutY="126.0" prefHeight="60.0" prefWidth="355.0">
                <children>
-                  <ImageView fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;" AnchorPane.leftAnchor="20.0" />
-                  <Label layoutX="77.0" layoutY="12.0" text="New Event" AnchorPane.leftAnchor="90.0">
+                  <ImageView fx:id="imgNewEvent" fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;" AnchorPane.leftAnchor="20.0" />
+                  <Label fx:id="lblNewEventlbl" layoutX="77.0" layoutY="12.0" text="Nyt Event" AnchorPane.leftAnchor="90.0">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane layoutY="216.0" prefHeight="60.0" prefWidth="355.0">
+            <AnchorPane fx:id="newUser" layoutY="216.0" prefHeight="60.0" prefWidth="355.0">
                <children>
-                  <ImageView fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;" AnchorPane.leftAnchor="20.0" />
-                  <Label layoutX="77.0" layoutY="12.0" text="New User" AnchorPane.leftAnchor="90.0">
+                  <ImageView fx:id="imgNewUser" fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;" AnchorPane.leftAnchor="20.0" />
+                  <Label fx:id="lblNewUser" layoutX="77.0" layoutY="12.0" text="Ny Bruger" AnchorPane.leftAnchor="90.0">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane layoutY="300.0" prefHeight="60.0" prefWidth="355.0">
+            <AnchorPane fx:id="manageCupons" layoutY="300.0" prefHeight="60.0" prefWidth="355.0">
                <children>
-                  <ImageView fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;" AnchorPane.leftAnchor="20.0" />
-                  <Label layoutX="77.0" layoutY="12.0" text="Manage Cupons" AnchorPane.leftAnchor="90.0">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="355.0" layoutY="108.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="368.0" prefWidth="1948.0" styleClass="backgroundMain">
-         <children>
-            <AnchorPane layoutX="180.0" layoutY="70.0" styleClass="dataItem">
-               <children>
-                  <Label alignment="CENTER" prefHeight="48.0" prefWidth="318.0" styleClass="dataItemTitle" text="Aktive Events" textAlignment="CENTER">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" text="Label">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutX="610.0" layoutY="70.0" styleClass="dataItem">
-               <children>
-                  <Label alignment="CENTER" prefHeight="48.0" prefWidth="318.0" styleClass="dataItemTitle" text="Events denne måned" textAlignment="CENTER">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" text="Label">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutX="1040.0" layoutY="70.0" styleClass="dataItem">
-               <children>
-                  <Label alignment="CENTER" prefHeight="48.0" prefWidth="318.0" styleClass="dataItemTitle" text="Events denne uge" textAlignment="CENTER">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" text="Label">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutX="1470.0" layoutY="70.0" styleClass="dataItem">
-               <children>
-                  <Label alignment="CENTER" prefHeight="48.0" prefWidth="318.0" styleClass="dataItemTitle" text="Aktive Kuponer" textAlignment="CENTER">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" text="Label">
+                  <ImageView fx:id="imgManageCupons" fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;" AnchorPane.leftAnchor="20.0" />
+                  <Label fx:id="lblManageCupons" layoutX="77.0" layoutY="12.0" text="Håndtér Kuponer" AnchorPane.leftAnchor="90.0">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -131,9 +71,69 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="355.0" layoutY="476.0" prefHeight="606.0" prefWidth="1136.0" styleClass="backgroundMain">
+      <AnchorPane fx:id="dataPane" layoutX="355.0" layoutY="108.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="368.0" prefWidth="1948.0" styleClass="backgroundMain">
          <children>
-            <TableView layoutX="26.0" layoutY="160.0" prefHeight="400.0" prefWidth="1109.0">
+            <AnchorPane fx:id="data1" layoutX="180.0" layoutY="70.0" styleClass="dataItem">
+               <children>
+                  <Label fx:id="lblData1Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" styleClass="dataItemTitle" text="Aktive Events" textAlignment="CENTER">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblData1data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" text="Label">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="data2" layoutX="610.0" layoutY="70.0" styleClass="dataItem">
+               <children>
+                  <Label fx:id="lvlData2Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" styleClass="dataItemTitle" text="Events denne måned" textAlignment="CENTER">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblData2data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" text="Label">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="data3" layoutX="1040.0" layoutY="70.0" styleClass="dataItem">
+               <children>
+                  <Label fx:id="lblData3Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" styleClass="dataItemTitle" text="Events denne uge" textAlignment="CENTER">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblData3data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" text="Label">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="data4" layoutX="1470.0" layoutY="70.0" prefWidth="139.0" styleClass="dataItem">
+               <children>
+                  <Label fx:id="lblData4Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" styleClass="dataItemTitle" text="Aktive Kuponer" textAlignment="CENTER">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblData4data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" text="Label">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="eventOverview" layoutX="355.0" layoutY="476.0" prefHeight="606.0" prefWidth="1136.0" styleClass="backgroundMain">
+         <children>
+            <TableView fx:id="tblEvent" layoutX="26.0" layoutY="160.0" prefHeight="400.0" prefWidth="1109.0">
               <columns>
                 <TableColumn prefWidth="125.5999755859375" text="Event Titel" />
                 <TableColumn minWidth="0.0" prefWidth="75.99996948242188" text="Type" />
@@ -145,36 +145,36 @@
                   <TableColumn minWidth="24.0" prefWidth="138.13330078125" text="Slet" />
               </columns>
             </TableView>
-            <Label alignment="CENTER" layoutX="26.0" layoutY="83.0" prefHeight="39.0" prefWidth="115.0" text="Events:">
+            <Label fx:id="lblEvent" alignment="CENTER" layoutX="26.0" layoutY="83.0" prefHeight="39.0" prefWidth="115.0" text="Events:">
                <font>
                   <Font size="32.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="235.0" layoutY="35.0" text="Event Titel">
+            <Label fx:id="lvlEventSearch" alignment="CENTER" layoutX="235.0" layoutY="35.0" text="Event Titel">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="450.0" layoutY="35.0" text="Event Type">
+            <Label fx:id="lblEventTypeSearch" layoutX="450.0" layoutY="35.0" text="Event Type">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="235.0" layoutY="83.0" prefHeight="25.0">
+            <TextField fx:id="txtEventTitle" layoutX="235.0" layoutY="83.0" prefHeight="25.0">
                <font>
                   <Font size="16.0" />
                </font></TextField>
-            <ComboBox layoutX="450.0" layoutY="83.0" prefWidth="200.0" />
+            <ComboBox fx:id="cbEventType" layoutX="450.0" layoutY="83.0" prefWidth="200.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="1489.0" layoutY="476.0" prefHeight="606.0" prefWidth="431.0" styleClass="backgroundMain">
+      <AnchorPane fx:id="cuponsPane" layoutX="1489.0" layoutY="476.0" prefHeight="606.0" prefWidth="431.0" styleClass="backgroundMain">
          <children>
-            <Label alignment="CENTER" layoutX="40.0" layoutY="65.0" prefHeight="40.0" prefWidth="150.0" text="Kuponer">
+            <Label fx:id="lblCupons" alignment="CENTER" layoutX="40.0" layoutY="65.0" prefHeight="40.0" prefWidth="150.0" text="Kuponer">
                <font>
                   <Font size="32.0" />
                </font>
             </Label>
-            <TableView layoutX="40.0" layoutY="160.0" prefHeight="400.0" prefWidth="350.0">
+            <TableView fx:id="tblCupons" layoutX="40.0" layoutY="160.0" prefHeight="400.0" prefWidth="350.0">
               <columns>
                 <TableColumn prefWidth="232.0" text="Titel" />
                   <TableColumn prefWidth="117.5999755859375" text="Print" />
