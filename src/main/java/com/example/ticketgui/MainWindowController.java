@@ -2,13 +2,18 @@ package com.example.ticketgui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainWindowController implements Initializable {
@@ -24,9 +29,9 @@ public class MainWindowController implements Initializable {
     @FXML
     private AnchorPane userInformation;
     @FXML
-    private Text lblUserName;
+    private Label lblUserName;
     @FXML
-    private Text lblUserRole;
+    private Label lblUserRole;
     @FXML
     private ImageView imgUserImage;
     @FXML
@@ -95,6 +100,7 @@ public class MainWindowController implements Initializable {
     private Label lblCupons;
     @FXML
     private TableView tblCupons;
+    private List<Region> windowContent;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -115,6 +121,47 @@ public class MainWindowController implements Initializable {
 
     // erhmmm ja... man kunne også bare give hvert pane et fxId og .getChildren() - hilsen Casper -> but also made by Casper... træls (root.getChildren() for each)
     public void initializeComponents(){
-
+        windowContent = new ArrayList<>();
+        windowContent.add(dataPane);
+        windowContent.add(root);
+        windowContent.add(sideMenu);
+        windowContent.add(menuBar);
+        windowContent.add(userInformation);
+        windowContent.add(lblUserName);
+        windowContent.add(lblUserRole);
+        windowContent.add(imgUserImage);
+        windowContent.add(imgLogout);
+        windowContent.add(lblMenuTitle);
+        windowContent.add(newEvent);
+        windowContent.add(imgNewEvent);
+        windowContent.add(lblNewEventlbl);
+        windowContent.add(newUser);
+        windowContent.add(imgNewUser);
+        windowContent.add(lblNewUser);
+        windowContent.add(manageCupons);
+        windowContent.add(imgManageCupons);
+        windowContent.add(lblManageCupons);
+        windowContent.add(data1);
+        windowContent.add(lblData1Title);
+        windowContent.add(lblData1data);
+        windowContent.add(data2);
+        windowContent.add(lvlData2Title);
+        windowContent.add(lblData2data);
+        windowContent.add(data3);
+        windowContent.add(lblData3Title);
+        windowContent.add(lblData3data);
+        windowContent.add(data4);
+        windowContent.add(lblData4Title);
+        windowContent.add(lblData4data);
+        windowContent.add(eventOverview);
+        windowContent.add(tblEvent);
+        windowContent.add(lblEvent);
+        windowContent.add(lvlEventSearch);
+        windowContent.add(lblEventTypeSearch);
+        windowContent.add(txtEventTitle);
+        windowContent.add(cbEventType);
+        windowContent.add(cuponsPane);
+        windowContent.add(lblCupons);
+        Node jens = new ImageView();
     }
 }
