@@ -17,9 +17,14 @@ public class Main extends Application {
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
-        stage.setMaximized(true);
         MainWindowController mwc = fxmlLoader.getController();
-        mwc.test(stage);
+        //mwc.test(stage);
+        mwc.initializeComponents(1920, 1080);
+
+        stage.widthProperty().addListener((observable, oldValue, newValue) -> {mwc.resizeItems(newValue.doubleValue(), stage.getHeight());});
+        stage.heightProperty().addListener((observable, oldValue, newValue) -> {mwc.resizeItems(stage.getWidth(), newValue.doubleValue());});
+
+        stage.setMaximized(true);
     }
 
     public static void main(String[] args) {

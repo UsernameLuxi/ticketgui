@@ -12,9 +12,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class MainWindowController implements Initializable {
 
@@ -100,7 +98,7 @@ public class MainWindowController implements Initializable {
     private Label lblCupons;
     @FXML
     private TableView tblCupons;
-    private List<Node> windowContent;
+    private Map<Region, List<Double>> windowItems = new HashMap<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -120,8 +118,9 @@ public class MainWindowController implements Initializable {
     }
 
     // erhmmm ja... man kunne også bare give hvert pane et fxId og .getChildren() - hilsen Casper -> but also made by Casper... træls (root.getChildren() for each)
-    public void initializeComponents(){
-        windowContent = new ArrayList<>();
+    // update note - det kan man ikke - fordi root childen har ikke nok children (7 currently ift. 40)
+    public void initializeComponents(double width, double height) {
+        List<Region> windowContent = new ArrayList<>();
         windowContent.add(dataPane);
         windowContent.add(root);
         windowContent.add(sideMenu);
@@ -129,10 +128,10 @@ public class MainWindowController implements Initializable {
         windowContent.add(userInformation);
         windowContent.add(lblUserName);
         windowContent.add(lblUserRole);
-        windowContent.add(imgLogout);
+        //windowContent.add(imgLogout);
         windowContent.add(lblMenuTitle);
         windowContent.add(newEvent);
-        windowContent.add(imgNewEvent);
+        //windowContent.add(imgNewEvent);
         windowContent.add(lblNewEventlbl);
         windowContent.add(newUser);
         windowContent.add(lblNewUser);
@@ -159,8 +158,37 @@ public class MainWindowController implements Initializable {
         windowContent.add(cbEventType);
         windowContent.add(cuponsPane);
         windowContent.add(lblCupons);
-        windowContent.add(imgManageCupons);
-        windowContent.add(imgNewUser);
-        windowContent.add(imgUserImage);
+        windowContent.add(tblCupons);
+        //windowContent.add(imgManageCupons);
+        //windowContent.add(imgNewUser);
+        //windowContent.add(imgUserImage);
+
+        fillMap(windowContent, width, height);
+
     }
+
+    private void fillMap(List<Region> items, double width, double height) {
+        for (Region item : items) {
+            windowItems.put(item, new ArrayList<>(){{
+                add(item.getWidth() / width);
+                add(item.getHeight() / height);
+                add(item.getLayoutX() / width);
+                add(item.getLayoutY() / height);}}
+            );
+        }
+    }
+
+    public void resizeItems(double width, double height){
+        width -= 15; // hold dig fra siden mand!
+        height -= 30;
+        for (Region n : windowItems.keySet()) {
+            //n.resize(width * windowItems.get(n).get(0), height * windowItems.get(n).get(1));
+            n.setPrefWidth(width * windowItems.get(n).get(0));
+            n.setLayoutX(width * windowItems.get(n).get(2));
+
+            n.setPrefHeight(height * windowItems.get(n).get(1));
+            n.setLayoutY(height * windowItems.get(n).get(3));
+        }
+    }
+
 }
