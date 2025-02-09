@@ -1,5 +1,6 @@
 package com.example.ticketgui;
 
+import javafx.css.StyleClass;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -8,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -188,7 +190,21 @@ public class MainWindowController implements Initializable {
 
             n.setPrefHeight(height * windowItems.get(n).get(1));
             n.setLayoutY(height * windowItems.get(n).get(3));
+
+            try{
+                Label jenniferlopez = (Label) n;
+                double newValueAVG = (jenniferlopez.getFont().getSize() * (width / 1920) + jenniferlopez.getFont().getSize() * (height / 1080)) / 2;
+                Font jens = new Font(newValueAVG);
+                jenniferlopez.setFont(jens);
+                System.out.println(jens);
+            } catch (Exception e) {
+                // do nothing
+            }
         }
+
+        // set font size - relative to the size difference
+        String stylesheet = root.getStylesheets().getFirst();
+        System.out.println(stylesheet.contains(".bigText"));
     }
 
 }

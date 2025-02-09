@@ -30,6 +30,16 @@
     -fx-font-size: 16px;
 }
 
+.smallText{
+    -fx-font-size: 12px;
+}
+.normalText{
+    -fx-font-size: 24px;
+}
+.bigText{
+    -fx-font-size: 32px;
+}
+
 #topBar{
     -fx-background-color: #CCCBCB;
 }

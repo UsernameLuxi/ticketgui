@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -16,8 +17,8 @@
             <AnchorPane fx:id="userInformation" layoutX="1620.0" layoutY="32.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="182.0">
                <children>
                   <ImageView fx:id="imgUserImage" fitHeight="44.0" fitWidth="44.0" layoutX="6.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="lblUserName" layoutX="63.0" layoutY="4.0" prefHeight="18.0" prefWidth="110.0" text="Brugernavn" />
-                  <Label fx:id="lblUserRole" layoutX="63.0" layoutY="28.0" prefHeight="18.0" prefWidth="110.0" text="Rolle" />
+                  <Label fx:id="lblUserName" layoutX="63.0" layoutY="4.0" prefHeight="18.0" prefWidth="110.0" styleClass="smallText" text="Brugernavn" />
+                  <Label fx:id="lblUserRole" layoutX="63.0" layoutY="28.0" prefHeight="18.0" prefWidth="110.0" styleClass="smallText" text="Rolle" />
                </children>
             </AnchorPane>
          </children>
@@ -25,7 +26,7 @@
       <ImageView fx:id="imgLogout" fitHeight="108.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" />
       <AnchorPane id="sideMenu" fx:id="sideMenu" layoutY="108.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="974.0" prefWidth="355.0">
          <children>
-            <Label fx:id="lblMenuTitle" alignment="CENTER" layoutY="20.0" prefHeight="55.0" prefWidth="355.0" text="Menu" textAlignment="CENTER">
+            <Label fx:id="lblMenuTitle" alignment="CENTER" layoutY="20.0" prefHeight="55.0" prefWidth="355.0" styleClass="bigText" text="Menu" textAlignment="CENTER">
                <font>
                   <Font size="38.0" />
                </font>
@@ -33,7 +34,7 @@
             <AnchorPane fx:id="newEvent" layoutY="126.0" prefHeight="60.0" prefWidth="355.0">
                <children>
                   <ImageView fx:id="imgNewEvent" fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;" AnchorPane.leftAnchor="20.0" />
-                  <Label fx:id="lblNewEventlbl" layoutX="77.0" layoutY="12.0" prefHeight="35.0" prefWidth="258.0" text="Nyt Event" AnchorPane.leftAnchor="90.0">
+                  <Label fx:id="lblNewEventlbl" layoutX="77.0" layoutY="12.0" prefHeight="35.0" prefWidth="258.0" styleClass="normalText" text="Nyt Event" AnchorPane.leftAnchor="90.0">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -43,7 +44,7 @@
             <AnchorPane fx:id="newUser" layoutY="216.0" prefHeight="60.0" prefWidth="355.0">
                <children>
                   <ImageView fx:id="imgNewUser" fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;" AnchorPane.leftAnchor="20.0" />
-                  <Label fx:id="lblNewUser" layoutX="77.0" layoutY="12.0" prefHeight="35.0" prefWidth="258.0" text="Ny Bruger" AnchorPane.leftAnchor="90.0">
+                  <Label fx:id="lblNewUser" layoutX="77.0" layoutY="12.0" prefHeight="35.0" prefWidth="258.0" styleClass="normalText" text="Ny Bruger" AnchorPane.leftAnchor="90.0">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -53,7 +54,7 @@
             <AnchorPane fx:id="manageCupons" layoutY="300.0" prefHeight="60.0" prefWidth="355.0">
                <children>
                   <ImageView fx:id="imgManageCupons" fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;" AnchorPane.leftAnchor="20.0" />
-                  <Label fx:id="lblManageCupons" layoutX="77.0" layoutY="12.0" prefHeight="35.0" prefWidth="258.0" text="Håndtér Kuponer" AnchorPane.leftAnchor="90.0">
+                  <Label fx:id="lblManageCupons" layoutX="77.0" layoutY="12.0" prefHeight="35.0" prefWidth="258.0" styleClass="normalText" text="Håndtér Kuponer" AnchorPane.leftAnchor="90.0">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -66,12 +67,16 @@
          <children>
             <AnchorPane fx:id="data1" layoutX="180.0" layoutY="70.0" styleClass="dataItem">
                <children>
-                  <Label fx:id="lblData1Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" styleClass="dataItemTitle" text="Aktive Events" textAlignment="CENTER">
+                  <Label fx:id="lblData1Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" text="Aktive Events" textAlignment="CENTER">
                      <font>
                         <Font size="24.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="dataItemTitle" />
+                        <String fx:value="normalText" />
+                     </styleClass>
                   </Label>
-                  <Label fx:id="lblData1data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" text="Label">
+                  <Label fx:id="lblData1data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" styleClass="normalText" text="Label">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -80,12 +85,16 @@
             </AnchorPane>
             <AnchorPane fx:id="data2" layoutX="610.0" layoutY="70.0" styleClass="dataItem">
                <children>
-                  <Label fx:id="lvlData2Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" styleClass="dataItemTitle" text="Events denne måned" textAlignment="CENTER">
+                  <Label fx:id="lvlData2Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" text="Events denne måned" textAlignment="CENTER">
                      <font>
                         <Font size="24.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="dataItemTitle" />
+                        <String fx:value="normalText" />
+                     </styleClass>
                   </Label>
-                  <Label fx:id="lblData2data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" text="Label">
+                  <Label fx:id="lblData2data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" styleClass="normalText" text="Label">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -94,12 +103,16 @@
             </AnchorPane>
             <AnchorPane fx:id="data3" layoutX="1040.0" layoutY="70.0" styleClass="dataItem">
                <children>
-                  <Label fx:id="lblData3Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" styleClass="dataItemTitle" text="Events denne uge" textAlignment="CENTER">
+                  <Label fx:id="lblData3Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" text="Events denne uge" textAlignment="CENTER">
                      <font>
                         <Font size="24.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="dataItemTitle" />
+                        <String fx:value="normalText" />
+                     </styleClass>
                   </Label>
-                  <Label fx:id="lblData3data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" text="Label">
+                  <Label fx:id="lblData3data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" styleClass="normalText" text="Label">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -108,12 +121,16 @@
             </AnchorPane>
             <AnchorPane fx:id="data4" layoutX="1470.0" layoutY="70.0" prefWidth="139.0" styleClass="dataItem">
                <children>
-                  <Label fx:id="lblData4Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" styleClass="dataItemTitle" text="Aktive Kuponer" textAlignment="CENTER">
+                  <Label fx:id="lblData4Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" text="Aktive Kuponer" textAlignment="CENTER">
                      <font>
                         <Font size="24.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="dataItemTitle" />
+                        <String fx:value="normalText" />
+                     </styleClass>
                   </Label>
-                  <Label fx:id="lblData4data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" text="Label">
+                  <Label fx:id="lblData4data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" styleClass="normalText" text="Label">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -136,17 +153,17 @@
                   <TableColumn minWidth="24.0" prefWidth="138.13330078125" text="Slet" />
               </columns>
             </TableView>
-            <Label fx:id="lblEvent" layoutX="26.0" layoutY="83.0" prefHeight="47.0" prefWidth="199.0" text="Events:">
+            <Label fx:id="lblEvent" layoutX="26.0" layoutY="83.0" prefHeight="47.0" prefWidth="199.0" styleClass="bigText" text="Events:">
                <font>
                   <Font size="32.0" />
                </font>
             </Label>
-            <Label fx:id="lvlEventSearch" layoutX="235.0" layoutY="35.0" prefHeight="35.0" prefWidth="199.0" text="Event Titel">
+            <Label fx:id="lvlEventSearch" layoutX="235.0" layoutY="35.0" prefHeight="35.0" prefWidth="199.0" styleClass="normalText" text="Event Titel">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label fx:id="lblEventTypeSearch" layoutX="450.0" layoutY="35.0" prefHeight="35.0" prefWidth="200.0" text="Event Type">
+            <Label fx:id="lblEventTypeSearch" layoutX="450.0" layoutY="35.0" prefHeight="35.0" prefWidth="200.0" styleClass="normalText" text="Event Type">
                <font>
                   <Font size="24.0" />
                </font>
@@ -160,7 +177,7 @@
       </AnchorPane>
       <AnchorPane fx:id="cuponsPane" layoutX="1489.0" layoutY="476.0" prefHeight="606.0" prefWidth="431.0" styleClass="backgroundMain">
          <children>
-            <Label fx:id="lblCupons" layoutX="40.0" layoutY="65.0" prefHeight="47.0" prefWidth="350.0" text="Kuponer">
+            <Label fx:id="lblCupons" layoutX="40.0" layoutY="65.0" prefHeight="47.0" prefWidth="350.0" styleClass="bigText" text="Kuponer">
                <font>
                   <Font size="32.0" />
                </font>
