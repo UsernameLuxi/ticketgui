@@ -31,13 +31,13 @@
 }
 
 .smallText{
-    -fx-font-size: 12px;
+   /* -fx-font-size: 12px;*/
 }
 .normalText{
-    -fx-font-size: 24px;
+    /*-fx-font-size: 24px;*/
 }
 .bigText{
-    -fx-font-size: 32px;
+    /*-fx-font-size: 32px;*/
 }
 
 #topBar{

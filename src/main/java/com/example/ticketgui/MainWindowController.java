@@ -191,12 +191,13 @@ public class MainWindowController implements Initializable {
             n.setPrefHeight(height * windowItems.get(n).get(1));
             n.setLayoutY(height * windowItems.get(n).get(3));
 
+            // TODO : vurdér om dette er okay + om vi skal have dette
             try{
-                Label jenniferlopez = (Label) n;
-                double newValueAVG = (jenniferlopez.getFont().getSize() * (width / 1920) + jenniferlopez.getFont().getSize() * (height / 1080)) / 2;
-                Font jens = new Font(newValueAVG);
-                jenniferlopez.setFont(jens);
-                System.out.println(jens);
+                Label label = (Label) n;
+                double orgSize = label.getStyleClass().contains("bigText") ? 32 : label.getStyleClass().contains("normalText") ? 24 : 12;
+                double newValueAVG = (orgSize * (width / 1920) + orgSize * (height / 1080)) / 2;
+                Font newFont = new Font(newValueAVG);
+                label.setFont(newFont);
             } catch (Exception e) {
                 // do nothing
             }
