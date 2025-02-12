@@ -11,66 +11,66 @@
 
 <AnchorPane prefHeight="972.0" prefWidth="1920.0" styleClass="backgroundOther" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ticketgui.NewEvent">
    <children>
-      <Label layoutX="760.0" layoutY="50.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Event navn:">
+      <Label layoutX="60.0" layoutY="317.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Event navn:">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <TextField layoutX="760.0" layoutY="100.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" styleClass="normalText">
+      <TextField layoutX="60.0" layoutY="367.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" styleClass="normalText">
          <font>
             <Font size="24.0" />
          </font></TextField>
-      <Label layoutX="760.0" layoutY="170.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Pris:">
+      <Label layoutX="60.0" layoutY="437.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Pris:">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <TextField layoutX="760.0" layoutY="220.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" styleClass="normalText">
+      <TextField layoutX="60.0" layoutY="487.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" styleClass="normalText">
          <font>
             <Font size="24.0" />
          </font></TextField>
-      <Label layoutX="760.0" layoutY="290.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Dato:">
+      <Label layoutX="60.0" layoutY="557.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Dato:">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <TextField layoutX="760.0" layoutY="340.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" styleClass="normalText">
+      <TextField layoutX="60.0" layoutY="607.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" styleClass="normalText">
          <font>
             <Font size="24.0" />
          </font></TextField>
-      <Label layoutX="760.0" layoutY="410.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Tidspunkt:">
+      <Label layoutX="60.0" layoutY="677.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Tidspunkt:">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <TextField layoutX="760.0" layoutY="580.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" styleClass="normalText">
+      <TextField layoutX="627.0" layoutY="367.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" styleClass="normalText">
          <font>
             <Font size="24.0" />
          </font></TextField>
-      <Label layoutX="760.0" layoutY="530.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Lokation:">
+      <Label layoutX="627.0" layoutY="317.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Lokation:">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <TextField layoutX="760.0" layoutY="460.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0">
+      <TextField layoutX="60.0" layoutY="727.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0">
          <font>
             <Font size="24.0" />
          </font></TextField>
-      <Label layoutX="760.0" layoutY="650.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Type:">
+      <Label layoutX="627.0" layoutY="437.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Type:">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <TextField layoutX="760.0" layoutY="700.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" styleClass="normalText">
+      <TextField layoutX="627.0" layoutY="487.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" styleClass="normalText">
          <font>
             <Font size="24.0" />
          </font></TextField>
-      <Label layoutX="760.0" layoutY="770.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Beskrivelse:">
+      <Label layoutX="627.0" layoutY="557.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Beskrivelse:">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <TextField layoutX="760.0" layoutY="820.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="124.0" prefWidth="400.0" styleClass="normalText">
+      <TextField layoutX="627.0" layoutY="607.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="124.0" prefWidth="400.0" styleClass="normalText">
          <font>
             <Font size="24.0" />
          </font></TextField>
@@ -88,6 +88,11 @@
          <padding>
             <Insets left="-10.0" />
          </padding>
+      </Button>
+      <Button layoutX="627.0" layoutY="809.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="232.0" styleClass="normalText" text="Gem">
+         <font>
+            <Font size="24.0" />
+         </font>
       </Button>
    </children>
 </AnchorPane>
