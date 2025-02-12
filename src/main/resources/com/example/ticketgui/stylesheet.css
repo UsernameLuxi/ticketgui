@@ -2,6 +2,13 @@
     -fx-background-color: black;
     -fx-text-fill: white;
 }
+.backbutton{
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-border-width: 2px;
+    -fx-border-style: solid;
+    -fx-border-color: black;
+}
 
 .backgroundMain{
     -fx-background-color: #7766DD;

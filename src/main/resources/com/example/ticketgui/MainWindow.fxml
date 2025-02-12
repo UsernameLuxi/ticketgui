@@ -24,7 +24,7 @@
             <ImageView fx:id="imgLogout" fitHeight="108.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="viewPanel" layoutY="108.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1920.0">
+      <AnchorPane fx:id="viewPanel" layoutY="108.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="972.0" prefWidth="1920.0">
          <children>
             <AnchorPane id="sideMenu" fx:id="sideMenu" minHeight="-Infinity" minWidth="-Infinity" prefHeight="974.0" prefWidth="355.0">
                <children>
