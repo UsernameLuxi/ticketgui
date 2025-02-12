@@ -1,16 +1,12 @@
 package com.example.ticketgui;
 
-import javafx.css.StyleClass;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -101,22 +97,37 @@ public class MainWindowController implements Initializable {
     @FXML
     private TableView tblCupons;
     private Map<Region, List<Double>> windowItems = new HashMap<>();
+    @FXML
+    private AnchorPane viewPanel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-    public void test(Stage primaryStage) {
+    public ScrollPane createScrollpaneForDatapane() {
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setLayoutX(dataPane.getLayoutX());
         scrollPane.setLayoutY(dataPane.getLayoutY());
         scrollPane.setContent(dataPane);
         scrollPane.setPrefViewportHeight(dataPane.getHeight());
         scrollPane.setPrefViewportWidth(dataPane.getWidth());
+
+        // nok på en anden måde
+        scrollPane.setStyle("-fx-background-color: #7766DD;");
+
         double length = Stage.getWindows().getFirst().getWidth() - sideMenu.getWidth();
         scrollPane.setPrefSize(length, dataPane.getHeight());
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         root.getChildren().add(scrollPane);
+        System.out.println(scrollPane.getHeight());
+        System.out.println(scrollPane.getWidth());
+        return scrollPane;
+    }
+
+    // Skifte mellem ting/menuer
+    public void test(){
+        viewPanel.getChildren().clear();
+        //viewPanel.getChildren().add(//something)
     }
 
     // erhmmm ja... man kunne også bare give hvert pane et fxId og .getChildren() - hilsen Casper -> but also made by Casper... træls (root.getChildren() for each)
@@ -124,16 +135,15 @@ public class MainWindowController implements Initializable {
     public void initializeComponents(double width, double height) {
         List<Region> windowContent = new ArrayList<>();
         windowContent.add(dataPane);
+        windowContent.add(viewPanel);
         windowContent.add(root);
         windowContent.add(sideMenu);
         windowContent.add(menuBar);
         windowContent.add(userInformation);
         windowContent.add(lblUserName);
         windowContent.add(lblUserRole);
-        //windowContent.add(imgLogout);
         windowContent.add(lblMenuTitle);
         windowContent.add(newEvent);
-        //windowContent.add(imgNewEvent);
         windowContent.add(lblNewEventlbl);
         windowContent.add(newUser);
         windowContent.add(lblNewUser);
@@ -164,6 +174,17 @@ public class MainWindowController implements Initializable {
         //windowContent.add(imgManageCupons);
         //windowContent.add(imgNewUser);
         //windowContent.add(imgUserImage);
+        //windowContent.add(imgNewEvent);
+        //windowContent.add(imgLogout);
+
+        // special case:
+        ScrollPane scrollPane = createScrollpaneForDatapane();
+        windowItems.put(scrollPane, new ArrayList<>(){{
+            add(scrollPane.getPrefWidth() / width);
+            add(scrollPane.getPrefHeight() / height);
+            add(scrollPane.getLayoutX() / width);
+            add(scrollPane.getLayoutY() / height);}}
+        );
 
         fillMap(windowContent, width, height);
 
