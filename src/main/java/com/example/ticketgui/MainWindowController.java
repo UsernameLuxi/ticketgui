@@ -96,9 +96,10 @@ public class MainWindowController implements Initializable {
     private Label lblCupons;
     @FXML
     private TableView tblCupons;
-    private Map<Region, List<Double>> windowItems = new HashMap<>();
     @FXML
     private AnchorPane viewPanel;
+    private Map<Region, List<Double>> windowItems = new HashMap<>();
+    private Map<ImageView, List<Double>> imageViews = new HashMap<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -118,9 +119,7 @@ public class MainWindowController implements Initializable {
         double length = Stage.getWindows().getFirst().getWidth() - sideMenu.getWidth();
         scrollPane.setPrefSize(length, dataPane.getHeight());
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        root.getChildren().add(scrollPane);
-        System.out.println(scrollPane.getHeight());
-        System.out.println(scrollPane.getWidth());
+        viewPanel.getChildren().add(scrollPane);
         return scrollPane;
     }
 
@@ -186,6 +185,33 @@ public class MainWindowController implements Initializable {
             add(scrollPane.getLayoutY() / height);}}
         );
 
+        // også et specielt tilfælde
+        imageViews.put(imgManageCupons, new ArrayList<>(){{
+            add(imgManageCupons.getFitWidth() / width);
+            add(imgManageCupons.getFitHeight() / height);
+            add(imgManageCupons.getLayoutX() / width);
+            add(imgManageCupons.getLayoutY() / height);}});
+        imageViews.put(imgNewUser, new ArrayList<>(){{
+            add(imgNewUser.getFitWidth() / width);
+            add(imgNewUser.getFitHeight() / height);
+            add(imgNewUser.getLayoutX() / width);
+            add(imgNewUser.getLayoutY() / height);}});
+        imageViews.put(imgUserImage, new ArrayList<>(){{
+            add(imgUserImage.getFitWidth() / width);
+            add(imgUserImage.getFitHeight() / height);
+            add(imgUserImage.getLayoutX() / width);
+            add(imgUserImage.getLayoutY() / height);}});
+        imageViews.put(imgNewEvent, new ArrayList<>(){{
+            add(imgNewEvent.getFitWidth() / width);
+            add(imgNewEvent.getFitHeight() / height);
+            add(imgNewEvent.getLayoutX() / width);
+            add(imgNewEvent.getLayoutY() / height);}});
+        imageViews.put(imgLogout, new ArrayList<>(){{
+            add(imgLogout.getFitWidth() / width);
+            add(imgLogout.getFitHeight() / height);
+            add(imgLogout.getLayoutX() / width);
+            add(imgLogout.getLayoutY() / height);}});
+
         fillMap(windowContent, width, height);
 
     }
@@ -213,6 +239,7 @@ public class MainWindowController implements Initializable {
             n.setLayoutY(height * windowItems.get(n).get(3));
 
             // TODO : skal have dette?
+            // set font size - relative to the size difference
             if (n instanceof Label label)
             {
                 double orgSize = label.getStyleClass().contains("bigText") ? 32 : label.getStyleClass().contains("normalText") ? 24 : 12;
@@ -222,9 +249,13 @@ public class MainWindowController implements Initializable {
             }
         }
 
-        // set font size - relative to the size difference
-        String stylesheet = root.getStylesheets().getFirst();
-        System.out.println(stylesheet.contains(".bigText"));
+        // image views
+        for (ImageView v : imageViews.keySet()){
+            v.setFitWidth(width * imageViews.get(v).get(0));
+            v.setFitHeight(height * imageViews.get(v).get(1));
+            v.setLayoutX(width * imageViews.get(v).get(2));
+            v.setLayoutY(height * imageViews.get(v).get(3));
+        }
     }
 
 }
