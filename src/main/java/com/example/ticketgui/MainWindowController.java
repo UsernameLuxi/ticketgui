@@ -1,7 +1,9 @@
 package com.example.ticketgui;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -9,6 +11,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -124,8 +127,13 @@ public class MainWindowController implements Initializable {
     }
 
     // Skifte mellem ting/menuer
-    public void test(){
+    // dette virker find lige en metode at initte resize på - måske flyt til en manager
+    public void test() throws IOException {
         viewPanel.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("ManageCoupons.fxml"));
+        AnchorPane jens = loader.load();
+        viewPanel.getChildren().add(jens);
+
         //viewPanel.getChildren().add(//something)
     }
 

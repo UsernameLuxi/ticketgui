@@ -18,13 +18,15 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
         MainWindowController mwc = fxmlLoader.getController();
-        //mwc.test(stage);
+
         mwc.initializeComponents(1920, 1080);
 
         stage.widthProperty().addListener((observable, oldValue, newValue) -> {mwc.resizeItems(newValue.doubleValue(), stage.getHeight());});
         stage.heightProperty().addListener((observable, oldValue, newValue) -> {mwc.resizeItems(stage.getWidth(), newValue.doubleValue());});
 
         stage.setMaximized(true);
+
+        //mwc.test();
     }
 
     public static void main(String[] args) {
