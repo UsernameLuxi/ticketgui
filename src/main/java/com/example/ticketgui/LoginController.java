@@ -1,6 +1,7 @@
 package com.example.ticketgui;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LoginController {
+public class LoginController implements IController {
     private Map<Region, List<Double>> windowItems = new HashMap<>();
     @FXML
     private AnchorPane loginPane;

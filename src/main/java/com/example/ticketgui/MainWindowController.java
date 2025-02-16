@@ -2,8 +2,6 @@ package com.example.ticketgui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -12,10 +10,13 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.*;
 
-public class MainWindowController implements Initializable {
+public class MainWindowController implements IController {
+    IController viewController;
+    private Map<Region, List<Double>> windowItems = new HashMap<>();
+    private Map<ImageView, List<Double>> imageViews = new HashMap<>();
+
 
     @FXML
     private AnchorPane dataPane;
@@ -101,12 +102,6 @@ public class MainWindowController implements Initializable {
     private TableView tblCupons;
     @FXML
     private AnchorPane viewPanel;
-    private Map<Region, List<Double>> windowItems = new HashMap<>();
-    private Map<ImageView, List<Double>> imageViews = new HashMap<>();
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-    }
 
     public ScrollPane createScrollpaneForDatapane() {
         ScrollPane scrollPane = new ScrollPane();
@@ -128,10 +123,18 @@ public class MainWindowController implements Initializable {
 
     // Skifte mellem ting/menuer
     // dette virker find lige en metode at initte resize på - måske flyt til en manager
-    public void test() throws IOException {
+    public void test(Stage stage) throws IOException {
         viewPanel.getChildren().clear();
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("ManageCoupons.fxml"));
         AnchorPane jens = loader.load();
+
+        viewController = loader.getController();
+        // husk gør dette kun en gang - ikke flere
+        viewController.initializeComponents(1920, 972);
+        viewController.resizeItems(viewPanel.getWidth(), viewPanel.getHeight());
+        viewPanel.widthProperty().addListener((observable, oldValue, newValue) -> {viewController.resizeItems(newValue.doubleValue(), viewPanel.getHeight());});
+        viewPanel.heightProperty().addListener(((observable, oldValue, newValue) -> {viewController.resizeItems(viewPanel.getWidth(), newValue.doubleValue());}));
+
         viewPanel.getChildren().add(jens);
 
         //viewPanel.getChildren().add(//something)
@@ -139,6 +142,7 @@ public class MainWindowController implements Initializable {
 
     // erhmmm ja... man kunne også bare give hvert pane et fxId og .getChildren() - hilsen Casper -> but also made by Casper... træls (root.getChildren() for each)
     // update note - det kan man ikke - fordi root childen har ikke nok children (7 currently ift. 40)
+    @Override
     public void initializeComponents(double width, double height) {
         List<Region> windowContent = new ArrayList<>();
         windowContent.add(dataPane);
@@ -178,6 +182,7 @@ public class MainWindowController implements Initializable {
         windowContent.add(cuponsPane);
         windowContent.add(lblCupons);
         windowContent.add(tblCupons);
+
         //windowContent.add(imgManageCupons);
         //windowContent.add(imgNewUser);
         //windowContent.add(imgUserImage);
@@ -235,6 +240,7 @@ public class MainWindowController implements Initializable {
         }
     }
 
+    @Override
     public void resizeItems(double width, double height){
         width -= 15; // hold dig fra siden mand!
         height -= 30;
