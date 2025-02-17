@@ -1,5 +1,6 @@
 package com.example.ticketgui;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -70,14 +71,19 @@ public class LoginController implements IController {
             n.setPrefHeight(height * windowItems.get(n).get(1));
             n.setLayoutY(height * windowItems.get(n).get(3));
 
-            // TODO : skal have dette?
-            if (n instanceof Label label)
-            {
-                double orgSize = label.getStyleClass().contains("bigText") ? 32 : label.getStyleClass().contains("normalText") ? 24 : 12;
-                double newValueAVG = (orgSize * (width / 1920) + orgSize * (height / 1080)) / 2;
-                Font newFont = new Font(newValueAVG);
-                label.setFont(newFont);
+            switch (n) {
+                case Label label -> label.setFont(getFont(label.getStyleClass(), width, height));
+                case Button btn -> btn.setFont(getFont(btn.getStyleClass(), width, height));
+                case TextField txt -> txt.setFont(getFont(txt.getStyleClass(), width, height));
+                default -> {
+                }
             }
         }
+    }
+
+    private Font getFont(ObservableList<String> style, double newWidth, double newHeight){
+        double orgSize = style.contains("bigText") ? 32 : style.contains("normalText") ? 24 : 12;
+        double newValueAVG = (orgSize * (newWidth / 1920) + orgSize * (newHeight / 1080)) / 2;
+        return new Font(newValueAVG);
     }
 }

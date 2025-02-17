@@ -94,7 +94,6 @@ public class ManageCouponsContrller implements IController{
             n.setPrefHeight(height * windowItems.get(n).get(1));
             n.setLayoutY(height * windowItems.get(n).get(3));
 
-            // TODO : skal have dette?
             // set font size - relative to the size difference
             switch (n) {
                 case Label label -> label.setFont(getFont(label.getStyleClass(), width, height));
