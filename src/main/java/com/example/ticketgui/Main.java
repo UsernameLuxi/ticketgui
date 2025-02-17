@@ -26,7 +26,7 @@ public class Main extends Application {
 
         stage.setMaximized(true);
 
-        //mwc.test(stage);
+        mwc.test(stage);
     }
 
     public static void main(String[] args) {

@@ -125,7 +125,7 @@ public class MainWindowController implements IController {
     // dette virker find lige en metode at initte resize på - måske flyt til en manager
     public void test(Stage stage) throws IOException {
         viewPanel.getChildren().clear();
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("ManageCoupons.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("NewEvent.fxml"));
         AnchorPane jens = loader.load();
 
         viewController = loader.getController();
