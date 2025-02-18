@@ -239,6 +239,7 @@ public class MainWindowController implements IController {
         fillMap(windowContent, width, height);
         mainContent = FXCollections.observableArrayList();
         mainContent.addAll(viewPanel.getChildren());
+        mainContent.remove(dataPane);
 
     }
 
@@ -301,6 +302,7 @@ public class MainWindowController implements IController {
         // husk gør dette kun en gang - ikke flere
         viewController.initializeComponents(1920, 972);
         viewController.resizeItems(viewPanel.getWidth(), viewPanel.getHeight());
+        viewController.setControllerRoot(this);
         if (!addedThing){
             viewPanel.widthProperty().addListener((observable, oldValue, newValue) -> {viewController.resizeItems(newValue.doubleValue(), viewPanel.getHeight());});
             viewPanel.heightProperty().addListener(((observable, oldValue, newValue) -> {viewController.resizeItems(viewPanel.getWidth(), newValue.doubleValue());}));
