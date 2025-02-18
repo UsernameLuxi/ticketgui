@@ -1,6 +1,7 @@
 package com.example.ticketgui;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 public class UserController implements IController {
+    private IController root;
     private Map<Region, List<Double>> windowItems = new HashMap<>();
     private Map<ImageView, List<Double>> imageViews = new HashMap<>();
     @FXML
@@ -91,6 +93,16 @@ public class UserController implements IController {
         double orgSize = style.contains("bigText") ? 32 : style.contains("normalText") ? 24 : 12;
         double newValueAVG = (orgSize * (newWidth / 1920) + orgSize * (newHeight / 1080)) / 2;
         return new Font(newValueAVG);
+    }
+
+    @Override
+    public void setControllerRoot(IController controller) {
+        root = controller;
+    }
+
+    @FXML
+    private void loadMain(ActionEvent event) {
+        root.reload();
     }
 
 }

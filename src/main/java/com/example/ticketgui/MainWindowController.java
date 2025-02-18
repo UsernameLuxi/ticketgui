@@ -1,10 +1,14 @@
 package com.example.ticketgui;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Font;
@@ -12,11 +16,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.*;
-
+// TODO : Ryd op
 public class MainWindowController implements IController {
-    IController viewController;
+    private IController rootController;
+    private IController viewController;
     private Map<Region, List<Double>> windowItems = new HashMap<>();
     private Map<ImageView, List<Double>> imageViews = new HashMap<>();
+    private boolean addedThing = false; // TODO : rename
 
 
     @FXML
@@ -103,6 +109,7 @@ public class MainWindowController implements IController {
     private TableView tblCupons;
     @FXML
     private AnchorPane viewPanel;
+    private ObservableList<Node> mainContent;
 
     public ScrollPane createScrollpaneForDatapane() {
         ScrollPane scrollPane = new ScrollPane();
@@ -125,6 +132,7 @@ public class MainWindowController implements IController {
     // Skifte mellem ting/menuer
     // dette virker find lige en metode at initte resize på - måske flyt til en manager
     public void test(Stage stage) throws IOException {
+        /*
         viewPanel.getChildren().clear();
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("Print Event.fxml"));
         AnchorPane jens = loader.load();
@@ -139,6 +147,8 @@ public class MainWindowController implements IController {
         viewPanel.getChildren().add(jens);
 
         //viewPanel.getChildren().add(//something)
+
+         */
     }
 
     // erhmmm ja... man kunne også bare give hvert pane et fxId og .getChildren() - hilsen Casper -> but also made by Casper... træls (root.getChildren() for each)
@@ -227,6 +237,8 @@ public class MainWindowController implements IController {
             add(imgLogout.getLayoutY() / height);}});
 
         fillMap(windowContent, width, height);
+        mainContent = FXCollections.observableArrayList();
+        mainContent.addAll(viewPanel.getChildren());
 
     }
 
@@ -280,4 +292,62 @@ public class MainWindowController implements IController {
         return new Font(newValueAVG);
     }
 
+    private void setPane(String file) throws IOException {
+        viewPanel.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource(file));
+        AnchorPane pane = loader.load();
+
+        viewController = loader.getController();
+        // husk gør dette kun en gang - ikke flere
+        viewController.initializeComponents(1920, 972);
+        viewController.resizeItems(viewPanel.getWidth(), viewPanel.getHeight());
+        if (!addedThing){
+            viewPanel.widthProperty().addListener((observable, oldValue, newValue) -> {viewController.resizeItems(newValue.doubleValue(), viewPanel.getHeight());});
+            viewPanel.heightProperty().addListener(((observable, oldValue, newValue) -> {viewController.resizeItems(viewPanel.getWidth(), newValue.doubleValue());}));
+            addedThing = true;
+        }
+
+        viewPanel.getChildren().add(pane);
+
+    }
+
+    @FXML
+    private void newEventClick(MouseEvent mouseEvent) {
+        try{
+            setPane("NewEvent.fxml");
+        }
+        catch (Exception e){
+            // TODO : Find et eller andet og putte her
+        }
+    }
+
+    @FXML
+    private void newUserClick(MouseEvent mouseEvent) {
+        try{
+            setPane("NewUser.fxml");
+        }
+        catch (Exception e){
+            // TODO : Find et eller andet og putte her
+        }
+    }
+
+    @FXML
+    private void manageCouponClick(MouseEvent mouseEvent) {
+        try{
+            setPane("ManageCoupons.fxml");
+        }
+        catch (Exception e){
+            // TODO : Find et eller andet og putte her
+        }
+    }
+
+    @Override
+    public void setControllerRoot(IController controller) {
+        rootController = controller;
+    }
+
+    @Override
+    public void reload() {
+        viewPanel.getChildren().setAll(mainContent);
+    }
 }

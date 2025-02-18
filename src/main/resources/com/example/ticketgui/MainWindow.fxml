@@ -35,7 +35,7 @@
                         <Font size="38.0" />
                      </font>
                   </Label>
-                  <AnchorPane fx:id="newEvent" layoutY="126.0" prefHeight="60.0" prefWidth="355.0">
+                  <AnchorPane fx:id="newEvent" layoutY="126.0" onMouseClicked="#newEventClick" prefHeight="60.0" prefWidth="355.0">
                      <children>
                         <ImageView fx:id="imgNewEvent" fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;">
                            <image>
@@ -49,7 +49,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="newUser" layoutY="216.0" prefHeight="60.0" prefWidth="355.0">
+                  <AnchorPane fx:id="newUser" layoutY="216.0" onMouseClicked="#newUserClick" prefHeight="60.0" prefWidth="355.0">
                      <children>
                         <ImageView fx:id="imgNewUser" fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;" />
                         <Label fx:id="lblNewUser" layoutX="77.0" layoutY="12.0" prefHeight="35.0" prefWidth="258.0" styleClass="normalText" text="Ny Bruger">
@@ -59,7 +59,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="manageCupons" layoutY="300.0" prefHeight="60.0" prefWidth="355.0">
+                  <AnchorPane fx:id="manageCupons" layoutY="300.0" onMouseClicked="#manageCouponClick" prefHeight="60.0" prefWidth="355.0">
                      <children>
                         <ImageView fx:id="imgManageCupons" fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;" />
                         <Label fx:id="lblManageCupons" layoutX="77.0" layoutY="12.0" prefHeight="35.0" prefWidth="258.0" styleClass="normalText" text="Håndtér Kuponer">

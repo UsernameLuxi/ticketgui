@@ -1,6 +1,7 @@
 package com.example.ticketgui;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ManageCouponsContrller implements IController{
+    private IController root;
     private Map<Region, List<Double>> windowItems = new HashMap<>();
     private Map<ImageView, List<Double>> imageViews = new HashMap<>();
     @FXML
@@ -111,5 +113,15 @@ public class ManageCouponsContrller implements IController{
             v.setLayoutX(width * imageViews.get(v).get(2));
             v.setLayoutY(height * imageViews.get(v).get(3));
         }
+    }
+
+    @Override
+    public void setControllerRoot(IController controller) {
+        root = controller;
+    }
+
+    @FXML
+    private void loadMain(ActionEvent event) {
+        root.reload();
     }
 }
