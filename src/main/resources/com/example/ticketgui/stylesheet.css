@@ -1,6 +1,9 @@
 .button {
-    -fx-background-color: black;
+    -fx-background-color: #588157;
     -fx-text-fill: white;
+}
+.table-view{
+    -fx-text-fill: #588157;
 }
 .backbutton{
     -fx-background-color: transparent;
@@ -11,21 +14,21 @@
 }
 
 .backgroundMain{
-    -fx-background-color: #7766DD;
+    -fx-background-color: #DAD7CD;
 
 }
 
 .backgroundLogin{
-    -fx-background-color: #6655CC;
+    -fx-background-color: #DAD7CD;
 
 }
 .backgroundOther{
-    -fx-background-color: #9988DD;
+    -fx-background-color: #DAD7CD;
 
 }
 
 .dataItem{
-    -fx-background-color: #CCCBCB;
+    -fx-background-color: #588157;
     -fx-background-radius: 25px;
 }
 .dataItemTitle{
@@ -39,19 +42,22 @@
 
 .smallText{
    /* -fx-font-size: 12px;*/
+    -fx-text-fill: #DAD7CD;
 }
 .normalText{
     /*-fx-font-size: 24px;*/
+    -fx-text-fill: #2a3d34;
 }
 .bigText{
     /*-fx-font-size: 32px;*/
+    -fx-text-fill: #2a3d34;
 }
 
 #topBar{
-    -fx-background-color: #CCCBCB;
+    -fx-background-color: #3a5a40;
 }
 #sideMenu{
-    -fx-background-color: #9966DD;
+    -fx-background-color: #588157;
     -fx-border-style: solid;
     -fx-border-width: 0 2px 0 0;
 }
