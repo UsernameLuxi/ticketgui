@@ -14,7 +14,7 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("MainWindow.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("stylesheet.css")).toExternalForm());
-        stage.setTitle("Hello!");
+        stage.setTitle("TICKET GUI");
         stage.setScene(scene);
         stage.show();
         MainWindowController mwc = fxmlLoader.getController();
