@@ -58,41 +58,8 @@ public class UserController implements IController {
 
     @Override
     public void resizeItems(double width, double height) {
-        width -= 15; // hold dig fra siden mand!
-        height -= 30;
-        for (Region n : windowItems.keySet()) {
-            n.setPrefWidth(width * windowItems.get(n).get(0));
-            n.setLayoutX(width * windowItems.get(n).get(2));
+        resizeItems(windowItems, imageViews, width, height);
 
-            n.setPrefHeight(height * windowItems.get(n).get(1));
-            n.setLayoutY(height * windowItems.get(n).get(3));
-
-            // set font size - relative to the size difference
-            switch (n) {
-                case Label label -> label.setFont(getFont(label.getStyleClass(), width, height));
-                case Button btn -> btn.setFont(getFont(btn.getStyleClass(), width, height));
-                case TextField txt -> txt.setFont(getFont(txt.getStyleClass(), width, height));
-                case TextArea txt -> txt.setFont(getFont(txt.getStyleClass(), width, height));
-                case SplitMenuButton smb -> smb.setFont(getFont(smb.getStyleClass(), width, height));
-                default -> {
-                }
-            }
-        }
-
-        // images
-        for (ImageView v : imageViews.keySet()){
-            v.setFitWidth(width * imageViews.get(v).get(0));
-            v.setFitHeight(height * imageViews.get(v).get(1));
-            v.setLayoutX(width * imageViews.get(v).get(2));
-            v.setLayoutY(height * imageViews.get(v).get(3));
-        }
-
-    }
-
-    private Font getFont(ObservableList<String> style, double newWidth, double newHeight){
-        double orgSize = style.contains("bigText") ? 32 : style.contains("normalText") ? 24 : 12;
-        double newValueAVG = (orgSize * (newWidth / 1920) + orgSize * (newHeight / 1080)) / 2;
-        return new Font(newValueAVG);
     }
 
     @Override

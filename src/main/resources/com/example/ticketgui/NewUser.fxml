@@ -27,7 +27,7 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <Button layoutX="857.0" layoutY="617.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="185.0" text="Opret bruger">
+      <Button layoutX="857.0" layoutY="617.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="185.0" styleClass="normalText" text="Opret bruger">
          <font>
             <Font size="24.0" />
          </font>

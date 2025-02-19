@@ -63,35 +63,12 @@ public class LoginController implements IController {
     }
 
     public void resizeItems(double width, double height){
-        width -= 15; // hold dig fra siden mand!
-        height -= 30;
-        for (Region n : windowItems.keySet()) {
-            //n.resize(width * windowItems.get(n).get(0), height * windowItems.get(n).get(1));
-            n.setPrefWidth(width * windowItems.get(n).get(0));
-            n.setLayoutX(width * windowItems.get(n).get(2));
-
-            n.setPrefHeight(height * windowItems.get(n).get(1));
-            n.setLayoutY(height * windowItems.get(n).get(3));
-
-            switch (n) {
-                case Label label -> label.setFont(getFont(label.getStyleClass(), width, height));
-                case Button btn -> btn.setFont(getFont(btn.getStyleClass(), width, height));
-                case TextField txt -> txt.setFont(getFont(txt.getStyleClass(), width, height));
-                default -> {
-                }
-            }
-        }
+        resizeItems(windowItems, null, width, height);
     }
 
     @Override
     public void setControllerRoot(IController controller) {
         root = controller;
-    }
-
-    private Font getFont(ObservableList<String> style, double newWidth, double newHeight){
-        double orgSize = style.contains("bigText") ? 32 : style.contains("normalText") ? 24 : 12;
-        double newValueAVG = (orgSize * (newWidth / 1920) + orgSize * (newHeight / 1080)) / 2;
-        return new Font(newValueAVG);
     }
 
     @FXML
