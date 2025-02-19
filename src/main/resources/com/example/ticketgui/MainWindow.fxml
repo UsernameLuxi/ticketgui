@@ -18,12 +18,18 @@
          <children>
             <AnchorPane fx:id="userInformation" layoutX="1620.0" layoutY="32.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="182.0">
                <children>
-                  <ImageView fx:id="imgUserImage" fitHeight="44.0" fitWidth="44.0" layoutX="6.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imgUserImage" fitHeight="44.0" fitWidth="44.0" layoutX="6.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@symbols/User.png" />
+                     </image></ImageView>
                   <Label fx:id="lblUserName" layoutX="63.0" layoutY="4.0" prefHeight="18.0" prefWidth="110.0" styleClass="smallText" text="Brugernavn" />
                   <Label fx:id="lblUserRole" layoutX="63.0" layoutY="28.0" prefHeight="18.0" prefWidth="110.0" styleClass="smallText" text="Rolle" />
                </children>
             </AnchorPane>
-            <ImageView fx:id="imgLogout" fitHeight="108.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgLogout" fitHeight="108.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@symbols/logout.png" />
+               </image></ImageView>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="viewPanel" layoutY="108.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="972.0" prefWidth="1920.0">
@@ -39,7 +45,7 @@
                      <children>
                         <ImageView fx:id="imgNewEvent" fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;">
                            <image>
-                              <Image url="@symbols/backarrow.png" />
+                              <Image url="@symbols/event.png" />
                            </image>
                         </ImageView>
                         <Label fx:id="lblNewEventlbl" layoutX="77.0" layoutY="12.0" prefHeight="35.0" prefWidth="258.0" styleClass="normalText" text="Nyt Event">
@@ -51,7 +57,10 @@
                   </AnchorPane>
                   <AnchorPane fx:id="newUser" layoutY="216.0" onMouseClicked="#newUserClick" prefHeight="60.0" prefWidth="355.0">
                      <children>
-                        <ImageView fx:id="imgNewUser" fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;" />
+                        <ImageView fx:id="imgNewUser" fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;">
+                           <image>
+                              <Image url="@symbols/newuser.png" />
+                           </image></ImageView>
                         <Label fx:id="lblNewUser" layoutX="77.0" layoutY="12.0" prefHeight="35.0" prefWidth="258.0" styleClass="normalText" text="Ny Bruger">
                            <font>
                               <Font size="24.0" />
@@ -61,7 +70,10 @@
                   </AnchorPane>
                   <AnchorPane fx:id="manageCupons" layoutY="300.0" onMouseClicked="#manageCouponClick" prefHeight="60.0" prefWidth="355.0">
                      <children>
-                        <ImageView fx:id="imgManageCupons" fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;" />
+                        <ImageView fx:id="imgManageCupons" fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;">
+                           <image>
+                              <Image url="@symbols/coupon.png" />
+                           </image></ImageView>
                         <Label fx:id="lblManageCupons" layoutX="77.0" layoutY="12.0" prefHeight="35.0" prefWidth="258.0" styleClass="normalText" text="Håndtér Kuponer">
                            <font>
                               <Font size="24.0" />
