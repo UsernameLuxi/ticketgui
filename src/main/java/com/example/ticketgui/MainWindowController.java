@@ -2,7 +2,6 @@ package com.example.ticketgui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,13 +10,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.*;
 // TODO : Ryd op
 public class MainWindowController implements IController {
+    private ControllerManager manager;
     private IController rootController;
     private IController viewController;
     private Map<Region, List<Double>> windowItems = new HashMap<>();
@@ -122,7 +121,8 @@ public class MainWindowController implements IController {
         // nok på en anden måde
         scrollPane.setStyle("-fx-background-color: #7766DD;");
 
-        double length = Stage.getWindows().getFirst().getWidth() - sideMenu.getWidth();
+        //double length = Stage.getWindows().getFirst().getWidth() - sideMenu.getWidth();
+        double length = 1920 - sideMenu.getWidth();
         scrollPane.setPrefSize(length, dataPane.getHeight());
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         viewPanel.getChildren().add(scrollPane);
@@ -319,5 +319,20 @@ public class MainWindowController implements IController {
     @Override
     public void reload() {
         viewPanel.getChildren().setAll(mainContent);
+    }
+
+    @FXML
+    private void logout(MouseEvent mouseEvent) {
+        try{
+            manager.setStage("Login Screen.fxml");
+        }
+        catch (Exception e){
+            // noget het
+        }
+    }
+
+    @Override
+    public void setManager(ControllerManager manager) {
+        this.manager = manager;
     }
 }

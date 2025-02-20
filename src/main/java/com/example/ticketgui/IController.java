@@ -71,4 +71,6 @@ public interface IController {
         double newValueAVG = (orgSize * (newWidth / 1920) + orgSize * (newHeight / 1080)) / 2;
         return new Font(newValueAVG);
     }
+
+    void setManager(ControllerManager manager);
 }

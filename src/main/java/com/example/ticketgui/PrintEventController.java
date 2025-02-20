@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 public class PrintEventController implements IController {
+    private ControllerManager manager;
     private IController root;
     private Map<Region, List<Double>> windowItems = new HashMap<>();
     private Map<ImageView, List<Double>> imageViews = new HashMap<>();
@@ -64,6 +65,11 @@ public class PrintEventController implements IController {
     public void resizeItems(double width, double height) {
         resizeItems(windowItems, imageViews, width, height);
 
+    }
+
+    @Override
+    public void setManager(ControllerManager manager) {
+        this.manager = manager;
     }
 
     @Override

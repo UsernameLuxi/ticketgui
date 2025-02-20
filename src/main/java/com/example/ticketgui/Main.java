@@ -11,13 +11,14 @@ import java.util.Objects;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("MainWindow.fxml"));
+        /*
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login Screen.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("stylesheet.css")).toExternalForm());
         stage.setTitle("TICKET GUI");
         stage.setScene(scene);
         stage.show();
-        MainWindowController mwc = fxmlLoader.getController();
+        IController mwc = fxmlLoader.getController();
 
         mwc.initializeComponents(1920, 1080);
 
@@ -27,6 +28,9 @@ public class Main extends Application {
         stage.setMaximized(true);
 
         //mwc.test(stage);
+
+         */
+        ControllerManager controllerManager = new ControllerManager(stage);
     }
 
     public static void main(String[] args) {

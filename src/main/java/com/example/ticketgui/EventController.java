@@ -4,10 +4,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
@@ -19,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 public class EventController implements IController {
+    private ControllerManager manager;
     private IController root;
     private Map<Region, List<Double>> windowItems = new HashMap<>();
     private Map<ImageView, List<Double>> imageViews = new HashMap<>();
@@ -62,6 +59,11 @@ public class EventController implements IController {
     @Override
     public void resizeItems(double width, double height) {
         resizeItems(windowItems, imageViews, width, height);
+    }
+
+    @Override
+    public void setManager(ControllerManager manager) {
+        this.manager = manager;
     }
 
     @Override
