@@ -155,51 +155,44 @@ public class MainWindowController implements IController {
     // update note - det kan man ikke - fordi root childen har ikke nok children (7 currently ift. 40)
     @Override
     public void initializeComponents(double width, double height) {
-        // TODO : overvej .addall
-        List<Region> windowContent = new ArrayList<>();
-        windowContent.add(dataPane);
-        windowContent.add(viewPanel);
-        windowContent.add(root);
-        windowContent.add(sideMenu);
-        windowContent.add(menuBar);
-        windowContent.add(userInformation);
-        windowContent.add(lblUserName);
-        windowContent.add(lblUserRole);
-        windowContent.add(lblMenuTitle);
-        windowContent.add(newEvent);
-        windowContent.add(lblNewEventlbl);
-        windowContent.add(newUser);
-        windowContent.add(lblNewUser);
-        windowContent.add(manageCupons);
-        windowContent.add(lblManageCupons);
-        windowContent.add(data1);
-        windowContent.add(lblData1Title);
-        windowContent.add(lblData1data);
-        windowContent.add(data2);
-        windowContent.add(lvlData2Title);
-        windowContent.add(lblData2data);
-        windowContent.add(data3);
-        windowContent.add(lblData3Title);
-        windowContent.add(lblData3data);
-        windowContent.add(data4);
-        windowContent.add(lblData4Title);
-        windowContent.add(lblData4data);
-        windowContent.add(eventOverview);
-        windowContent.add(tblEvent);
-        windowContent.add(lblEvent);
-        windowContent.add(lvlEventSearch);
-        windowContent.add(lblEventTypeSearch);
-        windowContent.add(txtEventTitle);
-        windowContent.add(cbEventType);
-        windowContent.add(cuponsPane);
-        windowContent.add(lblCupons);
-        windowContent.add(tblCupons);
-
-        //windowContent.add(imgManageCupons);
-        //windowContent.add(imgNewUser);
-        //windowContent.add(imgUserImage);
-        //windowContent.add(imgNewEvent);
-        //windowContent.add(imgLogout);
+        List<Region> windowContent = new ArrayList<>(Arrays.asList(
+        dataPane, 
+        viewPanel,
+        root,
+        sideMenu,
+        menuBar,
+        userInformation,
+        lblUserName,
+        lblUserRole,
+        lblMenuTitle,
+        newEvent,
+        lblNewEventlbl,
+        newUser,
+        lblNewUser,
+        manageCupons,
+        lblManageCupons,
+        data1,
+        lblData1Title,
+        lblData1data,
+        data2,
+        lvlData2Title,
+        lblData2data,
+        data3,
+        lblData3Title,
+        lblData3data,
+        data4,
+        lblData4Title,
+        lblData4data,
+        eventOverview,
+        tblEvent,
+        lblEvent,
+        lvlEventSearch,
+        lblEventTypeSearch,
+        txtEventTitle,
+        cbEventType,
+        cuponsPane,
+        lblCupons,
+        tblCupons));
 
         // special case:
         ScrollPane scrollPane = createScrollpaneForDatapane();
