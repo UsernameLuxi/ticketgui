@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LoginController implements IController {
+public class LoginController extends Controller {
     private IController mainController;
     private ControllerManager manager;
     private boolean abool = false;

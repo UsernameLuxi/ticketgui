@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PrintEventController implements IController {
+public class PrintEventController extends Controller {
     private ControllerManager manager;
     private IController root;
     private Map<Region, List<Double>> windowItems = new HashMap<>();

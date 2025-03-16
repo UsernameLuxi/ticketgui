@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.*;
 // TODO : Ryd op
-public class MainWindowController implements IController {
+public class MainWindowController extends Controller {
     private ControllerManager manager;
     private IController rootController;
     private IController viewController;

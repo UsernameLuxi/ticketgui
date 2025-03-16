@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class EventController implements IController {
+public class EventController extends Controller {
     private ControllerManager manager;
     private IController root;
     private Map<Region, List<Double>> windowItems = new HashMap<>();

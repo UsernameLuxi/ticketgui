@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UserController implements IController {
+public class UserController extends Controller {
     private ControllerManager manager;
     private IController root;
     private Map<Region, List<Double>> windowItems = new HashMap<>();
