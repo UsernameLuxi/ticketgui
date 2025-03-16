@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+// TODO : overvej abstrakt klasse
 public interface IController {
     // TODO : overalt i controllerne er der duplikater - tænk på hvordan dette enten kan implementeres i interfacet el lign
     void initializeComponents(double width, double height);
