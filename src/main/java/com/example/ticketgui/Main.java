@@ -1,12 +1,10 @@
 package com.example.ticketgui;
 
+import com.example.ticketgui.GUI.ControllerManager;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class Main extends Application {
     @Override

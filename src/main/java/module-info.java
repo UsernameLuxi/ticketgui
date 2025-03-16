@@ -6,4 +6,8 @@ module com.example.ticketgui {
 
     opens com.example.ticketgui to javafx.fxml;
     exports com.example.ticketgui;
+    exports com.example.ticketgui.GUI.Controller;
+    opens com.example.ticketgui.GUI.Controller to javafx.fxml;
+    exports com.example.ticketgui.GUI;
+    opens com.example.ticketgui.GUI to javafx.fxml;
 }

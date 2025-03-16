@@ -1,40 +1,34 @@
-package com.example.ticketgui;
+package com.example.ticketgui.GUI.Controller;
 
-import javafx.collections.ObservableList;
+import com.example.ticketgui.GUI.ControllerManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import javafx.scene.text.Font;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PrintEventController extends Controller {
+public class UserController extends Controller {
     private ControllerManager manager;
     private IController root;
     private Map<Region, List<Double>> windowItems = new HashMap<>();
     private Map<ImageView, List<Double>> imageViews = new HashMap<>();
     @FXML
-    private ImageView imgBtnBack;
+    private AnchorPane newUserPane;
     @FXML
-    private AnchorPane printEvent;
+    private ImageView imgBtnBack;
 
 
     @Override
     public void initializeComponents(double width, double height) {
         List<Region> windowContent = new ArrayList<>();
         // fordi der ikke er nogle sub-panes - så kan dette gøres ;)
-        for (Node n : printEvent.getChildren()){
+        for (Node n : newUserPane.getChildren()){
             if (n instanceof Region r){
                 windowContent.add(r);
             }
@@ -81,4 +75,5 @@ public class PrintEventController extends Controller {
     private void loadMain(ActionEvent event) {
         root.reload();
     }
+
 }

@@ -1,5 +1,7 @@
-package com.example.ticketgui;
+package com.example.ticketgui.GUI;
 
+import com.example.ticketgui.GUI.Controller.IController;
+import com.example.ticketgui.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -27,7 +29,7 @@ public class ControllerManager {
     public void setStage(String file) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(file));
         Scene scene = new Scene(fxmlLoader.load(), rootstage.getWidth(), rootstage.getHeight());
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("stylesheet.css")).toExternalForm());
+        //scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("stylesheet.css")).toExternalForm()); // <-- denne er nok ikke nødvendig fordi der er allerede tilføjet et stylesheet på vinduet ;) - men den producere også en exception - så den er bare dejligt
         rootstage.setTitle("TICKET GUI");
         rootstage.setScene(scene);
         rootstage.show();

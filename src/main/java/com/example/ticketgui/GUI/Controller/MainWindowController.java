@@ -1,5 +1,7 @@
-package com.example.ticketgui;
+package com.example.ticketgui.GUI.Controller;
 
+import com.example.ticketgui.GUI.ControllerManager;
+import com.example.ticketgui.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

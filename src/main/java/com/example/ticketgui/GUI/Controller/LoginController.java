@@ -1,18 +1,16 @@
-package com.example.ticketgui;
+package com.example.ticketgui.GUI.Controller;
 
-import javafx.collections.ObservableList;
+import com.example.ticketgui.GUI.ControllerManager;
+import com.example.ticketgui.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import javafx.scene.text.Font;
 
 import java.io.IOException;
 import java.util.ArrayList;

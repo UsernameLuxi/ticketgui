@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="printEvent" prefHeight="972.0" prefWidth="1920.0" styleClass="backgroundOther" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ticketgui.PrintEventController">
+<AnchorPane fx:id="printEvent" prefHeight="972.0" prefWidth="1920.0" styleClass="backgroundOther" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ticketgui.GUI.Controller.PrintEventController">
    <children>
       <TextField fx:id="txtEmail" layoutX="690.0" layoutY="275.0" prefHeight="50.0" prefWidth="800.0" styleClass="normalText">
          <font>
