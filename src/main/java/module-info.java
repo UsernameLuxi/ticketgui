@@ -4,6 +4,7 @@ module com.example.ticketgui {
     requires java.desktop;
     requires java.sql;
     requires com.microsoft.sqlserver.jdbc;
+    requires java.naming;
 
 
     opens com.example.ticketgui to javafx.fxml;

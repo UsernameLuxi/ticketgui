@@ -1,10 +1,11 @@
-package dk.easv.pmc.dal;
+package com.example.ticketgui.DAL;
 
 // sql imports
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 // java imports
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -19,7 +20,7 @@ public class DBConnector {
     public DBConnector() throws IOException {
         //load db settings to properties
         Properties props = new Properties();
-        props.load(new FileInputStream(PROPERTIES_FILE));
+        props.load(new FileInputStream(new File(PROPERTIES_FILE)));
 
         //dataSource configured with database connection details
         dataSource = new SQLServerDataSource();

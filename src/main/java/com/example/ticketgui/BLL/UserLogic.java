@@ -1,4 +1,27 @@
 package com.example.ticketgui.BLL;
 
-public class UserLogic {
+import com.example.ticketgui.BE.User;
+import com.example.ticketgui.BLL.util.IHashing;
+import com.example.ticketgui.BLL.util.PasswordHasher;
+import com.example.ticketgui.DAL.IUserAccess;
+import com.example.ticketgui.DAL.UserDataAccess;
+
+public class UserLogic implements ILogic {
+    private IUserAccess userAccess;
+    private IHashing hasher;
+    public UserLogic() throws Exception {
+        userAccess = new UserDataAccess();
+        hasher = new PasswordHasher();
+    }
+
+    /**
+     * Laver en bruger i databasen og hasher kodeordet
+     * @param user Den bruger som skal laves med brugernavn og rolle
+     * @param password Det password som skal hashes
+     * @return returnere brugeren med id genereret af databasen
+     */
+    public User createUser(User user, String password) throws Exception {
+        user.setPassword_hash(hasher.hashString(password));
+        return userAccess.create(user);
+    }
 }

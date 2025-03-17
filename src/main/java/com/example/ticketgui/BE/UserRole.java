@@ -12,4 +12,8 @@ public enum UserRole {
     public int getId() {
         return id;
     }
+
+    public static int getUserID(UserRole role) {
+        return role.getId();
+    }
 }

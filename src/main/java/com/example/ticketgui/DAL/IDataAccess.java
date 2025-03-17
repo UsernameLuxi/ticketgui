@@ -5,13 +5,13 @@ import java.util.List;
 // denne kan fyldes ud ig
 // her skal kun generelle ting, som gælder for alle, ind
 public interface IDataAccess<T> {
-    List<T> getAll();
+    List<T> getAll() throws Exception;
 
-    T create(T t);
+    T create(T t) throws Exception;
 
-    T getById(int id);
+    T getById(int id) throws Exception;
 
-    void update(T t);
+    void update(T t) throws Exception;
 
-    void delete(T t);
+    void delete(T t) throws Exception;
 }
