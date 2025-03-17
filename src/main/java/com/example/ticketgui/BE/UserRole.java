@@ -13,7 +13,17 @@ public enum UserRole {
         return id;
     }
 
+    // ? - måske fjern
     public static int getUserID(UserRole role) {
         return role.getId();
+    }
+    public static UserRole getRoleByString(String role){
+        role = role.toUpperCase();
+        for (UserRole userRole : values()) {
+            if(userRole.toString().equals(role)){
+                return userRole;
+            }
+        }
+        return EVENT_KOORDINATOR;
     }
 }

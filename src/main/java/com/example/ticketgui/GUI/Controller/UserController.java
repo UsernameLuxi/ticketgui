@@ -1,9 +1,14 @@
 package com.example.ticketgui.GUI.Controller;
 
+import com.example.ticketgui.BE.User;
+import com.example.ticketgui.BE.UserRole;
 import com.example.ticketgui.GUI.ControllerManager;
+import com.example.ticketgui.GUI.Model.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.SplitMenuButton;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
@@ -18,10 +23,17 @@ public class UserController extends Controller {
     private IController root;
     private Map<Region, List<Double>> windowItems = new HashMap<>();
     private Map<ImageView, List<Double>> imageViews = new HashMap<>();
+    UserModel userModel;
     @FXML
     private AnchorPane newUserPane;
     @FXML
     private ImageView imgBtnBack;
+    @FXML
+    private TextField txtUsername;
+    @FXML
+    private SplitMenuButton smbUserRole;
+    @FXML
+    private TextField txtPassword;
 
 
     @Override
@@ -41,6 +53,13 @@ public class UserController extends Controller {
             add(imgBtnBack.getLayoutY() / height);}});
 
         fillMap(windowContent, width, height);
+
+        try{
+            userModel = new UserModel();
+        }
+        catch (Exception e){
+            // TODO : indsæt håndtering hvis man ikke kan lave modellen
+        }
 
     }
 
@@ -76,4 +95,14 @@ public class UserController extends Controller {
         root.reload();
     }
 
+    @FXML
+    private void createUser(ActionEvent actionEvent) {
+        User u = new User(txtUsername.getText(), UserRole.getRoleByString(smbUserRole.getText()));
+        try{
+            userModel.createUser(u, txtPassword.getText().trim());
+        }
+        catch (Exception e){
+            // TODO : indsæt exception-håndtering
+        }
+    }
 }
