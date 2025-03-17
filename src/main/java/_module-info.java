@@ -1,6 +1,8 @@
+/*
 module com.example.ticketgui {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.base;
     requires java.desktop;
     requires java.sql;
     requires com.microsoft.sqlserver.jdbc;
@@ -14,3 +16,5 @@ module com.example.ticketgui {
     exports com.example.ticketgui.GUI;
     opens com.example.ticketgui.GUI to javafx.fxml;
 }
+
+ */

@@ -6,6 +6,8 @@ import com.example.ticketgui.BLL.util.PasswordHasher;
 import com.example.ticketgui.DAL.IUserAccess;
 import com.example.ticketgui.DAL.UserDataAccess;
 
+import java.util.List;
+
 public class UserLogic implements ILogic {
     private IUserAccess userAccess;
     private IHashing hasher;
@@ -23,5 +25,9 @@ public class UserLogic implements ILogic {
     public User createUser(User user, String password) throws Exception {
         user.setPassword_hash(hasher.hashString(password));
         return userAccess.create(user);
+    }
+
+    public List<User> getAllUsers() throws Exception {
+        return userAccess.getAll();
     }
 }

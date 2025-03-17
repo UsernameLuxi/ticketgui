@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -67,5 +69,16 @@
             <Font size="24.0" />
          </font>
       </TextField>
+      <Label layoutX="1290.0" layoutY="160.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Brugere:">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tblBrugere" layoutX="1290.0" layoutY="210.0" prefHeight="614.0" prefWidth="572.0">
+        <columns>
+          <TableColumn fx:id="colBrugernavn" prefWidth="427.199951171875" text="Bruger Navn" />
+          <TableColumn fx:id="colRolle" minWidth="0.0" prefWidth="135.199951171875" text="Rolle" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

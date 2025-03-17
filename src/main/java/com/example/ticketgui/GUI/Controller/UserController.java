@@ -7,9 +7,8 @@ import com.example.ticketgui.GUI.Model.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.SplitMenuButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
@@ -35,6 +34,12 @@ public class UserController extends Controller {
     private SplitMenuButton smbUserRole;
     @FXML
     private TextField txtPassword;
+    @FXML
+    private TableView<User> tblBrugere;
+    @FXML
+    private TableColumn<User, String> colBrugernavn;
+    @FXML
+    private TableColumn<User, UserRole> colRolle;
 
 
     @Override
@@ -55,11 +60,17 @@ public class UserController extends Controller {
 
         fillMap(windowContent, width, height);
 
+
+        // udfyld kolonnerne
+        colBrugernavn.setCellValueFactory(new PropertyValueFactory<>("username"));
+        colRolle.setCellValueFactory(new PropertyValueFactory<>("userRole"));
+
         try{
             userModel = new UserModel();
+            tblBrugere.setItems(userModel.getUsers());
         }
         catch (Exception e){
-            // TODO : indsæt håndtering hvis man ikke kan lave modellen
+            // TODO : indsæt håndtering hvis man ikke kan lave modellen eller få brugerne
         }
         // lav rollerne til menutingen
         List<MenuItem> items = new ArrayList<>();
