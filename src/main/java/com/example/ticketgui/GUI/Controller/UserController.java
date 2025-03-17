@@ -7,6 +7,7 @@ import com.example.ticketgui.GUI.Model.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -60,6 +61,18 @@ public class UserController extends Controller {
         catch (Exception e){
             // TODO : indsæt håndtering hvis man ikke kan lave modellen
         }
+        // lav rollerne til menutingen
+        List<MenuItem> items = new ArrayList<>();
+        for (UserRole ur : UserRole.values()) {
+            MenuItem mi = new MenuItem(ur.name());
+            mi.setOnAction(event -> {
+                MenuItem mt = (MenuItem) event.getSource();
+                smbUserRole.setText(mt.getText());
+            });
+            items.add(mi);
+        }
+        smbUserRole.getItems().clear();
+        smbUserRole.getItems().addAll(items);
 
     }
 
@@ -100,6 +113,8 @@ public class UserController extends Controller {
         User u = new User(txtUsername.getText(), UserRole.getRoleByString(smbUserRole.getText()));
         try{
             userModel.createUser(u, txtPassword.getText().trim());
+            txtUsername.clear();
+            txtPassword.clear();
         }
         catch (Exception e){
             // TODO : indsæt exception-håndtering

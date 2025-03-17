@@ -4,10 +4,7 @@ import com.example.ticketgui.BE.User;
 import com.example.ticketgui.BE.UserRole;
 import com.example.ticketgui.DAL.DBConnector;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 public class UserDataAccess implements IUserAccess{
@@ -37,7 +34,7 @@ public class UserDataAccess implements IUserAccess{
         // 3 -> Role id-baseret på enum -> tjek om rolle kan forsage problemer
         String sql = "INSERT INTO [Users] (Username, Password, Role) VALUES (?,?,?)";
         try(Connection conn = new DBConnector().getConnection();
-        PreparedStatement stmt = conn.prepareStatement(sql)){
+        PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getPassword_hash());
             stmt.setInt(3, user.getUserRole().getId());
