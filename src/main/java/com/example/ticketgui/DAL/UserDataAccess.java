@@ -64,7 +64,25 @@ public class UserDataAccess implements IUserAccess{
 
     // TODO : implement
     @Override
-    public void delete(User user) {
+    public void delete(User user) throws Exception {
+        String sql = "DELETE FROM [Users] WHERE ID = ?";
+        try(Connection conn = new DBConnector().getConnection()){
+            try(PreparedStatement stmt = conn.prepareStatement(sql)){
+                // Jeg er sikker på at transaktioner ikke er nødvendig her meeeen hvis der sker en fejl
+                // så er brugeren stadig i live ;)
+                conn.setAutoCommit(false);
+                stmt.setInt(1, user.getId());
+                stmt.executeUpdate();
+                conn.commit();
+                conn.setAutoCommit(true);
+            }
+            catch(Exception e){
+                conn.rollback();
+                throw new Exception("Couldn't delete user");
+            }
 
+        } catch (Exception e) {
+            throw new Exception("Couldn't delete user");
+        }
     }
 }
