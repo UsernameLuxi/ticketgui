@@ -5,6 +5,7 @@ import com.example.ticketgui.BE.UserRole;
 import com.example.ticketgui.DAL.DBConnector;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDataAccess implements IUserAccess{
@@ -17,10 +18,23 @@ public class UserDataAccess implements IUserAccess{
             throw new Exception("Couldn't get a connection");
         }
     }
-    // TODO : implement
     @Override
-    public List<User> getAll() {
-        return List.of();
+    public List<User> getAll() throws Exception {
+        String sql = "SELECT ID, Username, Password, Role FROM Users";
+        List<User> users = new ArrayList<User>();
+        try(Connection conn = db.getConnection();
+        PreparedStatement ps = conn.prepareStatement(sql)){
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                User u = new User(rs.getInt(1), rs.getString(2), rs.getString(3), UserRole.getUserRole(rs.getInt(4)));
+                users.add(u);
+            }
+
+        } catch (Exception e) {
+            throw new Exception("Couldn't get users");
+        }
+
+        return users;
     }
 
     @Override
@@ -62,7 +76,6 @@ public class UserDataAccess implements IUserAccess{
 
     }
 
-    // TODO : implement
     @Override
     public void delete(User user) throws Exception {
         String sql = "DELETE FROM [Users] WHERE ID = ?";

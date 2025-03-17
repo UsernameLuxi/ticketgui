@@ -17,6 +17,16 @@ public enum UserRole {
     public static int getUserID(UserRole role) {
         return role.getId();
     }
+
+    public static UserRole getUserRole(int id) {
+        for (UserRole role : values()) {
+            if (role.getId() == id) {
+                return role;
+            }
+        }
+        return EVENT_KOORDINATOR;
+    }
+
     public static UserRole getRoleByString(String role){
         role = role.toUpperCase();
         for (UserRole userRole : values()) {
