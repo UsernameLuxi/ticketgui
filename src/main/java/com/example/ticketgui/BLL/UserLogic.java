@@ -30,4 +30,8 @@ public class UserLogic implements ILogic {
     public List<User> getAllUsers() throws Exception {
         return userAccess.getAll();
     }
+
+    public void deleteUser(User user) throws Exception {
+        userAccess.delete(user);
+    }
 }

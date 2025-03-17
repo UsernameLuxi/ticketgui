@@ -80,5 +80,10 @@
           <TableColumn fx:id="colRolle" minWidth="0.0" prefWidth="135.199951171875" text="Rolle" />
         </columns>
       </TableView>
+      <Button layoutX="1483.0" layoutY="845.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="67.0" prefWidth="185.0" styleClass="normalText" text="Slet bruger">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

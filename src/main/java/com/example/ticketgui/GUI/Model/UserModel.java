@@ -33,4 +33,9 @@ public class UserModel {
         users.addAll(ul);
         return ul;
     }
+
+    public void deleteUser(User user) throws Exception {
+        userLogic.deleteUser(user);
+        users.remove(user);
+    }
 }

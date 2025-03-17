@@ -131,4 +131,22 @@ public class UserController extends Controller {
             // TODO : indsæt exception-håndtering
         }
     }
+
+    @FXML
+    private void deleteUser(ActionEvent actionEvent) {
+        User selctedUser = tblBrugere.getSelectionModel().getSelectedItem();
+        if (selctedUser != null){
+            // TODO : lav et tjek at brugeren ikke sletter sig selv ;)
+            // TODO : måske lidt verificering af brugerens valg
+            try{
+                userModel.deleteUser(selctedUser);
+            }
+            catch (Exception e){
+                // TODO : der skete noget med sletningen - imp noget
+            }
+        }
+        else{
+            // TODO : null giv måske en advarsel eller noget information i form a label ?
+        }
+    }
 }
