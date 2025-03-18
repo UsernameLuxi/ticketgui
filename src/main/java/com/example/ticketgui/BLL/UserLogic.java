@@ -3,7 +3,7 @@ package com.example.ticketgui.BLL;
 import com.example.ticketgui.BE.User;
 import com.example.ticketgui.BLL.util.IHashing;
 import com.example.ticketgui.BLL.util.PasswordHasher;
-import com.example.ticketgui.DAL.IUserAccess;
+import com.example.ticketgui.DAL.Interfaces.IUserAccess;
 import com.example.ticketgui.DAL.UserDataAccess;
 
 import java.util.List;

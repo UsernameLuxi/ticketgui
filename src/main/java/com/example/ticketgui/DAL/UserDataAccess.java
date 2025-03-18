@@ -2,12 +2,13 @@ package com.example.ticketgui.DAL;
 
 import com.example.ticketgui.BE.User;
 import com.example.ticketgui.BE.UserRole;
+import com.example.ticketgui.DAL.Interfaces.IUserAccess;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDataAccess implements IUserAccess{
+public class UserDataAccess implements IUserAccess {
     private DBConnector db;
     public UserDataAccess() throws Exception {
         try{

@@ -1,6 +1,7 @@
 package com.example.ticketgui.DAL;
 
 import com.example.ticketgui.BE.Event;
+import com.example.ticketgui.DAL.Interfaces.IEventDataAccess;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

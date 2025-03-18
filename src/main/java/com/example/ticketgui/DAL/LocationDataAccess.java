@@ -1,6 +1,7 @@
 package com.example.ticketgui.DAL;
 
 import com.example.ticketgui.BE.Location;
+import com.example.ticketgui.DAL.Interfaces.IDataAccess;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
