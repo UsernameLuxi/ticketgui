@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 public class PasswordHasher implements IHashing{
     @Override
     public String hashString(String input) throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance("SHA-512");
+        MessageDigest md = MessageDigest.getInstance("SHA3-512");
         byte[] hash = md.digest(input.getBytes(StandardCharsets.UTF_8));
         StringBuilder hexString = new StringBuilder();
         for (byte b : hash) {
