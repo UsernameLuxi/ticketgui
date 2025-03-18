@@ -18,6 +18,15 @@ public class Event {
         this.eventType = eventType;
         this.location = location;
     }
+    public Event(int id, String name){
+        this.id = id;
+        this.name = name;
+        this.price = 0;
+        this.description = "";
+        this.dateTime = "";
+        this.eventType = null;
+        this.location = null;
+    }
 
     public String getName() {
         return name;
