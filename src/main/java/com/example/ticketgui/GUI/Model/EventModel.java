@@ -2,6 +2,8 @@ package com.example.ticketgui.GUI.Model;
 
 import com.example.ticketgui.BE.Event;
 import com.example.ticketgui.BE.EventType;
+import com.example.ticketgui.BE.User;
+import com.example.ticketgui.BE.UserRole;
 import com.example.ticketgui.BLL.EventLogic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,5 +31,15 @@ public class EventModel {
     public void deleteEvent(Event e) throws Exception {
         logic.deleteEvent(e);
         events.remove(e);
+    }
+
+    public ObservableList<Event> getEventsForUser(User user) throws Exception {
+        events.clear();
+        if (user.getUserRole() == UserRole.ADMIN){
+            events.addAll(logic.getAllEvents());
+            return events;
+        }
+        events.addAll(logic.getEventAccess(user));
+        return events;
     }
 }

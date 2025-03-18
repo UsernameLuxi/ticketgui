@@ -2,6 +2,7 @@ package com.example.ticketgui.BLL;
 
 import com.example.ticketgui.BE.Event;
 import com.example.ticketgui.BE.EventType;
+import com.example.ticketgui.BE.User;
 import com.example.ticketgui.DAL.EventDataAccess;
 import com.example.ticketgui.DAL.EventTypeDataAccess;
 import com.example.ticketgui.DAL.Interfaces.IDataAccess;
@@ -28,5 +29,13 @@ public class EventLogic {
 
     public void deleteEvent(Event event) throws Exception{
         eventDataAccess.delete(event);
+    }
+
+    public List<Event> getEventAccess(User user) throws Exception {
+        return eventDataAccess.getEventAccess(user);
+    }
+
+    public List<Event> getAllEvents() throws Exception {
+        return eventDataAccess.getAll();
     }
 }
