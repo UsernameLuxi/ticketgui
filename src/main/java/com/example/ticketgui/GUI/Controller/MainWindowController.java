@@ -237,6 +237,10 @@ public class MainWindowController extends Controller {
         mainContent.addAll(viewPanel.getChildren());
         mainContent.remove(dataPane);
 
+        // indsæt bruger ;)
+        lblUserName.setText(ControllerManager.getCurrentUser().getUsername());
+        lblUserRole.setText(ControllerManager.getCurrentUser().getUserRole().toString());
+
     }
 
     private void fillMap(List<Region> items, double width, double height) {
