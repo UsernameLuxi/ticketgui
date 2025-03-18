@@ -25,4 +25,8 @@ public class EventLogic {
     public List<EventType> getEventTypes() throws Exception{
         return eventTypeDataAccess.getAll();
     }
+
+    public void deleteEvent(Event event) throws Exception{
+        eventDataAccess.delete(event);
+    }
 }

@@ -1,9 +1,11 @@
 package com.example.ticketgui.GUI.Controller;
 
+import com.example.ticketgui.BE.Event;
 import com.example.ticketgui.GUI.ControllerManager;
 import com.example.ticketgui.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -91,7 +93,7 @@ public class MainWindowController extends Controller {
     @FXML
     private AnchorPane eventOverview;
     @FXML
-    private TableView tblEvent;
+    private TableView<Event> tblEvent;
     @FXML
     private Label lblEvent;
     @FXML
@@ -333,5 +335,18 @@ public class MainWindowController extends Controller {
     @Override
     public void setManager(ControllerManager manager) {
         this.manager = manager;
+    }
+
+    private void removeEvent(ActionEvent event) {
+        // TODO : confirmation message
+        Event e = tblEvent.getSelectionModel().getSelectedItem();
+        if (e == null){
+            return;
+        }
+        try {
+            manager.getEventModel().deleteEvent(e);
+        } catch (Exception ex) {
+            // TODO : indsæt noget
+        }
     }
 }

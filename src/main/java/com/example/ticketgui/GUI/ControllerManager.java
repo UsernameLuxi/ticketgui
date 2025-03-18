@@ -2,6 +2,7 @@ package com.example.ticketgui.GUI;
 
 import com.example.ticketgui.BE.User;
 import com.example.ticketgui.GUI.Controller.IController;
+import com.example.ticketgui.GUI.Model.EventModel;
 import com.example.ticketgui.GUI.Model.UserModel;
 import com.example.ticketgui.Main;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,9 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class ControllerManager {
+    // TODO : overvej om alle modellerne skal gemmes her?
+    private EventModel eventModel;
+    // TODO : overvej om currentUser skal være static
     private static User currentUser = null; // null igen logget ind ;)
     private Stage rootstage;
     private IController mainController;
@@ -27,6 +31,9 @@ public class ControllerManager {
         } catch (IOException e) {
             // something
         }
+
+        // models?
+        eventModel = new EventModel();
     }
 
     public void setStage(String file) throws IOException {
@@ -58,6 +65,10 @@ public class ControllerManager {
     }
     public void setCurrentUser(User user){
         currentUser = user;
+    }
+
+    public EventModel getEventModel() {
+        return eventModel;
     }
 
 }

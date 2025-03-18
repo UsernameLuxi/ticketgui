@@ -62,6 +62,15 @@ public class EventDataAccess implements IEventDataAccess {
     // TODO : implement
     @Override
     public void delete(Event event) throws Exception {
+        String sql = "DELETE FROM Events WHERE ID = ?";
+        DBConnector db = new DBConnector();
+        try(Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)){
+            ps.setInt(1, event.getId());
+            ps.executeUpdate();
+        }
+        catch (Exception e) {
+            throw new Exception("Couldn't delete event: " + e.getMessage());
+        }
 
     }
 }

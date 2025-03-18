@@ -25,4 +25,9 @@ public class EventModel {
     public List<EventType> getEventTypes() throws Exception {
         return logic.getEventTypes();
     }
+
+    public void deleteEvent(Event e) throws Exception {
+        logic.deleteEvent(e);
+        events.remove(e);
+    }
 }
