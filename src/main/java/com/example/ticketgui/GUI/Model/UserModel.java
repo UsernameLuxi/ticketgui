@@ -5,7 +5,6 @@ import com.example.ticketgui.BLL.UserLogic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.Collections;
 import java.util.List;
 
 public class UserModel {
@@ -15,7 +14,7 @@ public class UserModel {
     public UserModel() throws Exception {
         users = FXCollections.observableArrayList();
         userLogic = new UserLogic();
-        users.addAll(userLogic.getAllUsers());
+        //users.addAll(userLogic.getAllUsers()); <- til dem som ikke skal bruge den skal ikke håndtere at der bliver loaded users fra DB
     }
 
     public void createUser(User user, String password) throws Exception {
@@ -34,8 +33,17 @@ public class UserModel {
         return ul;
     }
 
+    public void loadUsersDB() throws Exception {
+        users.clear();
+        users.addAll(userLogic.getAllUsers());
+    }
+
     public void deleteUser(User user) throws Exception {
         userLogic.deleteUser(user);
         users.remove(user);
+    }
+
+    public User login(User user) throws Exception {
+        return userLogic.loginUser(user);
     }
 }

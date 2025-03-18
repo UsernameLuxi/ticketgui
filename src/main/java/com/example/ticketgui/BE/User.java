@@ -1,6 +1,6 @@
 package com.example.ticketgui.BE;
 
-public class User {
+public class User{
     private int id;
     private String username;
     private UserRole userRole;
@@ -17,6 +17,11 @@ public class User {
         this.username = username;
         this.userRole = UserRole;
     }
+    public User (String username, String password){
+        this.username = username;
+        this.password_hash = password;
+        this.userRole = UserRole.EVENT_KOORDINATOR;
+    }
 
     public int getId() {
         return id;
@@ -27,7 +32,7 @@ public class User {
     public UserRole getUserRole() {
         return userRole;
     }
-    public String getPassword_hash() {
+    public String getPassword() {
         return password_hash;
     }
     public void setPassword_hash(String password_hash) {

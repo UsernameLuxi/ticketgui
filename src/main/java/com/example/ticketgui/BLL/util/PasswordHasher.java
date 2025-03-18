@@ -20,4 +20,15 @@ public class PasswordHasher implements IHashing{
         }
         return hexString.toString();
     }
+
+    @Override
+    /**
+     * Compares input(non hash) to a hashed value and returns if the input string has the same hashed value as the hash string
+     */
+    public boolean compare(String input, String hash) throws Exception {
+        String inputHash = hashString(input);
+        return inputHash.equals(hash);
+    }
+
+
 }

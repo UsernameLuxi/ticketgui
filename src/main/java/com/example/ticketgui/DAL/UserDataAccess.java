@@ -2,7 +2,6 @@ package com.example.ticketgui.DAL;
 
 import com.example.ticketgui.BE.User;
 import com.example.ticketgui.BE.UserRole;
-import com.example.ticketgui.DAL.DBConnector;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -50,13 +49,13 @@ public class UserDataAccess implements IUserAccess{
         try(Connection conn = new DBConnector().getConnection();
         PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             stmt.setString(1, user.getUsername());
-            stmt.setString(2, user.getPassword_hash());
+            stmt.setString(2, user.getPassword());
             stmt.setInt(3, user.getUserRole().getId());
             stmt.executeUpdate();
 
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()){
-                return new User(rs.getInt(1), user.getUsername(), user.getPassword_hash(), user.getUserRole());
+                return new User(rs.getInt(1), user.getUsername(), user.getPassword(), user.getUserRole());
             }
             else{
                 throw new Exception("Couldn't get the generated key");
@@ -66,8 +65,19 @@ public class UserDataAccess implements IUserAccess{
 
     // TODO : implement
     @Override
-    public User getById(int id) {
-        return null;
+    public User getById(int id) throws Exception {
+        String sql = "SELECT ID, Username, Password, Role FROM Users WHERE ID = ?";
+        try (Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)){
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next())
+                return new User(rs.getInt(1), rs.getString(2), rs.getString(3), UserRole.getUserRole(rs.getInt(4)));
+            else
+                return null;
+        }
+        catch(Exception e){
+            throw new Exception("Couldn't get the user");
+        }
     }
 
     // TODO : implement
@@ -96,6 +106,23 @@ public class UserDataAccess implements IUserAccess{
 
         } catch (Exception e) {
             throw new Exception("Couldn't delete user");
+        }
+    }
+
+    @Override
+    public User getUserOfUsername(String username) throws Exception{
+        String sql = "SELECT ID FROM [Users] WHERE Username = ?";
+
+        try(Connection conn = db.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()){
+                return getById(rs.getInt(1)); // TODO : måske indsæt egen ting så 2 sql kald ikke forekommer
+            }
+            else
+                return null;
+        } catch (Exception e) {
+            throw new Exception("Couldn't fetch password");
         }
     }
 }

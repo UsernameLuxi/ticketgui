@@ -1,6 +1,8 @@
 package com.example.ticketgui.GUI;
 
+import com.example.ticketgui.BE.User;
 import com.example.ticketgui.GUI.Controller.IController;
+import com.example.ticketgui.GUI.Model.UserModel;
 import com.example.ticketgui.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,6 +13,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class ControllerManager {
+    private static User currentUser = null; // null igen logget ind ;)
     private Stage rootstage;
     private IController mainController;
     private boolean resizeTingen = false;
@@ -48,6 +51,13 @@ public class ControllerManager {
 
     public void setPaneRoot(AnchorPane pane, String file) {
 
+    }
+
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+    public void setCurrentUser(User user){
+        currentUser = user;
     }
 
 }

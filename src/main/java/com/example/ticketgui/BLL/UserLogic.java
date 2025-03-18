@@ -34,4 +34,21 @@ public class UserLogic implements ILogic {
     public void deleteUser(User user) throws Exception {
         userAccess.delete(user);
     }
+
+    /**
+     * Tjekker om brugerens password passer med det som blev indsendt.
+     * Indsend et brugerobjekt med brugernavn og password(u-hashet) ->
+     * giver den fulde bruger retur med rolle og id.
+     */
+    public User loginUser(User user) throws Exception {
+        User dbUser = userAccess.getUserOfUsername(user.getUsername());
+        if (dbUser == null)
+            return null;
+
+        if (hasher.compare(user.getPassword(), dbUser.getPassword())){
+            return dbUser;
+        }
+        else
+            return null;
+    }
 }

@@ -1,6 +1,8 @@
 package com.example.ticketgui.GUI.Controller;
 
+import com.example.ticketgui.BE.User;
 import com.example.ticketgui.GUI.ControllerManager;
+import com.example.ticketgui.GUI.Model.UserModel;
 import com.example.ticketgui.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,6 +26,7 @@ public class LoginController extends Controller {
     private boolean abool = false;
     private IController root;
     private Map<Region, List<Double>> windowItems = new HashMap<>();
+    private UserModel userModel;
     @FXML
     private AnchorPane loginPane;
     @FXML
@@ -36,6 +39,15 @@ public class LoginController extends Controller {
     private Label lblUsername;
     @FXML
     private Label lblPassword;
+
+    public LoginController() {
+        try{
+            userModel = new UserModel();
+        }
+        catch (Exception e){
+            // TODO : lav noget
+        }
+    }
 
 
     // samme koncept som i main controlleren
@@ -81,12 +93,25 @@ public class LoginController extends Controller {
 
     @FXML
     private void login(ActionEvent actionEvent) {
-        // TODO : refactor
+        //  refactor
+        // TODO : lav metode i usermodel
+        User loginAttempt = new User(txtUsername.getText(), textPassword.getText());
+        try{
+            User loginUser = userModel.login(loginAttempt);
+            if (loginUser != null){
+                manager.setCurrentUser(loginUser);
+            }
+            else
+                return; // måske noget her ig TODO
+        }
+        catch (Exception e){
+            // something
+        }
         try{
             manager.setStage("MainWindow.fxml");
         }
-        catch (IOException e){
-            // something
+        catch (Exception e){
+            // TODO : something
         }
 
     }

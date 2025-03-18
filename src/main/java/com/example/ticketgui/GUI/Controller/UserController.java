@@ -67,6 +67,7 @@ public class UserController extends Controller {
 
         try{
             userModel = new UserModel();
+            userModel.loadUsersDB();
             tblBrugere.setItems(userModel.getUsers());
         }
         catch (Exception e){
