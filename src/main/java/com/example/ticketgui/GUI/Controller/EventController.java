@@ -14,10 +14,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class EventController extends Controller {
     private ControllerManager manager;
@@ -76,10 +74,12 @@ public class EventController extends Controller {
                 mi.setOnAction(event -> {
                     MenuItem mt = (MenuItem) event.getSource();
                     smbType.setText(mt.getText());
-                    currentEventType = et; // TODO : test virker dette?
+                    currentEventType = et;
                 });
                 items.add(mi);
             }
+            currentEventType = types.getFirst();
+            smbType.setText(currentEventType.getName());
             smbType.getItems().clear();
             smbType.getItems().addAll(items);
         } catch (Exception e) {
@@ -140,11 +140,20 @@ public class EventController extends Controller {
         String street = txtLocation.getText().split(",")[1];
         Location location = new Location(-1, postInt, street); // TODO : tjek lige om den allerede er i db!
 
-        String dateTime = datePicker.getValue().toString() + " (" + txtTime.getText() + ")"; // TODO se lige hvordan dette ser ud
-
+        //String dateTime = datePicker.getValue().toString() + " (" + txtTime.getText() + ")";
+        String dateTime = datePicker.getValue().getDayOfMonth() + "-"+ datePicker.getValue().getMonthValue() + "-" + datePicker.getValue().getYear() + " (" + txtTime.getText() + ")";
         Event e = new Event(-1, name, price, desc, dateTime, type, location);
         try {
             model.createEvent(e);
+            // TODO : tilføj noget feedback
+
+            // tøm felter
+            txtEventName.clear();
+            txtEventDesc.clear();
+            txtEventPrice.clear();
+            datePicker.setValue(null);
+            txtLocation.clear();
+            txtTime.clear();
         } catch (Exception ex) {
             // TODO : tilføj noget her!
         }
