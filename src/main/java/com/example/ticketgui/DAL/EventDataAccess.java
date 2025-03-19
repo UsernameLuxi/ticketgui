@@ -1,14 +1,13 @@
 package com.example.ticketgui.DAL;
 
-import com.example.ticketgui.BE.Event;
-import com.example.ticketgui.BE.EventType;
-import com.example.ticketgui.BE.Location;
-import com.example.ticketgui.BE.User;
+import com.example.ticketgui.BE.*;
 import com.example.ticketgui.DAL.Interfaces.IEventDataAccess;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EventDataAccess implements IEventDataAccess {
     LocationDataAccess locDataAccess = new LocationDataAccess();
@@ -25,8 +24,9 @@ public class EventDataAccess implements IEventDataAccess {
         try(Connection conn = dbConnector.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
             List<Event> events = new ArrayList<>();
+            Map<Integer, List<User>> eventUsers = eventUsers();
             while(rs.next()) {
-                events.add(makeEvent(rs));
+                events.add(makeEvent(rs, eventUsers.get(rs.getInt(1))));
             }
             return events;
 
@@ -35,7 +35,7 @@ public class EventDataAccess implements IEventDataAccess {
         }
     }
 
-    private Event makeEvent(ResultSet rs) throws SQLException {
+    private Event makeEvent(ResultSet rs, List<User> eventUsers) throws SQLException {
         // create event
         Event e = new Event(rs.getInt("ID"), rs.getString("Name"));
         e.setPrice(rs.getInt("Price"));
@@ -43,8 +43,37 @@ public class EventDataAccess implements IEventDataAccess {
         e.setDateTime(rs.getString("DateTime"));
         e.setLocation(new Location(rs.getInt("Location"), rs.getInt("PostNummer"), rs.getString("Vej")));
         e.setDescription(rs.getString("Description"));
+        e.setEventKoordinators(eventUsers);
         System.out.println(rs.getString(5));
         return e;
+    }
+
+    private Map<Integer, List<User>> eventUsers() throws Exception {
+        Map<Integer, List<User>> eventUsers = new HashMap<>();
+        String sql = "SELECT EventID, UserID, Users.Username, Users.Role FROM EventAssignment " +
+                "INNER JOIN Users ON EventAssignment.UserID = Users.ID " +
+                "ORDER BY UserID;";
+        DBConnector db = new DBConnector();
+        try(Connection conn = db.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            User tempU = null;
+            while(rs.next()) {
+                if (tempU == null || tempU.getId() == rs.getInt(2)){
+                    tempU = new User(rs.getInt(2), rs.getString(3), "####", UserRole.getUserRole(rs.getInt(4)));
+
+                }
+                boolean newE = !eventUsers.containsKey(rs.getInt(1));
+                if (newE){
+                    eventUsers.put(rs.getInt(1), new ArrayList<>());
+                    eventUsers.get(rs.getInt(1)).add(tempU);
+                }
+                else
+                    eventUsers.get(rs.getInt(1)).add(tempU);
+            }
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+        return eventUsers;
     }
 
     @Override
@@ -67,7 +96,10 @@ public class EventDataAccess implements IEventDataAccess {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()){
                 int id = rs.getInt(1);
-                return new Event(id, event.getName(), event.getPrice(), event.getDescription(), event.getDateTime(), event.getEventType(), event.getLocation());
+                Event e = new Event(id, event.getName(), event.getPrice(), event.getDescription(), event.getDateTime(), event.getEventType(), event.getLocation());
+                e.setEventKoordinators(event.getEventKoordinators());
+                addUsersToEvent(e, event.getEventKoordinators());
+                return e;
             }
 
         }
@@ -75,6 +107,23 @@ public class EventDataAccess implements IEventDataAccess {
             throw new Exception("Couldn't create event");
         }
         return null;
+    }
+
+    public void addUsersToEvent(Event event, List<User> users) throws Exception {
+        String sql = "INSERT INTO EventAssignment (EventID, UserID) Values (?, ?)";
+        DBConnector db = new DBConnector();
+        try(Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)){
+            ps.setInt(1, event.getId()); // konstant
+            for (User u : users){
+                ps.setInt(2, u.getId());
+                ps.addBatch();
+            }
+            ps.executeBatch(); // commit all numbers ;)
+
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+
     }
 
     // TODO : implement
@@ -118,11 +167,13 @@ public class EventDataAccess implements IEventDataAccess {
             // TODO : test lige om det virker
             ps.setInt(1, user.getId());
             ResultSet rs = ps.executeQuery();
+            Map<Integer, List<User>> eventUsers = eventUsers();
             while (rs.next()){
-                eventList.add(makeEvent(rs));
+                eventList.add(makeEvent(rs, eventUsers.get(rs.getInt(1))));
             }
         }
         catch (Exception e) {
+            e.printStackTrace();
             throw new Exception("Couldn't get event list: " + e.getMessage());
         }
         return eventList;

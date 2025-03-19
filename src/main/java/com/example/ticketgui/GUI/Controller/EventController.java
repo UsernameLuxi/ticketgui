@@ -91,8 +91,17 @@ public class EventController extends Controller {
         // fill the koordinator list
         lstEventUser.setItems(FXCollections.observableArrayList());
         lstEventUser.getItems().add(ControllerManager.getCurrentUser());
-        lstUnassigned.setItems(manager.getUserModel().getEventKoordinators());
 
+        lstUnassigned.setItems(FXCollections.observableArrayList());
+        int id = ControllerManager.getCurrentUser().getId();
+        lstUnassigned.getItems().addAll(manager.getUserModel().getEventKoordinators());
+        System.out.println(lstUnassigned.getItems());
+        for (User u : lstUnassigned.getItems()) {
+            if (u.getId() == id){
+                lstUnassigned.getItems().remove(u);
+                break;
+            }
+        }
     }
 
     public void fillMap(List<Region> items, double width, double height){
