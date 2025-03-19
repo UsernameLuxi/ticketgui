@@ -1,11 +1,9 @@
 package com.example.ticketgui.GUI.Controller;
 
-import com.example.ticketgui.BE.Event;
-import com.example.ticketgui.BE.EventType;
-import com.example.ticketgui.BE.Location;
-import com.example.ticketgui.BE.UserRole;
+import com.example.ticketgui.BE.*;
 import com.example.ticketgui.GUI.ControllerManager;
 import com.example.ticketgui.GUI.Model.EventModel;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -42,6 +40,10 @@ public class EventController extends Controller {
     private DatePicker datePicker;
     @FXML
     private SplitMenuButton smbType;
+    @FXML
+    private ListView<User> lstEventUser;
+    @FXML
+    private ListView<User> lstUnassigned;
 
 
     @Override
@@ -85,6 +87,11 @@ public class EventController extends Controller {
         } catch (Exception e) {
             // TODO : noget her
         }
+
+        // fill the koordinator list
+        lstEventUser.setItems(FXCollections.observableArrayList());
+        lstEventUser.getItems().add(ControllerManager.getCurrentUser());
+        lstUnassigned.setItems(manager.getUserModel().getEventKoordinators());
 
     }
 
@@ -143,6 +150,7 @@ public class EventController extends Controller {
         //String dateTime = datePicker.getValue().toString() + " (" + txtTime.getText() + ")";
         String dateTime = datePicker.getValue().getDayOfMonth() + "-"+ datePicker.getValue().getMonthValue() + "-" + datePicker.getValue().getYear() + " (" + txtTime.getText() + ")";
         Event e = new Event(-1, name, price, desc, dateTime, type, location);
+        e.setEventKoordinators(lstEventUser.getItems());
         try {
             model.createEvent(e);
             // TODO : tilføj noget feedback
@@ -156,6 +164,27 @@ public class EventController extends Controller {
             txtTime.clear();
         } catch (Exception ex) {
             // TODO : tilføj noget her!
+        }
+    }
+
+    @FXML
+    private void addKoor(ActionEvent actionEvent) {
+        User selUser = lstUnassigned.getSelectionModel().getSelectedItem();
+        if (selUser != null) {
+            lstEventUser.getItems().add(selUser);
+            lstUnassigned.getItems().remove(selUser);
+        }
+
+    }
+
+    @FXML
+    private void removeKoor(ActionEvent actionEvent) {
+        User selUser = lstEventUser.getSelectionModel().getSelectedItem();
+        if (selUser != null){
+            if (selUser.getId() != ControllerManager.getCurrentUser().getId() && lstEventUser.getItems().size() > 1){
+                lstUnassigned.getItems().add(selUser);
+                lstEventUser.getItems().remove(selUser);
+            }
         }
     }
 }

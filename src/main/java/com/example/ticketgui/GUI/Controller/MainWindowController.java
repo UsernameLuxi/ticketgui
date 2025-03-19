@@ -331,6 +331,7 @@ public class MainWindowController extends Controller {
         AnchorPane pane = loader.load();
 
         viewController = loader.getController();
+        viewController.setManager(manager);
         // husk gør dette kun en gang - ikke flere
         viewController.initializeComponents(1920, 972);
         viewController.resizeItems(viewPanel.getWidth(), viewPanel.getHeight());

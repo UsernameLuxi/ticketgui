@@ -1,5 +1,8 @@
 package com.example.ticketgui.BE;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Event {
     private int id;
     private String name;
@@ -8,6 +11,7 @@ public class Event {
     private String dateTime;
     private EventType eventType;
     private Location location;
+    private List<User> eventKoordinators;
 
     public Event(int id, String name, int price, String description, String dateTime, EventType eventType, Location location) {
         this.id = id;
@@ -17,6 +21,7 @@ public class Event {
         this.dateTime = dateTime;
         this.eventType = eventType;
         this.location = location;
+        this.eventKoordinators = new ArrayList<>();
     }
     public Event(int id, String name){
         this.id = id;
@@ -26,6 +31,7 @@ public class Event {
         this.dateTime = "";
         this.eventType = null;
         this.location = null;
+        this.eventKoordinators = new ArrayList<>();
     }
 
     public String getName() {
@@ -73,5 +79,12 @@ public class Event {
 
     public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public List<User> getEventKoordinators() {
+        return eventKoordinators;
+    }
+    public void setEventKoordinators(List<User> eventKoordinators) {
+        this.eventKoordinators = eventKoordinators;
     }
 }

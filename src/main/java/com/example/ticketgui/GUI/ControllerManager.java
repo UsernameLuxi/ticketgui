@@ -16,6 +16,7 @@ import java.util.Objects;
 public class ControllerManager {
     // TODO : overvej om alle modellerne skal gemmes her?
     private EventModel eventModel;
+    private UserModel userModel;
     // TODO : overvej om currentUser skal være static
     private static User currentUser = null; // null igen logget ind ;)
     private Stage rootstage;
@@ -33,7 +34,15 @@ public class ControllerManager {
         }
 
         // models?
-        eventModel = new EventModel();
+        try {
+            eventModel = new EventModel();
+            userModel = new UserModel();
+            userModel.loadUsersDB();
+            userModel.loadEventKoordinatorsDB();
+        } catch (Exception e) {
+            // TODO : noget her
+            System.out.println(e.getMessage());
+        }
     }
 
     public void setStage(String file) throws IOException {
@@ -69,6 +78,9 @@ public class ControllerManager {
 
     public EventModel getEventModel() {
         return eventModel;
+    }
+    public UserModel getUserModel(){
+        return userModel;
     }
 
 }

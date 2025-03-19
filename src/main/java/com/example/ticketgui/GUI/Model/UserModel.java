@@ -9,10 +9,12 @@ import java.util.List;
 
 public class UserModel {
     ObservableList<User> users;
+    ObservableList<User> eventKoordinators;
     UserLogic userLogic;
 
     public UserModel() throws Exception {
         users = FXCollections.observableArrayList();
+        eventKoordinators = FXCollections.observableArrayList();
         userLogic = new UserLogic();
         //users.addAll(userLogic.getAllUsers()); <- til dem som ikke skal bruge den skal ikke håndtere at der bliver loaded users fra DB
     }
@@ -45,5 +47,14 @@ public class UserModel {
 
     public User login(User user) throws Exception {
         return userLogic.loginUser(user);
+    }
+
+    public ObservableList<User> getEventKoordinators() {
+        return eventKoordinators;
+    }
+
+    public void loadEventKoordinatorsDB() throws Exception {
+        eventKoordinators.clear();
+        eventKoordinators.addAll(userLogic.getAllEventKoordinators());
     }
 }

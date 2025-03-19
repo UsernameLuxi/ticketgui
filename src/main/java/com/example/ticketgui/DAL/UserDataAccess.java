@@ -126,4 +126,21 @@ public class UserDataAccess implements IUserAccess {
             throw new Exception("Couldn't fetch password");
         }
     }
+
+    // Denne kunne godt være get all users with role hvor man selv kunne taste ind rollen meeen ja nu er det sådan
+    // man kunne også diskutere hvorvidt password skulle være med - og om man skulle lave en basic user
+    @Override
+    public List<User> getAllCoordinators() throws Exception {
+        String sql = "SELECT ID, Username, Role FROM Users WHERE Role = 2";
+        try(Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)){
+            ResultSet rs = ps.executeQuery();
+            List<User> users = new ArrayList<>();
+            while(rs.next()){
+                users.add(new User(rs.getInt(1), rs.getString(2), "######", UserRole.getUserRole(rs.getInt(3))));
+            }
+            return users;
+        } catch (Exception e) {
+            throw new Exception("Couldn't get coordinators " + e.getMessage());
+        }
+    }
 }

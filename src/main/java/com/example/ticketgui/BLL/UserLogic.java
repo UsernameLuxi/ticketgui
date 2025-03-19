@@ -51,4 +51,8 @@ public class UserLogic implements ILogic {
         else
             return null;
     }
+
+    public List<User> getAllEventKoordinators() throws Exception {
+        return userAccess.getAllCoordinators();
+    }
 }
