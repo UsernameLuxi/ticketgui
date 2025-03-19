@@ -64,8 +64,8 @@ public class EventController extends Controller {
 
         fillMap(windowContent, width, height);
 
-        // create event model
-        model = new EventModel();
+        // get event model TODO : hvis dette virker - så gør lige det for det neden for også ;) - altså bruger model i-stedet for at kalde manager
+        model = manager.getEventModel();
 
         // fill the split menu
         try {
@@ -90,7 +90,9 @@ public class EventController extends Controller {
 
         // fill the koordinator list
         lstEventUser.setItems(FXCollections.observableArrayList());
-        lstEventUser.getItems().add(ControllerManager.getCurrentUser());
+        if (ControllerManager.getCurrentUser().getUserRole() != UserRole.ADMIN) { // ingen admins
+            lstEventUser.getItems().add(ControllerManager.getCurrentUser());
+        }
 
         lstUnassigned.setItems(FXCollections.observableArrayList());
         int id = ControllerManager.getCurrentUser().getId();
