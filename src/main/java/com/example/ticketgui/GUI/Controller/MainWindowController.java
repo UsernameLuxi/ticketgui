@@ -1,6 +1,8 @@
 package com.example.ticketgui.GUI.Controller;
 
 import com.example.ticketgui.BE.Event;
+import com.example.ticketgui.BE.EventType;
+import com.example.ticketgui.BE.Location;
 import com.example.ticketgui.GUI.ControllerManager;
 import com.example.ticketgui.Main;
 import javafx.collections.FXCollections;
@@ -10,11 +12,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.util.*;
@@ -26,6 +29,7 @@ public class MainWindowController extends Controller {
     private Map<Region, List<Double>> windowItems = new HashMap<>();
     private Map<ImageView, List<Double>> imageViews = new HashMap<>();
     private boolean addedThing = false; // TODO : rename
+    private ObservableList<Node> mainContent;
 
 
     @FXML
@@ -93,8 +97,6 @@ public class MainWindowController extends Controller {
     @FXML
     private AnchorPane eventOverview;
     @FXML
-    private TableView<Event> tblEvent;
-    @FXML
     private Label lblEvent;
     @FXML
     private Label lvlEventSearch;
@@ -112,7 +114,19 @@ public class MainWindowController extends Controller {
     private TableView tblCupons;
     @FXML
     private AnchorPane viewPanel;
-    private ObservableList<Node> mainContent;
+
+    /**
+     * EVENT TABLE CONTENT
+     */
+    @FXML private TableView<Event> tblEvent;
+    @FXML private TableColumn<Event, String> colTitle;
+    @FXML private TableColumn<Event, EventType> colType;
+    @FXML private TableColumn<Event, Integer> colPrice;
+    @FXML private TableColumn<Event, Location> colLoc;
+    @FXML private TableColumn<Event, String> colTime;
+    @FXML private TableColumn<Event, String> colEdit;
+    @FXML private TableColumn<Event, String> colPrint;
+    @FXML private TableColumn<Event, String> colDel;
 
     public ScrollPane createScrollpaneForDatapane() {
         ScrollPane scrollPane = new ScrollPane();
@@ -131,28 +145,6 @@ public class MainWindowController extends Controller {
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         viewPanel.getChildren().add(scrollPane);
         return scrollPane;
-    }
-
-    // Skifte mellem ting/menuer
-    // dette virker find lige en metode at initte resize på - måske flyt til en manager
-    public void test(Stage stage) throws IOException {
-        /*
-        viewPanel.getChildren().clear();
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("Print Event.fxml"));
-        AnchorPane jens = loader.load();
-
-        viewController = loader.getController();
-        // husk gør dette kun en gang - ikke flere
-        viewController.initializeComponents(1920, 972);
-        viewController.resizeItems(viewPanel.getWidth(), viewPanel.getHeight());
-        viewPanel.widthProperty().addListener((observable, oldValue, newValue) -> {viewController.resizeItems(newValue.doubleValue(), viewPanel.getHeight());});
-        viewPanel.heightProperty().addListener(((observable, oldValue, newValue) -> {viewController.resizeItems(viewPanel.getWidth(), newValue.doubleValue());}));
-
-        viewPanel.getChildren().add(jens);
-
-        //viewPanel.getChildren().add(//something)
-
-         */
     }
 
     // erhmmm ja... man kunne også bare give hvert pane et fxId og .getChildren() - hilsen Casper -> but also made by Casper... træls (root.getChildren() for each)
@@ -242,6 +234,77 @@ public class MainWindowController extends Controller {
         // indsæt bruger ;)
         lblUserName.setText(ControllerManager.getCurrentUser().getUsername());
         lblUserRole.setText(ControllerManager.getCurrentUser().getUserRole().toString());
+
+        // indsæt events TODO - spørgsmålet er om det skal gå gennem manageren og så til modellerne
+        colTitle.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colType.setCellValueFactory(new PropertyValueFactory<>("eventType"));
+        colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        colLoc.setCellValueFactory(new PropertyValueFactory<>("location"));
+        colTime.setCellValueFactory(new PropertyValueFactory<>("dateTime"));
+
+        colEdit.setCellFactory(new Callback<>() {
+            @Override
+            public TableCell<Event, String> call(TableColumn<Event, String> param) {
+                return new TableCell<>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        if (empty) {
+                            setGraphic(null);
+                        }
+                        else {
+                            Button editButton = new Button("Edit");
+                            setGraphic(editButton);
+                        }
+                    }
+                };
+            }
+        });
+        colDel.setCellFactory(new Callback<>() {
+            @Override
+            public TableCell<Event, String> call(TableColumn<Event, String> param) {
+                return new TableCell<>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        if (empty) {
+                            setGraphic(null);
+                        }
+                        else {
+                            Button editButton = new Button("Del");
+                            setGraphic(editButton);
+                        }
+                    }
+                };
+            }
+        });
+        colPrint.setCellFactory(new Callback<>() {
+            @Override
+            public TableCell<Event, String> call(TableColumn<Event, String> param) {
+                return new TableCell<>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        if (empty) {
+                            setGraphic(null);
+                        }
+                        else {
+                            Button editButton = new Button("Print");
+                            setGraphic(editButton);
+                        }
+                    }
+                };
+            }
+        });
+        try {
+            tblEvent.setItems(manager.getEventModel().getEventsForUser(ControllerManager.getCurrentUser()));
+        } catch (Exception e) {
+            // TODO : indsæt noget
+            System.out.println(e.getMessage());
+        }
 
     }
 

@@ -6,10 +6,7 @@ import com.example.ticketgui.BE.Location;
 import com.example.ticketgui.BE.User;
 import com.example.ticketgui.DAL.Interfaces.IEventDataAccess;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +15,36 @@ public class EventDataAccess implements IEventDataAccess {
     // TODO : implement
     @Override
     public List<Event> getAll() throws Exception {
-        return List.of();
+        String sql = "SELECT Events.ID, Events.Name, Events.Price, Events.Type, Category.Name, " +
+                "Events.DateTime, Events.Location, Location.PostNummer, Location.Vej, Events.Description " +
+                "FROM Events " +
+                "INNER JOIN Category ON Events.Type = Category.ID " +
+                "INNER JOIN Location ON Events.Location = Location.ID;";
+
+        DBConnector dbConnector = new DBConnector();
+        try(Connection conn = dbConnector.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            List<Event> events = new ArrayList<>();
+            while(rs.next()) {
+                events.add(makeEvent(rs));
+            }
+            return events;
+
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    private Event makeEvent(ResultSet rs) throws SQLException {
+        // create event
+        Event e = new Event(rs.getInt("ID"), rs.getString("Name"));
+        e.setPrice(rs.getInt("Price"));
+        e.setEventType(new EventType(rs.getInt("Type"), rs.getString(5)));
+        e.setDateTime(rs.getString("DateTime"));
+        e.setLocation(new Location(rs.getInt("Location"), rs.getInt("PostNummer"), rs.getString("Vej")));
+        e.setDescription(rs.getString("Description"));
+        System.out.println(rs.getString(5));
+        return e;
     }
 
     @Override
@@ -85,7 +111,7 @@ public class EventDataAccess implements IEventDataAccess {
                 " FROM EventAssignment" +
                 " INNER JOIN Events ON EventAssignment.EventID = Events.ID" +
                 " INNER JOIN Category ON Events.Type = Category.ID" +
-                " INNER JOIN Locaiton ON Events.Location = Location.ID" +
+                " INNER JOIN Location ON Events.Location = Location.ID" +
                 " WHERE UserID = ?;";
         DBConnector db = new DBConnector();
         try(Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)){
@@ -93,17 +119,11 @@ public class EventDataAccess implements IEventDataAccess {
             ps.setInt(1, user.getId());
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                Event e = new Event(rs.getInt("Events.ID"), rs.getString("Events.Name"));
-                e.setPrice(rs.getInt("Events.Price"));
-                e.setEventType(new EventType(rs.getInt("Events.Type"), rs.getString("Category.Name")));
-                e.setDateTime(rs.getString("Events.DateTime"));
-                e.setLocation(new Location(rs.getInt("Events.Location"), rs.getInt("Location.PostNummer"), rs.getString("Location.Vej")));
-                e.setDescription(rs.getString("Events.Description"));
-                eventList.add(e);
+                eventList.add(makeEvent(rs));
             }
         }
         catch (Exception e) {
-            throw new Exception("Couldn't get event list");
+            throw new Exception("Couldn't get event list: " + e.getMessage());
         }
         return eventList;
     }

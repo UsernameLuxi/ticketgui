@@ -163,14 +163,14 @@
                <children>
                   <TableView fx:id="tblEvent" layoutX="26.0" layoutY="160.0" prefHeight="400.0" prefWidth="1109.0">
                     <columns>
-                      <TableColumn prefWidth="125.5999755859375" text="Event Titel" />
-                      <TableColumn minWidth="0.0" prefWidth="75.99996948242188" text="Type" />
-                        <TableColumn minWidth="0.0" prefWidth="82.4000244140625" text="Pris" />
-                        <TableColumn prefWidth="178.13330078125" text="Lokation" />
-                        <TableColumn minWidth="5.86663818359375" prefWidth="200.26678466796875" text="Tidspunkt" />
-                        <TableColumn prefWidth="160.0001220703125" text="Edit" />
-                        <TableColumn prefWidth="151.9998779296875" text="Print" />
-                        <TableColumn minWidth="24.0" prefWidth="138.13330078125" text="Slet" />
+                      <TableColumn fx:id="colTitle" prefWidth="125.5999755859375" text="Event Titel" />
+                      <TableColumn fx:id="colType" minWidth="0.0" prefWidth="75.99996948242188" text="Type" />
+                        <TableColumn fx:id="colPrice" minWidth="0.0" prefWidth="82.4000244140625" text="Pris" />
+                        <TableColumn fx:id="colLoc" prefWidth="178.13330078125" text="Lokation" />
+                        <TableColumn fx:id="colTime" minWidth="5.86663818359375" prefWidth="200.26678466796875" text="Tidspunkt" />
+                        <TableColumn fx:id="colEdit" prefWidth="160.0001220703125" text="Edit" />
+                        <TableColumn fx:id="colPrint" prefWidth="151.9998779296875" text="Print" />
+                        <TableColumn fx:id="colDel" minWidth="24.0" prefWidth="138.13330078125" text="Slet" />
                     </columns>
                   </TableView>
                   <Label fx:id="lblEvent" layoutX="26.0" layoutY="83.0" prefHeight="47.0" prefWidth="199.0" styleClass="bigText" text="Events:">
