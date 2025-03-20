@@ -4,7 +4,7 @@ import com.example.ticketgui.BE.User;
 import com.example.ticketgui.BE.UserRole;
 import com.example.ticketgui.BLL.util.IHashing;
 import com.example.ticketgui.BLL.util.PasswordHasher;
-import com.example.ticketgui.DAL.IUserAccess;
+import com.example.ticketgui.DAL.Interfaces.IUserAccess;
 import com.example.ticketgui.DAL.UserDataAccess;
 
 import java.util.List;
@@ -51,6 +51,10 @@ public class UserLogic implements ILogic {
         }
         else
             return null;
+    }
+
+    public List<User> getAllEventKoordinators() throws Exception {
+        return userAccess.getAllCoordinators();
     }
 
 }

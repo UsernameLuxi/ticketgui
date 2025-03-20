@@ -39,4 +39,8 @@ public class User{
         this.password_hash = password_hash;
     }
 
+    @Override
+    public String toString(){
+        return username;
+    }
 }

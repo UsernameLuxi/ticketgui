@@ -1,4 +1,4 @@
-package com.example.ticketgui.DAL;
+package com.example.ticketgui.DAL.Interfaces;
 
 import java.util.List;
 
