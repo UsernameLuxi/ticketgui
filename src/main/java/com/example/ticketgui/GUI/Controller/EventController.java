@@ -197,7 +197,7 @@ public class EventController extends Controller {
             return;
         }
         String street = txtLocation.getText().split(",")[1];
-        Location location = new Location(-1, postInt, street); // TODO : tjek lige om den allerede er i db!
+        Location location = new Location(-1, postInt, street.trim()); // TODO : tjek lige om den allerede er i db!
 
         //String dateTime = datePicker.getValue().toString() + " (" + txtTime.getText() + ")";
         String dateTime = datePicker.getValue().getDayOfMonth() + "-"+ datePicker.getValue().getMonthValue() + "-" + datePicker.getValue().getYear() + " (" + txtTime.getText() + ")";
