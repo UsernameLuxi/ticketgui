@@ -38,4 +38,7 @@ public class EventLogic {
     public List<Event> getAllEvents() throws Exception {
         return eventDataAccess.getAll();
     }
+    public void updateEvent(Event event) throws Exception{
+        eventDataAccess.update(event);
+    }
 }
