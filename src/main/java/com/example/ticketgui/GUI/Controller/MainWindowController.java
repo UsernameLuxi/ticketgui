@@ -30,6 +30,7 @@ public class MainWindowController extends Controller {
     private Map<ImageView, List<Double>> imageViews = new HashMap<>();
     private boolean addedThing = false; // TODO : rename
     private ObservableList<Node> mainContent;
+    private Event editEvent = null;
 
 
     @FXML
@@ -255,6 +256,9 @@ public class MainWindowController extends Controller {
                         }
                         else {
                             Button editButton = new Button("Edit");
+                            editButton.setOnAction(event -> {
+                                editEvent(getTableView().getItems().get(getIndex()));
+                            });
                             setGraphic(editButton);
                         }
                     }
@@ -336,6 +340,10 @@ public class MainWindowController extends Controller {
 
         viewController = loader.getController();
         viewController.setManager(manager);
+        if (file.equals("NewEvent.fxml") && editEvent != null){
+            EventController ev = (EventController) viewController;
+            ev.setEdit(editEvent);
+        }
         // husk gør dette kun en gang - ikke flere
         viewController.initializeComponents(1920, 972);
         viewController.resizeItems(viewPanel.getWidth(), viewPanel.getHeight());
@@ -412,5 +420,16 @@ public class MainWindowController extends Controller {
         } catch (Exception ex) {
             // TODO : indsæt noget
         }
+    }
+
+    private void editEvent(Event event){
+        editEvent = event;
+        try {
+            setPane("NewEvent.fxml");
+        } catch (IOException e) {
+            editEvent = null;
+            throw new RuntimeException(e);
+        }
+
     }
 }

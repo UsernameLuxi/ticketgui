@@ -24,6 +24,7 @@ public class EventDataAccess implements IEventDataAccess {
             ResultSet rs = stmt.executeQuery();
             List<Event> events = new ArrayList<>();
             Map<Integer, List<User>> eventUsers = eventUsers();
+            System.out.println(eventUsers);
             while(rs.next()) {
                 events.add(makeEvent(rs, eventUsers.get(rs.getInt(1))));
             }
@@ -43,7 +44,6 @@ public class EventDataAccess implements IEventDataAccess {
         e.setLocation(new Location(rs.getInt("Location"), rs.getInt("PostNummer"), rs.getString("Vej")));
         e.setDescription(rs.getString("Description"));
         e.setEventKoordinators(eventUsers);
-        System.out.println(rs.getString(5));
         return e;
     }
 
@@ -57,7 +57,7 @@ public class EventDataAccess implements IEventDataAccess {
             ResultSet rs = stmt.executeQuery();
             User tempU = null;
             while(rs.next()) {
-                if (tempU == null || tempU.getId() == rs.getInt(2)){
+                if (tempU == null || tempU.getId() != rs.getInt(2)){
                     tempU = new User(rs.getInt(2), rs.getString(3), "####", UserRole.getUserRole(rs.getInt(4)));
 
                 }
@@ -166,10 +166,11 @@ public class EventDataAccess implements IEventDataAccess {
                 // opdatere resten af informationerne
                 psUp.setString(1, event.getName());
                 psUp.setInt(2, event.getPrice());
-                psUp.setString(3, event.getDateTime());
-                psUp.setInt(4, event.getLocation().getId());
-                psUp.setString(5, event.getDescription());
-                psUp.setInt(6, event.getId());
+                psUp.setInt(3, event.getEventType().getId());
+                psUp.setString(4, event.getDateTime());
+                psUp.setInt(5, event.getLocation().getId());
+                psUp.setString(6, event.getDescription());
+                psUp.setInt(7, event.getId());
                 psUp.executeUpdate();
 
 
