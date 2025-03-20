@@ -1,6 +1,7 @@
 package com.example.ticketgui.GUI.Model;
 
 import com.example.ticketgui.BE.User;
+import com.example.ticketgui.BE.UserRole;
 import com.example.ticketgui.BLL.UserLogic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -47,15 +48,7 @@ public class UserModel {
     public User login(User user) throws Exception {
         return userLogic.loginUser(user);
     }
-    public static void NewUserButtonHandling(String UserRole, Button newUser)  {
-        switch (UserRole){
-            case "EVENT_KOOORDINATOR":
-                newUser.setVisible(false);
-                break;
-            case "ADMIN":
-                newUser.setVisible(true);
-                break;
-        }
-    }
 
-    }
+
+
+}

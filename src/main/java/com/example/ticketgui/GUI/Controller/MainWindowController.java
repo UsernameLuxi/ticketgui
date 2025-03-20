@@ -1,5 +1,6 @@
 package com.example.ticketgui.GUI.Controller;
 
+import com.example.ticketgui.BE.UserRole;
 import com.example.ticketgui.GUI.ControllerManager;
 import com.example.ticketgui.Main;
 import javafx.collections.FXCollections;
@@ -240,7 +241,7 @@ public class MainWindowController extends Controller {
         // indsæt bruger ;)
         lblUserName.setText(ControllerManager.getCurrentUser().getUsername());
         lblUserRole.setText(ControllerManager.getCurrentUser().getUserRole().toString());
-
+        NewUserButtonHandling(ControllerManager.getCurrentUser().getUserRole());
     }
 
     private void fillMap(List<Region> items, double width, double height) {
@@ -333,5 +334,15 @@ public class MainWindowController extends Controller {
     @Override
     public void setManager(ControllerManager manager) {
         this.manager = manager;
+    }
+
+    public void NewUserButtonHandling(UserRole userRole) {
+        if (userRole == UserRole.EVENT_KOORDINATOR) {
+            newUser.setVisible(false);
+        } else if (userRole == UserRole.ADMIN)
+            newEvent.setVisible(false);
+        {
+
+        }
     }
 }
