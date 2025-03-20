@@ -11,7 +11,6 @@ import java.util.Map;
 
 public class EventDataAccess implements IEventDataAccess {
     LocationDataAccess locDataAccess = new LocationDataAccess();
-    // TODO : implement
     @Override
     public List<Event> getAll() throws Exception {
         String sql = "SELECT Events.ID, Events.Name, Events.Price, Events.Type, Category.Name, " +
@@ -132,13 +131,58 @@ public class EventDataAccess implements IEventDataAccess {
         return null;
     }
 
-    // TODO : implement
     @Override
     public void update(Event event) throws Exception {
+        String sqlUp = "UPDATE Events SET Name = ?, Price = ?, Type = ?, DateTime = ?, Location = ?, Description = ? WHERE ID = ?;";
+        String sqlRemUsers = "DELETE FROM EventAssignment WHERE EventID = ?;";
+        String sqlReAddUsers = "INSERT INTO EventAssignment (EventID, UserID) Values (?, ?)"; // måske kunne man finde -
+        // en måde at genbruge add users på fra den anden hvor transaktionerne stadig er intakte
+        DBConnector db = new DBConnector();
+        try(Connection conn = db.getConnection(); PreparedStatement psUp = conn.prepareStatement(sqlUp);
+            PreparedStatement psRemUsers = conn.prepareStatement(sqlRemUsers);
+            PreparedStatement psReAddUsers = conn.prepareStatement(sqlReAddUsers)) {
+
+            conn.setAutoCommit(false); // start transaktion
+            // fjern brugere
+            psRemUsers.setInt(1, event.getId());
+            psRemUsers.executeUpdate();
+
+            // tilføje brugere igen
+            psReAddUsers.setInt(1, event.getId()); // konstant
+            for (User u : event.getEventKoordinators()){
+                psReAddUsers.setInt(2, u.getId());
+                psReAddUsers.addBatch();
+            }
+            psReAddUsers.executeBatch();
+
+            // opdatere lokationen
+            if (event.getLocation().getId() == -1){
+                // laver lokationen i databasen hvis den ikke eksistere
+                event.setLocation(locDataAccess.create(event.getLocation()));
+            }
+
+
+            // opdatere resten af informationerne
+            psUp.setString(1, event.getName());
+            psUp.setInt(2, event.getPrice());
+            psUp.setString(3, event.getDateTime());
+            psUp.setInt(4, event.getLocation().getId());
+            psUp.setString(5, event.getDescription());
+            psUp.setInt(6, event.getId());
+            psUp.executeUpdate();
+
+
+
+
+            conn.commit(); // committer ændringer
+            conn.setAutoCommit(true); // tilbage til gamle sættings
+        }
+        catch (Exception e) {
+            throw new Exception("Couldn't update event " + e.getMessage());
+        }
 
     }
 
-    // TODO : implement
     @Override
     public void delete(Event event) throws Exception {
         String sql = "DELETE FROM Events WHERE ID = ?";
