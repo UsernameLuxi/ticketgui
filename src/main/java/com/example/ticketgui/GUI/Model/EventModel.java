@@ -42,4 +42,21 @@ public class EventModel {
         events.addAll(logic.getEventAccess(user));
         return events;
     }
+
+    /**
+     * Gemmer ændringerne af et event i databasen
+     * @param event Kopi af det event som skal have ændringerne -> ikke send originalen
+     *             - hvis nu at der kommer en exception/fejl.
+     */
+    public void updateEvent(Event event) throws Exception {
+        logic.updateEvent(event);
+        // opdatere eventet i cachen -> hvis altså ikke at logic kaster en exception ;)
+        for (Event e : events) {
+            if (e.getId() == event.getId()) {
+                events.remove(e);
+                events.add(event);
+                break;
+            }
+        }
+    }
 }

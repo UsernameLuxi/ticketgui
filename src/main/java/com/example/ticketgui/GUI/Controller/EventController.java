@@ -13,12 +13,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 
 public class EventController extends Controller {
     private ControllerManager manager;
     private IController root;
     private EventModel model;
+    private Event editEvent = null;
     private Map<Region, List<Double>> windowItems = new HashMap<>();
     private Map<ImageView, List<Double>> imageViews = new HashMap<>();
     private EventType currentEventType;
@@ -104,6 +106,45 @@ public class EventController extends Controller {
                 break;
             }
         }
+
+
+        if (editEvent != null){
+            setEditEvent();
+        }
+    }
+
+    private void setEditEvent(){
+        txtEventName.setText(editEvent.getName());
+        txtEventPrice.setText(editEvent.getPrice() + "");
+        txtEventDesc.setText(editEvent.getDescription());
+        txtLocation.setText(editEvent.getLocation().toString());
+        smbType.setText(editEvent.getEventType().getName());
+        // users
+        lstEventUser.getItems().clear();
+        lstEventUser.getItems().addAll(editEvent.getEventKoordinators());
+        List<User> removUser = new ArrayList<>();
+        for (User u : lstUnassigned.getItems()){
+            for (User ue : editEvent.getEventKoordinators()){
+                if (ue.getId() == u.getId()){
+                    removUser.add(u);
+                }
+            }
+        }
+        lstUnassigned.getItems().removeAll(removUser);
+
+        // date and time
+        String[] timedate = editEvent.getDateTime().split(" ");
+        txtTime.setText(timedate[1].substring(1, timedate[1].length() - 1)); // se hvordan de ser ud og ændre det hvis det ikke er godt
+        String[] date = timedate[0].split("-");
+        try {
+            int year = Integer.parseInt(date[2]);
+            int month = Integer.parseInt(date[1]);
+            int day = Integer.parseInt(date[0]);
+            datePicker.setValue(LocalDate.of(year, month, day));
+        } catch (NumberFormatException e) {
+            // TODO noget her
+        }
+
     }
 
     public void fillMap(List<Region> items, double width, double height){
@@ -160,10 +201,17 @@ public class EventController extends Controller {
 
         //String dateTime = datePicker.getValue().toString() + " (" + txtTime.getText() + ")";
         String dateTime = datePicker.getValue().getDayOfMonth() + "-"+ datePicker.getValue().getMonthValue() + "-" + datePicker.getValue().getYear() + " (" + txtTime.getText() + ")";
-        Event e = new Event(-1, name, price, desc, dateTime, type, location);
+
+        int id = editEvent == null ? -1 : editEvent.getId();// incase of edit
+        Event e = new Event(id, name, price, desc, dateTime, type, location);
         e.setEventKoordinators(lstEventUser.getItems());
         try {
-            model.createEvent(e);
+            if ((id > 0)) {
+                model.updateEvent(e);
+                loadMain(actionEvent); // lukker den ned efter den har gemt
+            } else {
+                model.createEvent(e);
+            }
             // TODO : tilføj noget feedback
 
             // tøm felter
@@ -197,5 +245,9 @@ public class EventController extends Controller {
                 lstEventUser.getItems().remove(selUser);
             }
         }
+    }
+
+    public void setEdit(Event event){
+        editEvent = event;
     }
 }
