@@ -1,6 +1,7 @@
 package com.example.ticketgui.BLL;
 
 import com.example.ticketgui.BE.User;
+import com.example.ticketgui.BE.UserRole;
 import com.example.ticketgui.BLL.util.IHashing;
 import com.example.ticketgui.BLL.util.PasswordHasher;
 import com.example.ticketgui.DAL.IUserAccess;
@@ -51,4 +52,5 @@ public class UserLogic implements ILogic {
         else
             return null;
     }
+
 }

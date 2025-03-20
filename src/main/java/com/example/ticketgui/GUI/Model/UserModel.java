@@ -4,6 +4,7 @@ import com.example.ticketgui.BE.User;
 import com.example.ticketgui.BLL.UserLogic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
 
 import java.util.List;
 
@@ -46,4 +47,15 @@ public class UserModel {
     public User login(User user) throws Exception {
         return userLogic.loginUser(user);
     }
-}
+    public static void NewUserButtonHandling(String UserRole, Button newUser)  {
+        switch (UserRole){
+            case "EVENT_KOOORDINATOR":
+                newUser.setVisible(false);
+                break;
+            case "ADMIN":
+                newUser.setVisible(true);
+                break;
+        }
+    }
+
+    }
