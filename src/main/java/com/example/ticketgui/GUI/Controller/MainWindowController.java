@@ -273,8 +273,12 @@ public class MainWindowController extends Controller {
                             setGraphic(null);
                         }
                         else {
-                            Button editButton = new Button("Del");
-                            setGraphic(editButton);
+                            Button delButton = new Button("Del");
+                            delButton.setOnAction((event) -> {
+                                Event e = getTableView().getItems().get(getIndex());
+                                removeEvent(e);
+                            });
+                            setGraphic(delButton);
                         }
                     }
                 };
@@ -292,8 +296,8 @@ public class MainWindowController extends Controller {
                             setGraphic(null);
                         }
                         else {
-                            Button editButton = new Button("Print");
-                            setGraphic(editButton);
+                            Button printButton = new Button("Print");
+                            setGraphic(printButton);
                         }
                     }
                 };
@@ -401,14 +405,10 @@ public class MainWindowController extends Controller {
         this.manager = manager;
     }
 
-    private void removeEvent(ActionEvent event) {
+    private void removeEvent(Event event) {
         // TODO : confirmation message
-        Event e = tblEvent.getSelectionModel().getSelectedItem();
-        if (e == null){
-            return;
-        }
         try {
-            manager.getEventModel().deleteEvent(e);
+            manager.getEventModel().deleteEvent(event);
         } catch (Exception ex) {
             // TODO : indsæt noget
         }
