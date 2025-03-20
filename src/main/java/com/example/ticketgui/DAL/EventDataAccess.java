@@ -24,7 +24,6 @@ public class EventDataAccess implements IEventDataAccess {
             ResultSet rs = stmt.executeQuery();
             List<Event> events = new ArrayList<>();
             Map<Integer, List<User>> eventUsers = eventUsers();
-            System.out.println(eventUsers);
             while(rs.next()) {
                 events.add(makeEvent(rs, eventUsers.get(rs.getInt(1))));
             }
