@@ -3,6 +3,7 @@ package com.example.ticketgui.GUI.Controller;
 import com.example.ticketgui.BE.Event;
 import com.example.ticketgui.BE.EventType;
 import com.example.ticketgui.BE.Location;
+import com.example.ticketgui.BE.UserRole;
 import com.example.ticketgui.GUI.ControllerManager;
 import com.example.ticketgui.Main;
 import javafx.collections.FXCollections;
@@ -236,6 +237,8 @@ public class MainWindowController extends Controller {
         lblUserName.setText(ControllerManager.getCurrentUser().getUsername());
         lblUserRole.setText(ControllerManager.getCurrentUser().getUserRole().toString());
 
+        buttonHandling(ControllerManager.getCurrentUser().getUserRole());
+
         // indsæt events TODO - spørgsmålet er om det skal gå gennem manageren og så til modellerne
         colTitle.setCellValueFactory(new PropertyValueFactory<>("name"));
         colType.setCellValueFactory(new PropertyValueFactory<>("eventType"));
@@ -432,4 +435,12 @@ public class MainWindowController extends Controller {
         }
 
     }
+
+    public void buttonHandling(UserRole userRole) {
+        if (userRole == UserRole.EVENT_KOORDINATOR) {
+            newUser.setVisible(false);
+        }
+        else if (userRole == UserRole.ADMIN)
+            newEvent.setVisible(false);
+        }
 }
