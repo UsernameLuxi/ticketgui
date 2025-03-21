@@ -5,6 +5,7 @@ import com.example.ticketgui.BE.EventType;
 import com.example.ticketgui.BE.Location;
 import com.example.ticketgui.BE.UserRole;
 import com.example.ticketgui.GUI.ControllerManager;
+import com.example.ticketgui.GUI.util.ShowAlerts;
 import com.example.ticketgui.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -283,7 +284,8 @@ public class MainWindowController extends Controller {
                             Button delButton = new Button("Del");
                             delButton.setOnAction((event) -> {
                                 Event e = getTableView().getItems().get(getIndex());
-                                removeEvent(e);
+                                if (ShowAlerts.displayWarning("Sletning af event!", "Vil du gerne slette eventet: " + e.getName()))
+                                    removeEvent(e);
                             });
                             setGraphic(delButton);
                         }
