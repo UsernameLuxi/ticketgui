@@ -27,5 +27,10 @@
             <Font size="32.0" />
          </font>
       </Label>
+      <Label fx:id="lblError" alignment="CENTER" layoutX="727.0" layoutY="688.0" prefHeight="75.0" prefWidth="400.0" style="-fx-text-fill: #cc361f;" styleClass="normalText" textAlignment="CENTER" textFill="#cc361f">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

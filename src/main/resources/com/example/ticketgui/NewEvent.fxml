@@ -125,5 +125,10 @@
             <Font size="24.0" />
          </font>
       </Button>
+      <Label fx:id="lblFeedback" layoutX="571.0" layoutY="140.0" prefHeight="50.0" prefWidth="1216.0" styleClass="bigText">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

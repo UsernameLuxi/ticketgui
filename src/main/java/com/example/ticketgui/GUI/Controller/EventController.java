@@ -46,6 +46,8 @@ public class EventController extends Controller {
     private ListView<User> lstEventUser;
     @FXML
     private ListView<User> lstUnassigned;
+    @FXML
+    private Label lblFeedback;
 
 
     @Override
@@ -66,7 +68,7 @@ public class EventController extends Controller {
 
         fillMap(windowContent, width, height);
 
-        // get event model TODO : hvis dette virker - så gør lige det for det neden for også ;) - altså bruger model i-stedet for at kalde manager
+        // get event model TODO : dette virker - så gør lige det for det neden for også ;) - altså bruger model i-stedet for at kalde manager
         model = manager.getEventModel();
 
         // fill the split menu
@@ -202,7 +204,7 @@ public class EventController extends Controller {
         //String dateTime = datePicker.getValue().toString() + " (" + txtTime.getText() + ")";
         String dateTime = datePicker.getValue().getDayOfMonth() + "-"+ datePicker.getValue().getMonthValue() + "-" + datePicker.getValue().getYear() + " (" + txtTime.getText() + ")";
 
-        int id = editEvent == null ? -1 : editEvent.getId();// incase of edit
+        int id = editEvent == null ? -1 : editEvent.getId();// in case of edit
         Event e = new Event(id, name, price, desc, dateTime, type, location);
         e.setEventKoordinators(lstEventUser.getItems());
         try {
@@ -212,7 +214,9 @@ public class EventController extends Controller {
             } else {
                 model.createEvent(e);
             }
-            // TODO : tilføj noget feedback
+            // TODO : lav den timed så man ikke ser på den hele tiden - måske lave schduledExecutor idk
+            String feedback = e.getName() + " -> blev gemt!";
+            lblFeedback.setText(feedback);
 
             // tøm felter
             txtEventName.clear();

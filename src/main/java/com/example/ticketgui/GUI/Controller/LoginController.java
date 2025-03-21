@@ -39,6 +39,8 @@ public class LoginController extends Controller {
     private Label lblUsername;
     @FXML
     private Label lblPassword;
+    @FXML
+    private Label lblError;
 
     public LoginController() {
         try{
@@ -101,8 +103,10 @@ public class LoginController extends Controller {
             if (loginUser != null){
                 manager.setCurrentUser(loginUser);
             }
-            else
-                return; // måske noget her ig TODO
+            else {
+                lblError.setText("Ugyldig username or password!");
+                return;
+            }
         }
         catch (Exception e){
             // something
