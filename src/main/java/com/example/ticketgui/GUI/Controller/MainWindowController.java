@@ -338,6 +338,7 @@ public class MainWindowController extends Controller {
     }
 
 
+    // TODO : Måske panes som enum?
     private void setPane(String file) throws IOException {
         viewPanel.getChildren().clear();
         FXMLLoader loader = new FXMLLoader(Main.class.getResource(file));
