@@ -3,6 +3,7 @@ package com.example.ticketgui.GUI.Controller;
 import com.example.ticketgui.BE.*;
 import com.example.ticketgui.GUI.ControllerManager;
 import com.example.ticketgui.GUI.Model.EventModel;
+import com.example.ticketgui.GUI.util.ShowAlerts;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -68,7 +69,7 @@ public class EventController extends Controller {
 
         fillMap(windowContent, width, height);
 
-        // get event model TODO : dette virker - så gør lige det for det neden for også ;) - altså bruger model i-stedet for at kalde manager
+        // get event model
         model = manager.getEventModel();
 
         // fill the split menu
@@ -89,7 +90,7 @@ public class EventController extends Controller {
             smbType.getItems().clear();
             smbType.getItems().addAll(items);
         } catch (Exception e) {
-            // TODO : noget her
+            ShowAlerts.displayMessage("Event Error", "Could not load types\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
 
         // fill the koordinator list
@@ -144,7 +145,7 @@ public class EventController extends Controller {
             int day = Integer.parseInt(date[0]);
             datePicker.setValue(LocalDate.of(year, month, day));
         } catch (NumberFormatException e) {
-            // TODO noget her
+            // TODO noget her -> ikke displayvindue MEN ! et label
         }
 
     }
@@ -195,7 +196,7 @@ public class EventController extends Controller {
             postInt = Integer.parseInt(post);
             price = Integer.parseInt(txtEventPrice.getText());
         } catch (NumberFormatException e) {
-            // TODO : noget her
+            // TODO : noget her ! Label også her
             return;
         }
         String street = txtLocation.getText().split(",")[1];
@@ -214,7 +215,8 @@ public class EventController extends Controller {
             } else {
                 model.createEvent(e);
             }
-            // TODO : lav den timed så man ikke ser på den hele tiden - måske lave schduledExecutor idk
+
+            // TODO : lav den timed så man ikke ser på den hele tiden - måske lave schduledExecutor idk -> runnable
             String feedback = e.getName() + " -> blev gemt!";
             lblFeedback.setText(feedback);
 
@@ -226,7 +228,7 @@ public class EventController extends Controller {
             txtLocation.clear();
             txtTime.clear();
         } catch (Exception ex) {
-            // TODO : tilføj noget her!
+            // TODO : tilføj noget her! Også label -> feedback label
         }
     }
 

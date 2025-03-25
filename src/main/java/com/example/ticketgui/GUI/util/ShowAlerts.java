@@ -15,10 +15,19 @@ public class ShowAlerts {
         confirmation.setTitle(title);
         confirmation.setContentText(warningMessage);
         var result = confirmation.showAndWait();
-        // TODO : simplify ?
-        if (result.isPresent() && result.get() == ButtonType.OK){
-            return true;
-        }
-        return false;
+        return result.isPresent() && result.get() == ButtonType.OK;
+    }
+
+    /**
+     * Display en besked for brugeren
+     * @param title Titlen på vinduet
+     * @param message Hovedbeskeden
+     * @param alertType Hvilken type alert det skal være -> WARNING, INFORMATION, ERROR etc.
+     */
+    public static void displayMessage(String title, String message, Alert.AlertType alertType){
+        Alert messageAlert = new Alert(alertType);
+        messageAlert.setTitle(title);
+        messageAlert.setContentText(message);
+        messageAlert.showAndWait();
     }
 }

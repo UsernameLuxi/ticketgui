@@ -1,5 +1,6 @@
 package com.example.ticketgui.GUI.Controller;
 
+import com.example.ticketgui.GUI.util.ShowAlerts;
 import com.example.ticketgui.Main;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -57,10 +58,9 @@ public abstract class Controller implements IController {
     public void reload(){
         try{
             AnchorPane pane = getPane("Print Event.fxml");
-            // TODO : Do something
         }
         catch (Exception e){
-            // TODO : indsæt noget
+            ShowAlerts.displayMessage("Window Error", "Could not load window\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 

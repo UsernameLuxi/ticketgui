@@ -4,9 +4,11 @@ import com.example.ticketgui.BE.User;
 import com.example.ticketgui.GUI.Controller.IController;
 import com.example.ticketgui.GUI.Model.EventModel;
 import com.example.ticketgui.GUI.Model.UserModel;
+import com.example.ticketgui.GUI.util.ShowAlerts;
 import com.example.ticketgui.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -40,8 +42,8 @@ public class ControllerManager {
             userModel.loadUsersDB();
             userModel.loadEventKoordinatorsDB();
         } catch (Exception e) {
-            // TODO : noget her
-            System.out.println(e.getMessage());
+            ShowAlerts.displayMessage("Load", "Could not fetch database information!\n" + e.getMessage(), Alert.AlertType.ERROR);
+            //System.out.println(e.getMessage());
         }
     }
 

@@ -3,11 +3,13 @@ package com.example.ticketgui.GUI.Controller;
 import com.example.ticketgui.BE.User;
 import com.example.ticketgui.GUI.ControllerManager;
 import com.example.ticketgui.GUI.Model.UserModel;
+import com.example.ticketgui.GUI.util.ShowAlerts;
 import com.example.ticketgui.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -43,12 +45,14 @@ public class LoginController extends Controller {
     private Label lblError;
 
     public LoginController() {
+        /* prøv lige med initialize components i stedet
         try{
             userModel = new UserModel();
         }
         catch (Exception e){
-            // TODO : lav noget
+            ShowAlerts.displayMessage("Error", "Could not fetch users\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
+         */
     }
 
 
@@ -65,9 +69,11 @@ public class LoginController extends Controller {
 
         fillMap(windowContent, width, height);
 
+        // TODO : se om dette har nogle komplikationer
+        userModel = manager.getUserModel();
+
     }
 
-    // static? - return things?
     private void fillMap(List<Region> items, double width, double height) {
         for (Region item : items) {
             windowItems.put(item, new ArrayList<>(){{
@@ -95,8 +101,11 @@ public class LoginController extends Controller {
 
     @FXML
     private void login(ActionEvent actionEvent) {
-        //  refactor
-        // TODO : lav metode i usermodel
+        //  refactor? -> lav metode i usermodel? -> en lille flytning?
+        // f.eks:
+        // bool valid = usermodel.login(new User(tingeling))
+        // if vaild -> login
+        // else -> display not valid
         User loginAttempt = new User(txtUsername.getText(), textPassword.getText());
         try{
             User loginUser = userModel.login(loginAttempt);
@@ -109,13 +118,13 @@ public class LoginController extends Controller {
             }
         }
         catch (Exception e){
-            // something
+            lblError.setText(e.getMessage()); // måske lidt mere brugervenligt tekst
         }
         try{
             manager.setStage("MainWindow.fxml");
         }
         catch (Exception e){
-            // TODO : something
+            ShowAlerts.displayMessage("Window Error", "Could not load window\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
 
     }
@@ -126,7 +135,7 @@ public class LoginController extends Controller {
             manager.setStage("Login Screen.fxml");
         }
         catch (IOException e){
-            // something
+            ShowAlerts.displayMessage("Window Error", "Could not load window\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -153,6 +162,5 @@ public class LoginController extends Controller {
             abool = true;
         }
         loginPane.getChildren().addAll(pane.getChildren());
-
     }
 }

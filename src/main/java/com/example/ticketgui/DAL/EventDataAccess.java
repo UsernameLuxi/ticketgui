@@ -212,7 +212,6 @@ public class EventDataAccess implements IEventDataAccess {
                 " WHERE UserID = ?;";
         DBConnector db = new DBConnector();
         try(Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)){
-            // TODO : test lige om det virker
             ps.setInt(1, user.getId());
             ResultSet rs = ps.executeQuery();
             Map<Integer, List<User>> eventUsers = eventUsers();

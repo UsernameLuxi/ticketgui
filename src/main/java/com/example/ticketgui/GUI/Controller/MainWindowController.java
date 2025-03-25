@@ -9,7 +9,6 @@ import com.example.ticketgui.GUI.util.ShowAlerts;
 import com.example.ticketgui.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -23,15 +22,17 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 import java.util.*;
-// TODO : Ryd op
 public class MainWindowController extends Controller {
     private ControllerManager manager;
     private IController rootController;
     private IController viewController;
+
     private Map<Region, List<Double>> windowItems = new HashMap<>();
     private Map<ImageView, List<Double>> imageViews = new HashMap<>();
-    private boolean addedThing = false; // TODO : rename
     private ObservableList<Node> mainContent;
+
+    private boolean resizeableListenerAdded = false;
+
     private Event editEvent = null;
 
 
@@ -284,8 +285,7 @@ public class MainWindowController extends Controller {
                             Button delButton = new Button("Del");
                             delButton.setOnAction((event) -> {
                                 Event e = getTableView().getItems().get(getIndex());
-                                if (ShowAlerts.displayWarning("Sletning af event!", "Vil du gerne slette eventet: " + e.getName()))
-                                    removeEvent(e);
+                                removeEvent(e);
                             });
                             setGraphic(delButton);
                         }
@@ -315,8 +315,8 @@ public class MainWindowController extends Controller {
         try {
             tblEvent.setItems(manager.getEventModel().getEventsForUser(ControllerManager.getCurrentUser()));
         } catch (Exception e) {
-            // TODO : indsæt noget
-            System.out.println(e.getMessage());
+            ShowAlerts.displayMessage("Event Error", "Could not fetch events for current user\n" + e.getMessage(), Alert.AlertType.ERROR);
+            //System.out.println(e.getMessage());
         }
 
     }
@@ -354,10 +354,10 @@ public class MainWindowController extends Controller {
         viewController.initializeComponents(1920, 972);
         viewController.resizeItems(viewPanel.getWidth(), viewPanel.getHeight());
         viewController.setControllerRoot(this);
-        if (!addedThing){
+        if (!resizeableListenerAdded){
             viewPanel.widthProperty().addListener((observable, oldValue, newValue) -> {viewController.resizeItems(newValue.doubleValue(), viewPanel.getHeight());});
             viewPanel.heightProperty().addListener(((observable, oldValue, newValue) -> {viewController.resizeItems(viewPanel.getWidth(), newValue.doubleValue());}));
-            addedThing = true;
+            resizeableListenerAdded = true;
         }
 
         viewPanel.getChildren().add(pane);
@@ -370,7 +370,7 @@ public class MainWindowController extends Controller {
             setPane("NewEvent.fxml");
         }
         catch (Exception e){
-            // TODO : Find et eller andet og putte her
+            ShowAlerts.displayMessage("Window Error", "Could not load window\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -380,7 +380,7 @@ public class MainWindowController extends Controller {
             setPane("NewUser.fxml");
         }
         catch (Exception e){
-            // TODO : Find et eller andet og putte her
+            ShowAlerts.displayMessage("Window Error", "Could not load window\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -390,7 +390,7 @@ public class MainWindowController extends Controller {
             setPane("ManageCoupons.fxml");
         }
         catch (Exception e){
-            // TODO : Find et eller andet og putte her
+            ShowAlerts.displayMessage("Window Error", "Could not load window\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -420,11 +420,13 @@ public class MainWindowController extends Controller {
     }
 
     private void removeEvent(Event event) {
-        // TODO : confirmation message
+        if (!ShowAlerts.displayWarning("Sletning af event!", "Vil du gerne slette eventet: " + event.getName()))
+            return;
+
         try {
             manager.getEventModel().deleteEvent(event);
         } catch (Exception ex) {
-            // TODO : indsæt noget
+            ShowAlerts.displayMessage("Event Error", "Could not remove event\n" + ex.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -434,7 +436,7 @@ public class MainWindowController extends Controller {
             setPane("NewEvent.fxml");
         } catch (IOException e) {
             editEvent = null;
-            throw new RuntimeException(e);
+            ShowAlerts.displayMessage("Window Error", "Could not load window\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
 
     }
