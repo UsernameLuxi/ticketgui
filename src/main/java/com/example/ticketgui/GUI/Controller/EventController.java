@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.Region;
 
 import java.text.SimpleDateFormat;
@@ -145,7 +146,7 @@ public class EventController extends Controller {
             int day = Integer.parseInt(date[0]);
             datePicker.setValue(LocalDate.of(year, month, day));
         } catch (NumberFormatException e) {
-            // TODO noget her -> ikke displayvindue MEN ! et label
+            ShowAlerts.displayMessage("Event Error", "Could not read the date!\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
 
     }
@@ -195,8 +196,11 @@ public class EventController extends Controller {
         try {
             postInt = Integer.parseInt(post);
             price = Integer.parseInt(txtEventPrice.getText());
+            // TODO : tjek at den ikke er negativ
         } catch (NumberFormatException e) {
-            // TODO : noget her ! Label også her
+            lblFeedback.setText("Could not read number");
+            lblFeedback.setStyle("-fx-text-fill: red");
+            txtEventPrice.setStyle("-fx-border-color: red");
             return;
         }
         String street = txtLocation.getText().split(",")[1];
@@ -217,18 +221,21 @@ public class EventController extends Controller {
             }
 
             // TODO : lav den timed så man ikke ser på den hele tiden - måske lave schduledExecutor idk -> runnable
-            String feedback = e.getName() + " -> blev gemt!";
+            String feedback = e.getName() + " -> saved!";
+            lblFeedback.setStyle("-fx-text-fill: black");
             lblFeedback.setText(feedback);
 
             // tøm felter
             txtEventName.clear();
             txtEventDesc.clear();
             txtEventPrice.clear();
+            txtEventPrice.setStyle("-fx-border-color: transparent");
             datePicker.setValue(null);
             txtLocation.clear();
             txtTime.clear();
         } catch (Exception ex) {
-            // TODO : tilføj noget her! Også label -> feedback label
+            lblFeedback.setText("Could not save event");
+            lblFeedback.setStyle("-fx-text-fill: red");
         }
     }
 

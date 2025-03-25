@@ -29,11 +29,6 @@ public class ControllerManager {
         this.rootstage = rootstage;
         rootstage.setWidth(1920);
         rootstage.setHeight(1080);
-        try{
-            setStage("Login Screen.fxml");
-        } catch (IOException e) {
-            // something
-        }
 
         // models?
         try {
@@ -45,6 +40,14 @@ public class ControllerManager {
             ShowAlerts.displayMessage("Load", "Could not fetch database information!\n" + e.getMessage(), Alert.AlertType.ERROR);
             //System.out.println(e.getMessage());
         }
+
+
+        try{
+            setStage("Login Screen.fxml");
+        } catch (IOException e) {
+            // something
+        }
+
     }
 
     public void setStage(String file) throws IOException {

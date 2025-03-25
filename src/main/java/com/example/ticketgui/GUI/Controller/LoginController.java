@@ -68,8 +68,7 @@ public class LoginController extends Controller {
         }
 
         fillMap(windowContent, width, height);
-
-        // TODO : se om dette har nogle komplikationer
+        
         userModel = manager.getUserModel();
 
     }
@@ -119,6 +118,7 @@ public class LoginController extends Controller {
         }
         catch (Exception e){
             lblError.setText(e.getMessage()); // måske lidt mere brugervenligt tekst
+            return;
         }
         try{
             manager.setStage("MainWindow.fxml");
