@@ -68,7 +68,7 @@ public class LoginController extends Controller {
         }
 
         fillMap(windowContent, width, height);
-        
+
         userModel = manager.getUserModel();
 
     }

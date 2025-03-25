@@ -41,6 +41,8 @@ public class UserController extends Controller {
     private TableColumn<User, String> colBrugernavn;
     @FXML
     private TableColumn<User, UserRole> colRolle;
+    @FXML
+    private Label lblFeedback;
 
 
     @Override
@@ -128,9 +130,13 @@ public class UserController extends Controller {
             userModel.createUser(u, txtPassword.getText().trim());
             txtUsername.clear();
             txtPassword.clear();
+
+            lblFeedback.setText(u.getUsername() + "->" + " Created");
+            lblFeedback.setStyle("-fx-text-fill: green;");
         }
         catch (Exception e){
-            // TODO : indsæt exception-håndtering -> label
+            lblFeedback.setText("An error occurred while creating user");
+            lblFeedback.setStyle("-fx-text-fill: red;");
         }
     }
 
@@ -144,11 +150,13 @@ public class UserController extends Controller {
                 userModel.deleteUser(selctedUser);
             }
             catch (Exception e){
-                // TODO : der skete noget med sletningen - vis på label
+                lblFeedback.setText("Could not delete user");
+                lblFeedback.setStyle("-fx-text-fill: red;");
             }
         }
         else{
-            // TODO : null giv måske en advarsel eller noget information i form af label ?
+            lblFeedback.setText("You must select a user!");
+            lblFeedback.setStyle("-fx-text-fill: red;");
         }
     }
 }
