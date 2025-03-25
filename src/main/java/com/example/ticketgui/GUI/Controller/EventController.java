@@ -35,8 +35,6 @@ public class EventController extends Controller {
     @FXML
     private TextField txtEventPrice;
     @FXML
-    private TextField txtLocation;
-    @FXML
     private TextField txtTime;
     @FXML
     private TextArea txtEventDesc;
@@ -50,6 +48,10 @@ public class EventController extends Controller {
     private ListView<User> lstUnassigned;
     @FXML
     private Label lblFeedback;
+    @FXML
+    private TextField txtGade;
+    @FXML
+    private TextField txtPostnummer;
 
 
     @Override
@@ -121,7 +123,8 @@ public class EventController extends Controller {
         txtEventName.setText(editEvent.getName());
         txtEventPrice.setText(editEvent.getPrice() + "");
         txtEventDesc.setText(editEvent.getDescription());
-        txtLocation.setText(editEvent.getLocation().toString());
+        txtGade.setText(editEvent.getLocation().getStreet());
+        txtPostnummer.setText(editEvent.getLocation().getPostalCode() + "");
         smbType.setText(editEvent.getEventType().getName());
         // users
         lstEventUser.getItems().clear();
@@ -189,12 +192,25 @@ public class EventController extends Controller {
         String name = txtEventName.getText();
         String desc = txtEventDesc.getText();
         EventType type = currentEventType;
+
         // location
-        String post = txtLocation.getText().split(",")[0];
+        String post = txtPostnummer.getText().trim();
         int postInt = 0;
         int price;
+        // postnummer try catch
         try {
             postInt = Integer.parseInt(post);
+        } catch (NumberFormatException e) {
+            lblFeedback.setText("Could not read number");
+            lblFeedback.setStyle("-fx-text-fill: red");
+            txtPostnummer.setStyle("-fx-border-color: red");
+        }
+
+        String street = txtGade.getText().trim();
+        Location location = new Location(-1, postInt, street.trim()); // TODO : tjek lige om den allerede er i db!
+
+        // pris
+        try {
             price = Integer.parseInt(txtEventPrice.getText());
             // TODO : tjek at den ikke er negativ
         } catch (NumberFormatException e) {
@@ -203,8 +219,6 @@ public class EventController extends Controller {
             txtEventPrice.setStyle("-fx-border-color: red");
             return;
         }
-        String street = txtLocation.getText().split(",")[1];
-        Location location = new Location(-1, postInt, street.trim()); // TODO : tjek lige om den allerede er i db!
 
         //String dateTime = datePicker.getValue().toString() + " (" + txtTime.getText() + ")";
         String dateTime = datePicker.getValue().getDayOfMonth() + "-"+ datePicker.getValue().getMonthValue() + "-" + datePicker.getValue().getYear() + " (" + txtTime.getText() + ")";
@@ -231,8 +245,13 @@ public class EventController extends Controller {
             txtEventPrice.clear();
             txtEventPrice.setStyle("-fx-border-color: transparent");
             datePicker.setValue(null);
-            txtLocation.clear();
+            txtGade.clear();
+            txtPostnummer.clear();
             txtTime.clear();
+            
+            // reset formatering på textfields
+            txtEventPrice.setStyle("-fx-border-color: transparent");
+            txtPostnummer.setStyle("-fx-border-color: transparent");
         } catch (Exception ex) {
             lblFeedback.setText("Could not save event");
             lblFeedback.setStyle("-fx-text-fill: red");
