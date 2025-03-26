@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitMenuButton?>
@@ -16,7 +17,7 @@
    <children>
       <AnchorPane id="topBar" fx:id="menuBar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="108.0" prefWidth="1920.0">
          <children>
-            <AnchorPane fx:id="userInformation" layoutX="1620.0" layoutY="32.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="279.0">
+            <AnchorPane fx:id="userInformation" layoutX="1514.0" layoutY="29.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="279.0">
                <children>
                   <ImageView fx:id="imgUserImage" fitHeight="44.0" fitWidth="44.0" layoutX="6.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -32,10 +33,11 @@
                      </font></Label>
                </children>
             </AnchorPane>
-            <ImageView fx:id="imgLogout" fitHeight="108.0" fitWidth="110.0" onMouseClicked="#logout" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgLogo" fitHeight="164.0" fitWidth="318.0" layoutY="-20.0" onMouseClicked="#toMainMenu" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@symbols/logout.png" />
+                  <Image url="@symbols/EASYDVEST_negativ.png" />
                </image></ImageView>
+            <Button fx:id="btnLogout" layoutX="1793.0" layoutY="29.0" mnemonicParsing="false" onAction="#logout" prefHeight="44.0" prefWidth="110.0" text="Log out" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="viewPanel" layoutY="108.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="972.0" prefWidth="1920.0">

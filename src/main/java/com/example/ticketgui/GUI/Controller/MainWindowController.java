@@ -9,6 +9,7 @@ import com.example.ticketgui.GUI.util.ShowAlerts;
 import com.example.ticketgui.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -52,8 +53,6 @@ public class MainWindowController extends Controller {
     private Label lblUserRole;
     @FXML
     private ImageView imgUserImage;
-    @FXML
-    private ImageView imgLogout;
     @FXML
     private AnchorPane newEvent;
     @FXML
@@ -116,6 +115,10 @@ public class MainWindowController extends Controller {
     private TableView tblCupons;
     @FXML
     private AnchorPane viewPanel;
+    @FXML
+    private ImageView imgLogo;
+    @FXML
+    private Button btnLogout;
 
     /**
      * EVENT TABLE CONTENT
@@ -191,7 +194,8 @@ public class MainWindowController extends Controller {
         cbEventType,
         cuponsPane,
         lblCupons,
-        tblCupons));
+        tblCupons,
+        btnLogout));
 
         // special case:
         //ScrollPane scrollPane = createScrollpaneForDatapane();
@@ -225,16 +229,16 @@ public class MainWindowController extends Controller {
             add(imgNewEvent.getFitHeight() / height);
             add(imgNewEvent.getLayoutX() / width);
             add(imgNewEvent.getLayoutY() / height);}});
-        imageViews.put(imgLogout, new ArrayList<>(){{
-            add(imgLogout.getFitWidth() / width);
-            add(imgLogout.getFitHeight() / height);
-            add(imgLogout.getLayoutX() / width);
-            add(imgLogout.getLayoutY() / height);}});
+        imageViews.put(imgLogo, new ArrayList<>(){{
+            add(imgLogo.getFitWidth() / width);
+            add(imgLogo.getFitHeight() / height);
+            add(imgLogo.getLayoutX() / width);
+            add(imgLogo.getLayoutY() / height);}});
 
         fillMap(windowContent, width, height);
         mainContent = FXCollections.observableArrayList();
         mainContent.addAll(viewPanel.getChildren());
-        mainContent.remove(dataPane);
+        //mainContent.remove(dataPane);
 
         // indsæt bruger ;)
         lblUserName.setText(ControllerManager.getCurrentUser().getUsername());
@@ -406,7 +410,7 @@ public class MainWindowController extends Controller {
     }
 
     @FXML
-    private void logout(MouseEvent mouseEvent) {
+    private void logout(ActionEvent mouseEvent) {
         try{
             manager.setStage("Login Screen.fxml");
         }
@@ -449,4 +453,9 @@ public class MainWindowController extends Controller {
         else if (userRole == UserRole.ADMIN)
             newEvent.setVisible(false);
         }
+
+    @FXML
+    private void toMainMenu(MouseEvent mouseEvent) {
+        reload();
+    }
 }
