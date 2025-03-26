@@ -22,8 +22,14 @@
                      <image>
                         <Image url="@symbols/User.png" />
                      </image></ImageView>
-                  <Label fx:id="lblUserName" layoutX="63.0" layoutY="4.0" prefHeight="18.0" prefWidth="210.0" styleClass="smallText" text="Brugernavn" />
-                  <Label fx:id="lblUserRole" layoutX="63.0" layoutY="28.0" prefHeight="18.0" prefWidth="210.0" styleClass="smallText" text="Rolle" />
+                  <Label fx:id="lblUserName" layoutX="63.0" layoutY="1.0" prefHeight="18.0" prefWidth="210.0" styleClass="smallText" text="Brugernavn">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <Label fx:id="lblUserRole" layoutX="63.0" layoutY="23.0" prefHeight="18.0" prefWidth="210.0" styleClass="smallText" text="Rolle">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
                </children>
             </AnchorPane>
             <ImageView fx:id="imgLogout" fitHeight="108.0" fitWidth="110.0" onMouseClicked="#logout" pickOnBounds="true" preserveRatio="true">

@@ -72,7 +72,7 @@ public abstract class Controller implements IController {
 
     @Override
     public Font getFont(ObservableList<String> style, double newWidth, double newHeight){
-        double orgSize = style.contains("bigText") ? 32 : style.contains("normalText") ? 24 : 12;
+        double orgSize = style.contains("bigText") ? 32 : style.contains("normalText") ? 24 : 16;
         double newValueAVG = (orgSize * (newWidth / 1920) + orgSize * (newHeight / 1080)) / 2;
         return new Font(newValueAVG);
     }

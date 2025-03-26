@@ -261,9 +261,12 @@ public class EventController extends Controller {
     @FXML
     private void addKoor(ActionEvent actionEvent) {
         User selUser = lstUnassigned.getSelectionModel().getSelectedItem();
-        if (selUser != null) {
+        if (selUser != null && !selUser.getUsername().isEmpty()) {
             lstEventUser.getItems().add(selUser);
             lstUnassigned.getItems().remove(selUser);
+            if (lstUnassigned.getItems().isEmpty()) {
+                lstUnassigned.getItems().add(new User("", ""));
+            }
         }
 
     }
@@ -273,6 +276,9 @@ public class EventController extends Controller {
         User selUser = lstEventUser.getSelectionModel().getSelectedItem();
         if (selUser != null){
             if (selUser.getId() != ControllerManager.getCurrentUser().getId() && lstEventUser.getItems().size() > 1){
+                if (lstUnassigned.getItems().getFirst().getUsername().isEmpty()){
+                    lstUnassigned.getItems().clear();
+                }
                 lstUnassigned.getItems().add(selUser);
                 lstEventUser.getItems().remove(selUser);
             }

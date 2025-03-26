@@ -237,7 +237,7 @@ public class MainWindowController extends Controller {
 
         // indsæt bruger ;)
         lblUserName.setText(ControllerManager.getCurrentUser().getUsername());
-        lblUserRole.setText(ControllerManager.getCurrentUser().getUserRole().toString());
+        lblUserRole.setText(ControllerManager.getCurrentUser().getUserRole().toString().toLowerCase());
 
         buttonHandling(ControllerManager.getCurrentUser().getUserRole());
 
