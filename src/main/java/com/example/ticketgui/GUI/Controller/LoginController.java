@@ -15,6 +15,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -47,6 +49,8 @@ public class LoginController extends Controller {
     private ImageView imgShowHide;
     @FXML
     private PasswordField txtPassword;
+    @FXML
+    private TextField txtpasswordShown;
 
     public LoginController() {
         /* prøv lige med initialize components i stedet
@@ -177,14 +181,19 @@ public class LoginController extends Controller {
     @FXML
     private void togglePassword(MouseEvent mouseEvent) {
         isShowing = !isShowing;
+        txtPassword.setVisible(!isShowing);
+        txtpasswordShown.setVisible(isShowing);
         if (isShowing){
             // show closed eye
-            //imgShowHide.setImage(new Image("/resources/com/example/ticketgui/symbols/hide.png"));
             imgShowHide.setImage(new Image(String.valueOf(Main.class.getResource("symbols/hide.png"))));
+
+            txtpasswordShown.setText(txtPassword.getText());
         }
         else{
             // show open eye
             imgShowHide.setImage(new Image(String.valueOf(Main.class.getResource("symbols/eye.png"))));
+            txtPassword.setText(txtpasswordShown.getText());
+            txtPassword.selectAll();
         }
 
     }

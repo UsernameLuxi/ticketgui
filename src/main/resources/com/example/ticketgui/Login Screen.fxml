@@ -15,7 +15,6 @@
          <font>
             <Font size="24.0" />
          </font></TextField>
-      <Button fx:id="btnLogin" layoutX="834.0" layoutY="561.0" mnemonicParsing="false" onAction="#login" prefHeight="65.0" prefWidth="185.0" styleClass="normalText" text="Login" />
       <Label fx:id="lblUsername" layoutX="736.0" layoutY="210.0" prefHeight="75.0" prefWidth="400.0" styleClass="bigText" text="Username">
          <font>
             <Font size="32.0" />
@@ -36,10 +35,16 @@
             <Image url="@symbols/eye.png" />
          </image>
       </ImageView>
+      <TextField fx:id="txtpasswordShown" layoutX="736.0" layoutY="444.0" prefHeight="51.0" prefWidth="400.0" styleClass="normalText" visible="false">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
       <PasswordField fx:id="txtPassword" layoutX="736.0" layoutY="444.0" prefHeight="51.0" prefWidth="400.0" styleClass="normalText">
          <font>
             <Font size="24.0" />
          </font>
       </PasswordField>
+      <Button fx:id="btnLogin" layoutX="834.0" layoutY="561.0" mnemonicParsing="false" onAction="#login" prefHeight="65.0" prefWidth="185.0" styleClass="normalText" text="Login" />
    </children>
 </AnchorPane>
