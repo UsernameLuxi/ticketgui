@@ -84,27 +84,9 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="dataPane" layoutX="355.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="368.0" prefWidth="1948.0" styleClass="backgroundMain">
+            <AnchorPane fx:id="dataPane" layoutX="355.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="368.0" prefWidth="1567.0" styleClass="backgroundMain">
                <children>
-                  <AnchorPane fx:id="data1" layoutX="180.0" layoutY="70.0" styleClass="dataItem">
-                     <children>
-                        <Label fx:id="lblData1Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" text="Aktive Events" textAlignment="CENTER">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                           <styleClass>
-                              <String fx:value="dataItemTitle" />
-                              <String fx:value="normalText" />
-                           </styleClass>
-                        </Label>
-                        <Label fx:id="lblData1data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" styleClass="normalText" text="Label">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane fx:id="data2" layoutX="610.0" layoutY="70.0" styleClass="dataItem">
+                  <AnchorPane fx:id="data2" layoutX="267.0" layoutY="198.0" styleClass="dataItem">
                      <children>
                         <Label fx:id="lvlData2Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" text="Events denne måned" textAlignment="CENTER">
                            <font>
@@ -115,14 +97,14 @@
                               <String fx:value="normalText" />
                            </styleClass>
                         </Label>
-                        <Label fx:id="lblData2data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" styleClass="normalText" text="Label">
+                        <Label fx:id="lblData2data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="50.0" prefWidth="314.0" styleClass="normalText" text="Label">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="data3" layoutX="1040.0" layoutY="70.0" styleClass="dataItem">
+                  <AnchorPane fx:id="data3" layoutX="982.0" layoutY="70.0" prefHeight="95.0" prefWidth="318.0" styleClass="dataItem">
                      <children>
                         <Label fx:id="lblData3Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" text="Events denne uge" textAlignment="CENTER">
                            <font>
@@ -133,14 +115,32 @@
                               <String fx:value="normalText" />
                            </styleClass>
                         </Label>
-                        <Label fx:id="lblData3data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" styleClass="normalText" text="Label">
+                        <Label fx:id="lblData3data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="50.0" prefWidth="314.0" styleClass="normalText" text="Label">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="data4" layoutX="1470.0" layoutY="70.0" prefWidth="139.0" styleClass="dataItem">
+                  <AnchorPane fx:id="data1" layoutX="267.0" layoutY="68.0" styleClass="dataItem">
+                     <children>
+                        <Label fx:id="lblData1Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" text="Aktive Events" textAlignment="CENTER">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="dataItemTitle" />
+                              <String fx:value="normalText" />
+                           </styleClass>
+                        </Label>
+                        <Label fx:id="lblData1data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="50.0" prefWidth="314.0" styleClass="normalText" text="Label">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="data4" layoutX="982.0" layoutY="188.0" prefWidth="139.0" styleClass="dataItem">
                      <children>
                         <Label fx:id="lblData4Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" text="Aktive Kuponer" textAlignment="CENTER">
                            <font>
@@ -151,7 +151,7 @@
                               <String fx:value="normalText" />
                            </styleClass>
                         </Label>
-                        <Label fx:id="lblData4data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" styleClass="normalText" text="Label">
+                        <Label fx:id="lblData4data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="50.0" prefWidth="314.0" styleClass="normalText" text="Label">
                            <font>
                               <Font size="24.0" />
                            </font>

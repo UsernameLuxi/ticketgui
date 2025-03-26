@@ -55,8 +55,6 @@ public class MainWindowController extends Controller {
     @FXML
     private ImageView imgLogout;
     @FXML
-    private Label lblMenuTitle;
-    @FXML
     private AnchorPane newEvent;
     @FXML
     private ImageView imgNewEvent;
@@ -132,6 +130,7 @@ public class MainWindowController extends Controller {
     @FXML private TableColumn<Event, String> colPrint;
     @FXML private TableColumn<Event, String> colDel;
 
+    /*
     public ScrollPane createScrollpaneForDatapane() {
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setLayoutX(dataPane.getLayoutX());
@@ -150,6 +149,7 @@ public class MainWindowController extends Controller {
         viewPanel.getChildren().add(scrollPane);
         return scrollPane;
     }
+     */
 
     // erhmmm ja... man kunne også bare give hvert pane et fxId og .getChildren() - hilsen Casper -> but also made by Casper... træls (root.getChildren() for each)
     // update note - det kan man ikke - fordi root childen har ikke nok children (7 currently ift. 40)
@@ -164,7 +164,6 @@ public class MainWindowController extends Controller {
         userInformation,
         lblUserName,
         lblUserRole,
-        lblMenuTitle,
         newEvent,
         lblNewEventlbl,
         newUser,
@@ -195,13 +194,15 @@ public class MainWindowController extends Controller {
         tblCupons));
 
         // special case:
-        ScrollPane scrollPane = createScrollpaneForDatapane();
+        //ScrollPane scrollPane = createScrollpaneForDatapane();
+        /*
         windowItems.put(scrollPane, new ArrayList<>(){{
             add(scrollPane.getPrefWidth() / width);
             add(scrollPane.getPrefHeight() / height);
             add(scrollPane.getLayoutX() / width);
             add(scrollPane.getLayoutY() / height);}}
         );
+         */
 
         // også et specielt tilfælde
         imageViews.put(imgManageCupons, new ArrayList<>(){{
