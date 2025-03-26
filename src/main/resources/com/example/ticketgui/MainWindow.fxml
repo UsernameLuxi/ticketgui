@@ -42,12 +42,7 @@
          <children>
             <AnchorPane id="sideMenu" fx:id="sideMenu" minHeight="-Infinity" minWidth="-Infinity" prefHeight="974.0" prefWidth="355.0">
                <children>
-                  <Label fx:id="lblMenuTitle" alignment="CENTER" layoutY="20.0" prefHeight="55.0" prefWidth="355.0" styleClass="bigText" text="Menu" textAlignment="CENTER">
-                     <font>
-                        <Font size="38.0" />
-                     </font>
-                  </Label>
-                  <AnchorPane fx:id="newEvent" layoutY="126.0" onMouseClicked="#newEventClick" prefHeight="60.0" prefWidth="355.0">
+                  <AnchorPane fx:id="newEvent" layoutY="76.0" onMouseClicked="#newEventClick" prefHeight="60.0" prefWidth="355.0">
                      <children>
                         <ImageView fx:id="imgNewEvent" fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;">
                            <image>
@@ -61,7 +56,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="newUser" layoutY="216.0" onMouseClicked="#newUserClick" prefHeight="60.0" prefWidth="355.0">
+                  <AnchorPane fx:id="newUser" layoutY="166.0" onMouseClicked="#newUserClick" prefHeight="60.0" prefWidth="355.0">
                      <children>
                         <ImageView fx:id="imgNewUser" fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;">
                            <image>
@@ -74,7 +69,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="manageCupons" layoutY="300.0" onMouseClicked="#manageCouponClick" prefHeight="60.0" prefWidth="355.0">
+                  <AnchorPane fx:id="manageCupons" layoutY="250.0" onMouseClicked="#manageCouponClick" prefHeight="60.0" prefWidth="355.0">
                      <children>
                         <ImageView fx:id="imgManageCupons" fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;">
                            <image>
