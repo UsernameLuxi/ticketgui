@@ -5,6 +5,7 @@ import com.example.ticketgui.BE.EventType;
 import com.example.ticketgui.BE.Location;
 import com.example.ticketgui.BE.UserRole;
 import com.example.ticketgui.GUI.ControllerManager;
+import com.example.ticketgui.GUI.util.Screens;
 import com.example.ticketgui.GUI.util.ShowAlerts;
 import com.example.ticketgui.Main;
 import javafx.collections.FXCollections;
@@ -412,7 +413,7 @@ public class MainWindowController extends Controller {
     @FXML
     private void logout(ActionEvent mouseEvent) {
         try{
-            manager.setStage("Login Screen.fxml");
+            manager.setStage(Screens.LOGIN_WINDOW);
         }
         catch (Exception e){
             // noget het

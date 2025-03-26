@@ -3,6 +3,7 @@ package com.example.ticketgui.GUI.Controller;
 import com.example.ticketgui.BE.User;
 import com.example.ticketgui.GUI.ControllerManager;
 import com.example.ticketgui.GUI.Model.UserModel;
+import com.example.ticketgui.GUI.util.Screens;
 import com.example.ticketgui.GUI.util.ShowAlerts;
 import com.example.ticketgui.Main;
 import javafx.event.ActionEvent;
@@ -135,7 +136,7 @@ public class LoginController extends Controller {
             return;
         }
         try{
-            manager.setStage("MainWindow.fxml");
+            manager.setStage(Screens.MAIN_WINDOW);
         }
         catch (Exception e){
             ShowAlerts.displayMessage("Window Error", "Could not load window\n" + e.getMessage(), Alert.AlertType.ERROR);
@@ -146,7 +147,7 @@ public class LoginController extends Controller {
     @Override
     public void reload(){
         try{
-            manager.setStage("Login Screen.fxml");
+            manager.setStage(Screens.LOGIN_WINDOW);
         }
         catch (IOException e){
             ShowAlerts.displayMessage("Window Error", "Could not load window\n" + e.getMessage(), Alert.AlertType.ERROR);

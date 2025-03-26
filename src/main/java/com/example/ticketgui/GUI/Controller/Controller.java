@@ -1,5 +1,6 @@
 package com.example.ticketgui.GUI.Controller;
 
+import com.example.ticketgui.GUI.util.Screens;
 import com.example.ticketgui.GUI.util.ShowAlerts;
 import com.example.ticketgui.Main;
 import javafx.collections.ObservableList;
@@ -57,7 +58,7 @@ public abstract class Controller implements IController {
     @Override
     public void reload(){
         try{
-            AnchorPane pane = getPane("Print Event.fxml");
+            AnchorPane pane = getPane(Screens.PRINT_EVENT);
         }
         catch (Exception e){
             ShowAlerts.displayMessage("Window Error", "Could not load window\n" + e.getMessage(), Alert.AlertType.ERROR);
@@ -65,8 +66,8 @@ public abstract class Controller implements IController {
     }
 
     @Override
-    public AnchorPane getPane(String file) throws IOException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource(file));
+    public AnchorPane getPane(Screens screen) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource(screen.getFile()));
         return loader.load();
     }
 

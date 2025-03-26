@@ -4,6 +4,7 @@ import com.example.ticketgui.BE.User;
 import com.example.ticketgui.GUI.Controller.IController;
 import com.example.ticketgui.GUI.Model.EventModel;
 import com.example.ticketgui.GUI.Model.UserModel;
+import com.example.ticketgui.GUI.util.Screens;
 import com.example.ticketgui.GUI.util.ShowAlerts;
 import com.example.ticketgui.Main;
 import javafx.fxml.FXMLLoader;
@@ -43,15 +44,15 @@ public class ControllerManager {
 
 
         try{
-            setStage("Login Screen.fxml");
+            setStage(Screens.LOGIN_WINDOW);
         } catch (IOException e) {
             // something
         }
 
     }
 
-    public void setStage(String file) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(file));
+    public void setStage(Screens screen) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(screen.getFile()));
         Scene scene = new Scene(fxmlLoader.load(), rootstage.getWidth(), rootstage.getHeight());
         //scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("stylesheet.css")).toExternalForm()); // <-- denne er nok ikke nødvendig fordi der er allerede tilføjet et stylesheet på vinduet ;) - men den producere også en exception - så den er bare dejligt
         rootstage.setTitle("TICKET GUI");
@@ -68,10 +69,6 @@ public class ControllerManager {
             rootstage.setMaximized(true);
             resizeTingen = true;
         }
-    }
-
-    public void setPaneRoot(AnchorPane pane, String file) {
-
     }
 
     public static User getCurrentUser() {
