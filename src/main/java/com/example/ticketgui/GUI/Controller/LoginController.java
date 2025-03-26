@@ -9,10 +9,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 
@@ -28,13 +28,13 @@ public class LoginController extends Controller {
     private boolean abool = false;
     private IController root;
     private Map<Region, List<Double>> windowItems = new HashMap<>();
+    private Map<ImageView, List<Double>> imageViews = new HashMap<>();
     private UserModel userModel;
+    private boolean isShowing = false;
     @FXML
     private AnchorPane loginPane;
     @FXML
     private TextField txtUsername;
-    @FXML
-    private TextField textPassword;
     @FXML
     private Button btnLogin;
     @FXML
@@ -43,6 +43,10 @@ public class LoginController extends Controller {
     private Label lblPassword;
     @FXML
     private Label lblError;
+    @FXML
+    private ImageView imgShowHide;
+    @FXML
+    private PasswordField txtPassword;
 
     public LoginController() {
         /* prøv lige med initialize components i stedet
@@ -67,6 +71,12 @@ public class LoginController extends Controller {
             }
         }
 
+        imageViews.put(imgShowHide, new ArrayList<>(){{
+            add(imgShowHide.getFitWidth() / width);
+            add(imgShowHide.getFitHeight() / height);
+            add(imgShowHide.getLayoutX() / width);
+            add(imgShowHide.getLayoutY() / height);}});
+
         fillMap(windowContent, width, height);
 
         userModel = manager.getUserModel();
@@ -85,7 +95,7 @@ public class LoginController extends Controller {
     }
 
     public void resizeItems(double width, double height){
-        resizeItems(windowItems, null, width, height);
+        resizeItems(windowItems, imageViews, width, height);
     }
 
     @Override
@@ -105,7 +115,7 @@ public class LoginController extends Controller {
         // bool valid = usermodel.login(new User(tingeling))
         // if vaild -> login
         // else -> display not valid
-        User loginAttempt = new User(txtUsername.getText(), textPassword.getText());
+        User loginAttempt = new User(txtUsername.getText(), txtPassword.getText());
         try{
             User loginUser = userModel.login(loginAttempt);
             if (loginUser != null){
@@ -162,5 +172,20 @@ public class LoginController extends Controller {
             abool = true;
         }
         loginPane.getChildren().addAll(pane.getChildren());
+    }
+
+    @FXML
+    private void togglePassword(MouseEvent mouseEvent) {
+        isShowing = !isShowing;
+        if (isShowing){
+            // show closed eye
+            //imgShowHide.setImage(new Image("/resources/com/example/ticketgui/symbols/hide.png"));
+            imgShowHide.setImage(new Image(String.valueOf(Main.class.getResource("symbols/hide.png"))));
+        }
+        else{
+            // show open eye
+            imgShowHide.setImage(new Image(String.valueOf(Main.class.getResource("symbols/eye.png"))));
+        }
+
     }
 }
