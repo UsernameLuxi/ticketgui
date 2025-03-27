@@ -14,7 +14,7 @@ public class EventDataAccess implements IEventDataAccess {
     @Override
     public List<Event> getAll() throws Exception {
         String sql = "SELECT Events.ID, Events.Name, Events.Price, Events.Type, Category.Name, " +
-                "Events.DateTime, Events.Location, Location.PostNummer, Location.Vej, Events.Description " +
+                "Events.DateTime, Events.Location, Location.PostNummer, Location.Vej, Events.Description, Events.EndDateTime " +
                 "FROM Events " +
                 "INNER JOIN Category ON Events.Type = Category.ID " +
                 "INNER JOIN Location ON Events.Location = Location.ID;";
@@ -42,6 +42,7 @@ public class EventDataAccess implements IEventDataAccess {
         e.setDateTime(rs.getString("DateTime"));
         e.setLocation(new Location(rs.getInt("Location"), rs.getInt("PostNummer"), rs.getString("Vej")));
         e.setDescription(rs.getString("Description"));
+        e.setEndDateTime(rs.getString("EndDateTime"));
         e.setEventKoordinators(eventUsers);
         return e;
     }
@@ -76,7 +77,7 @@ public class EventDataAccess implements IEventDataAccess {
 
     @Override
     public Event create(Event event) throws Exception {
-        String sql = "INSERT INTO Events (Name, Price, Type, DateTime, Location, Description) Values (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Events (Name, Price, Type, DateTime, Location, Description, EndDateTime) Values (?, ?, ?, ?, ?, ?, ?)";
         DBConnector db = new DBConnector();
         if (event.getLocation().getId() == -1){
             // laver lokationen i databasen hvis den ikke eksistere
@@ -90,6 +91,7 @@ public class EventDataAccess implements IEventDataAccess {
             ps.setString(4, event.getDateTime());
             ps.setInt(5, event.getLocation().getId());
             ps.setString(6, event.getDescription());
+            ps.setString(7, event.getEndDateTime());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()){
@@ -132,7 +134,7 @@ public class EventDataAccess implements IEventDataAccess {
 
     @Override
     public void update(Event event) throws Exception {
-        String sqlUp = "UPDATE Events SET Name = ?, Price = ?, Type = ?, DateTime = ?, Location = ?, Description = ? WHERE ID = ?;";
+        String sqlUp = "UPDATE Events SET Name = ?, Price = ?, Type = ?, DateTime = ?, Location = ?, Description = ?, EndDateTime = ?  WHERE ID = ?;";
         String sqlRemUsers = "DELETE FROM EventAssignment WHERE EventID = ?;";
         String sqlReAddUsers = "INSERT INTO EventAssignment (EventID, UserID) Values (?, ?)"; // måske kunne man finde -
         // en måde at genbruge add users på fra den anden hvor transaktionerne stadig er intakte
@@ -169,7 +171,8 @@ public class EventDataAccess implements IEventDataAccess {
                 psUp.setString(4, event.getDateTime());
                 psUp.setInt(5, event.getLocation().getId());
                 psUp.setString(6, event.getDescription());
-                psUp.setInt(7, event.getId());
+                psUp.setString(7, event.getEndDateTime());
+                psUp.setInt(8, event.getId());
                 psUp.executeUpdate();
 
 
@@ -204,7 +207,7 @@ public class EventDataAccess implements IEventDataAccess {
     @Override
     public List<Event> getEventAccess(User user) throws Exception {
         List<Event> eventList = new ArrayList<>();
-        String sql = "SELECT Events.ID, Events.Name, Events.Price, Events.Type, Category.Name, Events.DateTime, Events.Location, Location.PostNummer, Location.Vej, Events.Description" +
+        String sql = "SELECT Events.ID, Events.Name, Events.Price, Events.Type, Category.Name, Events.DateTime, Events.Location, Location.PostNummer, Location.Vej, Events.Description, Events.EndDateTime" +
                 " FROM EventAssignment" +
                 " INNER JOIN Events ON EventAssignment.EventID = Events.ID" +
                 " INNER JOIN Category ON Events.Type = Category.ID" +

@@ -52,6 +52,10 @@ public class EventController extends Controller {
     private TextField txtGade;
     @FXML
     private TextField txtPostnummer;
+    @FXML
+    private TextField txtTimeEnd;
+    @FXML
+    private DatePicker datePickerEnd;
 
 
     @Override
@@ -143,11 +147,22 @@ public class EventController extends Controller {
         String[] timedate = editEvent.getDateTime().split(" ");
         txtTime.setText(timedate[1].substring(1, timedate[1].length() - 1)); // se hvordan de ser ud og ændre det hvis det ikke er godt
         String[] date = timedate[0].split("-");
+
+        String[] timedateEnd = editEvent.getEndDateTime().split(" ");
+        System.out.println(editEvent.getEndDateTime());
+        txtTimeEnd.setText(timedateEnd[1].substring(1, timedateEnd[1].length() - 1)); // se hvordan de ser ud og ændre det hvis det ikke er godt
+        String[] dateEnd = timedate[0].split("-");
         try {
             int year = Integer.parseInt(date[2]);
             int month = Integer.parseInt(date[1]);
             int day = Integer.parseInt(date[0]);
+
+            int yearEnd = Integer.parseInt(dateEnd[2]);
+            int monthEnd = Integer.parseInt(dateEnd[1]);
+            int dayEnd = Integer.parseInt(dateEnd[0]);
+
             datePicker.setValue(LocalDate.of(year, month, day));
+            datePickerEnd.setValue(LocalDate.of(yearEnd, monthEnd, dayEnd));
         } catch (NumberFormatException e) {
             ShowAlerts.displayMessage("Event Error", "Could not read the date!\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
@@ -222,10 +237,12 @@ public class EventController extends Controller {
 
         //String dateTime = datePicker.getValue().toString() + " (" + txtTime.getText() + ")";
         String dateTime = datePicker.getValue().getDayOfMonth() + "-"+ datePicker.getValue().getMonthValue() + "-" + datePicker.getValue().getYear() + " (" + txtTime.getText() + ")";
+        String dateTimeEnd = datePickerEnd.getValue().getDayOfMonth() + "-"+ datePickerEnd.getValue().getMonthValue() + "-" + datePickerEnd.getValue().getYear() + " (" + txtTimeEnd.getText() + ")";
 
         int id = editEvent == null ? -1 : editEvent.getId();// in case of edit
         Event e = new Event(id, name, price, desc, dateTime, type, location);
         e.setEventKoordinators(lstEventUser.getItems());
+        e.setEndDateTime(dateTimeEnd);
         try {
             if ((id > 0)) {
                 model.updateEvent(e);

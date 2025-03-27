@@ -34,12 +34,12 @@
          <font>
             <Font size="24.0" />
          </font></TextField>
-      <Label layoutX="60.0" layoutY="440.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Dato:">
+      <Label layoutX="60.0" layoutY="440.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Start date:">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <Label layoutX="60.0" layoutY="560.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Tidspunkt:">
+      <Label layoutX="60.0" layoutY="560.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Start time:">
          <font>
             <Font size="32.0" />
          </font>
@@ -140,5 +140,21 @@
             <Font size="32.0" />
          </font>
       </Label>
+      <Label layoutX="60.0" layoutY="690.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="End date:">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <Label layoutX="60.0" layoutY="810.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="End time:">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtTimeEnd" layoutX="60.0" layoutY="860.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" promptText="09:00" styleClass="normalText">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <DatePicker fx:id="datePickerEnd" layoutX="60.0" layoutY="740.0" prefHeight="50.0" prefWidth="400.0" promptText="dd/mm/yyyy" styleClass="normalText" />
    </children>
 </AnchorPane>

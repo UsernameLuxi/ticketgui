@@ -9,6 +9,7 @@ public class Event {
     private int price;
     private String description;
     private String dateTime;
+    private String endDateTime;
     private EventType eventType;
     private Location location;
     private List<User> eventKoordinators;
@@ -86,5 +87,12 @@ public class Event {
     }
     public void setEventKoordinators(List<User> eventKoordinators) {
         this.eventKoordinators = eventKoordinators;
+    }
+
+    public String getEndDateTime(){
+        return endDateTime;
+    }
+    public void setEndDateTime(String edt){
+        endDateTime = edt;
     }
 }
