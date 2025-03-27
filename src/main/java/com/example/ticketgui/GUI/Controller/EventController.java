@@ -109,7 +109,6 @@ public class EventController extends Controller {
             }
         }
 
-
         if (editEvent != null){
             setEditEvent();
         }

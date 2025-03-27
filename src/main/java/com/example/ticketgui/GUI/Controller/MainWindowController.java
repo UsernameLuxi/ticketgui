@@ -33,7 +33,7 @@ public class MainWindowController extends Controller {
     private boolean addedThing = false; // TODO : rename
     private ObservableList<Node> mainContent;
     private Event editEvent = null;
-
+    private Event eventToPrint = null;
 
     @FXML
     private AnchorPane dataPane;
@@ -306,6 +306,9 @@ public class MainWindowController extends Controller {
                         }
                         else {
                             Button printButton = new Button("Print");
+                            printButton.setOnAction(event -> {
+                                printEvent(getTableView().getItems().get(getIndex()));
+                            });
                             setGraphic(printButton);
                         }
                     }
@@ -349,6 +352,11 @@ public class MainWindowController extends Controller {
         if (file.equals("NewEvent.fxml") && editEvent != null){
             EventController ev = (EventController) viewController;
             ev.setEdit(editEvent);
+        }
+
+        if (file.equals("Print Event.fxml") && eventToPrint != null){
+            PrintEventController ev = (PrintEventController) viewController;
+            ev.setEvent(eventToPrint);
         }
         // husk gør dette kun en gang - ikke flere
         viewController.initializeComponents(1920, 972);
@@ -434,6 +442,16 @@ public class MainWindowController extends Controller {
             setPane("NewEvent.fxml");
         } catch (IOException e) {
             editEvent = null;
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void printEvent(Event event){
+        eventToPrint = event;
+        try {
+            setPane("Print Event.fxml");
+        } catch (IOException e) {
+            eventToPrint = null;
             throw new RuntimeException(e);
         }
 
