@@ -11,6 +11,7 @@ import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.io.source.ByteArrayOutputStream;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.element.Paragraph;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -83,15 +84,18 @@ public class PrintEventController extends Controller {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ImageIO.write(qrImage, "png", byteArrayOutputStream);
         byte[] qrImageBytes = byteArrayOutputStream.toByteArray();
+
         String pdfPath = "QRCode.pdf";
         PdfWriter writer = new PdfWriter(pdfPath);
         PdfDocument pdf = new PdfDocument(writer);
         Document document = new Document(pdf);
 
+        document.add(new Paragraph("et eller andet tekst").setBold().setFontSize(14));
         ImageData imageData = ImageDataFactory.create(qrImageBytes);
         Image qrCodeImage = new Image(imageData);
         document.add(qrCodeImage);
-        System.out.println("pdf genereret");
+        document.add(new Paragraph("sovs 2").setItalic().setFontSize(12));
+
         document.close();
     }
 
