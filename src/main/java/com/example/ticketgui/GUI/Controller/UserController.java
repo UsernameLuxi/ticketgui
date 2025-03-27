@@ -51,6 +51,7 @@ public class UserController extends Controller {
                 windowContent.add(r);
             }
         }
+        userModel.DeleteOwnUserPrevent(ControllerManager.getCurrentUser().getId());
 
         imageViews.put(imgBtnBack, new ArrayList<>(){{
             add(imgBtnBack.getFitWidth() / width);

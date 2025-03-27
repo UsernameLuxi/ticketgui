@@ -3,6 +3,7 @@ package com.example.ticketgui.GUI.Model;
 import com.example.ticketgui.BE.User;
 import com.example.ticketgui.BE.UserRole;
 import com.example.ticketgui.BLL.UserLogic;
+import com.example.ticketgui.GUI.ControllerManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
@@ -59,6 +60,11 @@ public class UserModel {
         eventKoordinators.clear();
         eventKoordinators.addAll(userLogic.getAllEventKoordinators());
     }
+    public boolean DeleteOwnUserPrevent(int userid) {
+        User currentUser = ControllerManager.getCurrentUser();
+        if (currentUser.getId() == userid) {
+        }
+        return false;
 
 
 
