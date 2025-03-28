@@ -1,6 +1,7 @@
 package com.example.ticketgui.GUI.Controller;
 
 import com.example.ticketgui.GUI.ControllerManager;
+import com.example.ticketgui.GUI.util.Screens;
 import javafx.collections.ObservableList;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -18,7 +19,7 @@ public interface IController {
 
     void setControllerRoot(IController controller);
     void reload();
-    AnchorPane getPane(String file) throws IOException;
+    AnchorPane getPane(Screens screen) throws IOException;
 
     Font getFont(ObservableList<String> style, double newWidth, double newHeight);
 

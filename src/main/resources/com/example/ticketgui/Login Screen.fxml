@@ -2,7 +2,10 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -12,11 +15,6 @@
          <font>
             <Font size="24.0" />
          </font></TextField>
-      <TextField fx:id="textPassword" layoutX="736.0" layoutY="444.0" prefHeight="51.0" prefWidth="400.0" styleClass="normalText">
-         <font>
-            <Font size="24.0" />
-         </font></TextField>
-      <Button fx:id="btnLogin" layoutX="834.0" layoutY="561.0" mnemonicParsing="false" onAction="#login" prefHeight="65.0" prefWidth="185.0" styleClass="normalText" text="Login" />
       <Label fx:id="lblUsername" layoutX="736.0" layoutY="210.0" prefHeight="75.0" prefWidth="400.0" styleClass="bigText" text="Username">
          <font>
             <Font size="32.0" />
@@ -32,5 +30,21 @@
             <Font size="24.0" />
          </font>
       </Label>
+      <ImageView fx:id="imgShowHide" fitHeight="51.0" fitWidth="60.0" layoutX="1154.0" layoutY="444.0" onMousePressed="#togglePassword" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@symbols/eye.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="txtpasswordShown" layoutX="736.0" layoutY="444.0" prefHeight="51.0" prefWidth="400.0" styleClass="normalText" visible="false">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="txtPassword" layoutX="736.0" layoutY="444.0" prefHeight="51.0" prefWidth="400.0" styleClass="normalText">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </PasswordField>
+      <Button fx:id="btnLogin" layoutX="834.0" layoutY="561.0" mnemonicParsing="false" onAction="#login" prefHeight="65.0" prefWidth="185.0" styleClass="normalText" text="Login" />
    </children>
 </AnchorPane>

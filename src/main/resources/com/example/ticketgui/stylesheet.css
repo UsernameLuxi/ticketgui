@@ -1,3 +1,10 @@
+/* *{
+    --primaryColor: #588157; /* variabler i css */
+ /*   --backgroundAndSmallText: #DAD7CD;
+    --otherText: #2a3d34;
+    --topBarColor: #3a5a40;
+}*/
+
 .button {
     -fx-background-color: #588157;
     -fx-text-fill: white;

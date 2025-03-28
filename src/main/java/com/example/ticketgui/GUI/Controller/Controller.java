@@ -1,5 +1,7 @@
 package com.example.ticketgui.GUI.Controller;
 
+import com.example.ticketgui.GUI.util.Screens;
+import com.example.ticketgui.GUI.util.ShowAlerts;
 import com.example.ticketgui.Main;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -56,23 +58,22 @@ public abstract class Controller implements IController {
     @Override
     public void reload(){
         try{
-            AnchorPane pane = getPane("Print Event.fxml");
-            // TODO : Do something
+            AnchorPane pane = getPane(Screens.PRINT_EVENT);
         }
         catch (Exception e){
-            // TODO : indsæt noget
+            ShowAlerts.displayMessage("Window Error", "Could not load window\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
     @Override
-    public AnchorPane getPane(String file) throws IOException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource(file));
+    public AnchorPane getPane(Screens screen) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource(screen.getFile()));
         return loader.load();
     }
 
     @Override
     public Font getFont(ObservableList<String> style, double newWidth, double newHeight){
-        double orgSize = style.contains("bigText") ? 32 : style.contains("normalText") ? 24 : 12;
+        double orgSize = style.contains("bigText") ? 32 : style.contains("normalText") ? 24 : 16;
         double newValueAVG = (orgSize * (newWidth / 1920) + orgSize * (newHeight / 1080)) / 2;
         return new Font(newValueAVG);
     }

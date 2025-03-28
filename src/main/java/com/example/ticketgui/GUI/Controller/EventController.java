@@ -3,6 +3,7 @@ package com.example.ticketgui.GUI.Controller;
 import com.example.ticketgui.BE.*;
 import com.example.ticketgui.GUI.ControllerManager;
 import com.example.ticketgui.GUI.Model.EventModel;
+import com.example.ticketgui.GUI.util.ShowAlerts;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.Region;
 
 import java.text.SimpleDateFormat;
@@ -33,8 +35,6 @@ public class EventController extends Controller {
     @FXML
     private TextField txtEventPrice;
     @FXML
-    private TextField txtLocation;
-    @FXML
     private TextField txtTime;
     @FXML
     private TextArea txtEventDesc;
@@ -48,6 +48,14 @@ public class EventController extends Controller {
     private ListView<User> lstUnassigned;
     @FXML
     private Label lblFeedback;
+    @FXML
+    private TextField txtGade;
+    @FXML
+    private TextField txtPostnummer;
+    @FXML
+    private TextField txtTimeEnd;
+    @FXML
+    private DatePicker datePickerEnd;
 
 
     @Override
@@ -68,7 +76,7 @@ public class EventController extends Controller {
 
         fillMap(windowContent, width, height);
 
-        // get event model TODO : dette virker - så gør lige det for det neden for også ;) - altså bruger model i-stedet for at kalde manager
+        // get event model
         model = manager.getEventModel();
 
         // fill the split menu
@@ -89,7 +97,7 @@ public class EventController extends Controller {
             smbType.getItems().clear();
             smbType.getItems().addAll(items);
         } catch (Exception e) {
-            // TODO : noget her
+            ShowAlerts.displayMessage("Event Error", "Could not load types\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
 
         // fill the koordinator list
@@ -118,7 +126,8 @@ public class EventController extends Controller {
         txtEventName.setText(editEvent.getName());
         txtEventPrice.setText(editEvent.getPrice() + "");
         txtEventDesc.setText(editEvent.getDescription());
-        txtLocation.setText(editEvent.getLocation().toString());
+        txtGade.setText(editEvent.getLocation().getStreet());
+        txtPostnummer.setText(editEvent.getLocation().getPostalCode() + "");
         smbType.setText(editEvent.getEventType().getName());
         // users
         lstEventUser.getItems().clear();
@@ -137,13 +146,24 @@ public class EventController extends Controller {
         String[] timedate = editEvent.getDateTime().split(" ");
         txtTime.setText(timedate[1].substring(1, timedate[1].length() - 1)); // se hvordan de ser ud og ændre det hvis det ikke er godt
         String[] date = timedate[0].split("-");
+
+        String[] timedateEnd = editEvent.getEndDateTime().split(" ");
+        System.out.println(editEvent.getEndDateTime());
+        txtTimeEnd.setText(timedateEnd[1].substring(1, timedateEnd[1].length() - 1)); // se hvordan de ser ud og ændre det hvis det ikke er godt
+        String[] dateEnd = timedate[0].split("-");
         try {
             int year = Integer.parseInt(date[2]);
             int month = Integer.parseInt(date[1]);
             int day = Integer.parseInt(date[0]);
+
+            int yearEnd = Integer.parseInt(dateEnd[2]);
+            int monthEnd = Integer.parseInt(dateEnd[1]);
+            int dayEnd = Integer.parseInt(dateEnd[0]);
+
             datePicker.setValue(LocalDate.of(year, month, day));
+            datePickerEnd.setValue(LocalDate.of(yearEnd, monthEnd, dayEnd));
         } catch (NumberFormatException e) {
-            // TODO noget her
+            ShowAlerts.displayMessage("Event Error", "Could not read the date!\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
 
     }
@@ -186,26 +206,42 @@ public class EventController extends Controller {
         String name = txtEventName.getText();
         String desc = txtEventDesc.getText();
         EventType type = currentEventType;
+
         // location
-        String post = txtLocation.getText().split(",")[0];
+        String post = txtPostnummer.getText().trim();
         int postInt = 0;
         int price;
+        // postnummer try catch
         try {
             postInt = Integer.parseInt(post);
-            price = Integer.parseInt(txtEventPrice.getText());
         } catch (NumberFormatException e) {
-            // TODO : noget her
+            lblFeedback.setText("Could not read number");
+            lblFeedback.setStyle("-fx-text-fill: red");
+            txtPostnummer.setStyle("-fx-border-color: red");
+        }
+
+        String street = txtGade.getText().trim();
+        Location location = new Location(-1, postInt, street.trim()); // TODO : tjek lige om den allerede er i db!
+
+        // pris
+        try {
+            price = Integer.parseInt(txtEventPrice.getText());
+            // TODO : tjek at den ikke er negativ
+        } catch (NumberFormatException e) {
+            lblFeedback.setText("Could not read number");
+            lblFeedback.setStyle("-fx-text-fill: red");
+            txtEventPrice.setStyle("-fx-border-color: red");
             return;
         }
-        String street = txtLocation.getText().split(",")[1];
-        Location location = new Location(-1, postInt, street.trim()); // TODO : tjek lige om den allerede er i db!
 
         //String dateTime = datePicker.getValue().toString() + " (" + txtTime.getText() + ")";
         String dateTime = datePicker.getValue().getDayOfMonth() + "-"+ datePicker.getValue().getMonthValue() + "-" + datePicker.getValue().getYear() + " (" + txtTime.getText() + ")";
+        String dateTimeEnd = datePickerEnd.getValue().getDayOfMonth() + "-"+ datePickerEnd.getValue().getMonthValue() + "-" + datePickerEnd.getValue().getYear() + " (" + txtTimeEnd.getText() + ")";
 
         int id = editEvent == null ? -1 : editEvent.getId();// in case of edit
         Event e = new Event(id, name, price, desc, dateTime, type, location);
         e.setEventKoordinators(lstEventUser.getItems());
+        e.setEndDateTime(dateTimeEnd);
         try {
             if ((id > 0)) {
                 model.updateEvent(e);
@@ -213,28 +249,40 @@ public class EventController extends Controller {
             } else {
                 model.createEvent(e);
             }
-            // TODO : lav den timed så man ikke ser på den hele tiden - måske lave schduledExecutor idk
-            String feedback = e.getName() + " -> blev gemt!";
+
+            // TODO : lav den timed så man ikke ser på den hele tiden - måske lave schduledExecutor idk -> runnable
+            String feedback = e.getName() + " -> saved!";
+            lblFeedback.setStyle("-fx-text-fill: black");
             lblFeedback.setText(feedback);
 
             // tøm felter
             txtEventName.clear();
             txtEventDesc.clear();
             txtEventPrice.clear();
+            txtEventPrice.setStyle("-fx-border-color: transparent");
             datePicker.setValue(null);
-            txtLocation.clear();
+            txtGade.clear();
+            txtPostnummer.clear();
             txtTime.clear();
+            
+            // reset formatering på textfields
+            txtEventPrice.setStyle("-fx-border-color: transparent");
+            txtPostnummer.setStyle("-fx-border-color: transparent");
         } catch (Exception ex) {
-            // TODO : tilføj noget her!
+            lblFeedback.setText("Could not save event");
+            lblFeedback.setStyle("-fx-text-fill: red");
         }
     }
 
     @FXML
     private void addKoor(ActionEvent actionEvent) {
         User selUser = lstUnassigned.getSelectionModel().getSelectedItem();
-        if (selUser != null) {
+        if (selUser != null && !selUser.getUsername().isEmpty()) {
             lstEventUser.getItems().add(selUser);
             lstUnassigned.getItems().remove(selUser);
+            if (lstUnassigned.getItems().isEmpty()) {
+                lstUnassigned.getItems().add(new User("", ""));
+            }
         }
 
     }
@@ -244,6 +292,9 @@ public class EventController extends Controller {
         User selUser = lstEventUser.getSelectionModel().getSelectedItem();
         if (selUser != null){
             if (selUser.getId() != ControllerManager.getCurrentUser().getId() && lstEventUser.getItems().size() > 1){
+                if (lstUnassigned.getItems().getFirst().getUsername().isEmpty()){
+                    lstUnassigned.getItems().clear();
+                }
                 lstUnassigned.getItems().add(selUser);
                 lstEventUser.getItems().remove(selUser);
             }

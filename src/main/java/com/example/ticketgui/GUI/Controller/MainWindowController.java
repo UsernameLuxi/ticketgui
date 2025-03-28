@@ -5,6 +5,7 @@ import com.example.ticketgui.BE.EventType;
 import com.example.ticketgui.BE.Location;
 import com.example.ticketgui.BE.UserRole;
 import com.example.ticketgui.GUI.ControllerManager;
+import com.example.ticketgui.GUI.util.Screens;
 import com.example.ticketgui.GUI.util.ShowAlerts;
 import com.example.ticketgui.Main;
 import javafx.collections.FXCollections;
@@ -23,15 +24,17 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 import java.util.*;
-// TODO : Ryd op
 public class MainWindowController extends Controller {
     private ControllerManager manager;
     private IController rootController;
     private IController viewController;
+
     private Map<Region, List<Double>> windowItems = new HashMap<>();
     private Map<ImageView, List<Double>> imageViews = new HashMap<>();
-    private boolean addedThing = false; // TODO : rename
     private ObservableList<Node> mainContent;
+
+    private boolean resizeableListenerAdded = false;
+
     private Event editEvent = null;
     private Event eventToPrint = null;
 
@@ -51,10 +54,6 @@ public class MainWindowController extends Controller {
     private Label lblUserRole;
     @FXML
     private ImageView imgUserImage;
-    @FXML
-    private ImageView imgLogout;
-    @FXML
-    private Label lblMenuTitle;
     @FXML
     private AnchorPane newEvent;
     @FXML
@@ -117,6 +116,10 @@ public class MainWindowController extends Controller {
     private TableView tblCupons;
     @FXML
     private AnchorPane viewPanel;
+    @FXML
+    private ImageView imgLogo;
+    @FXML
+    private Button btnLogout;
 
     /**
      * EVENT TABLE CONTENT
@@ -131,6 +134,7 @@ public class MainWindowController extends Controller {
     @FXML private TableColumn<Event, String> colPrint;
     @FXML private TableColumn<Event, String> colDel;
 
+    /*
     public ScrollPane createScrollpaneForDatapane() {
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setLayoutX(dataPane.getLayoutX());
@@ -149,6 +153,7 @@ public class MainWindowController extends Controller {
         viewPanel.getChildren().add(scrollPane);
         return scrollPane;
     }
+     */
 
     // erhmmm ja... man kunne også bare give hvert pane et fxId og .getChildren() - hilsen Casper -> but also made by Casper... træls (root.getChildren() for each)
     // update note - det kan man ikke - fordi root childen har ikke nok children (7 currently ift. 40)
@@ -163,7 +168,6 @@ public class MainWindowController extends Controller {
         userInformation,
         lblUserName,
         lblUserRole,
-        lblMenuTitle,
         newEvent,
         lblNewEventlbl,
         newUser,
@@ -191,16 +195,19 @@ public class MainWindowController extends Controller {
         cbEventType,
         cuponsPane,
         lblCupons,
-        tblCupons));
+        tblCupons,
+        btnLogout));
 
         // special case:
-        ScrollPane scrollPane = createScrollpaneForDatapane();
+        //ScrollPane scrollPane = createScrollpaneForDatapane();
+        /*
         windowItems.put(scrollPane, new ArrayList<>(){{
             add(scrollPane.getPrefWidth() / width);
             add(scrollPane.getPrefHeight() / height);
             add(scrollPane.getLayoutX() / width);
             add(scrollPane.getLayoutY() / height);}}
         );
+         */
 
         // også et specielt tilfælde
         imageViews.put(imgManageCupons, new ArrayList<>(){{
@@ -223,20 +230,20 @@ public class MainWindowController extends Controller {
             add(imgNewEvent.getFitHeight() / height);
             add(imgNewEvent.getLayoutX() / width);
             add(imgNewEvent.getLayoutY() / height);}});
-        imageViews.put(imgLogout, new ArrayList<>(){{
-            add(imgLogout.getFitWidth() / width);
-            add(imgLogout.getFitHeight() / height);
-            add(imgLogout.getLayoutX() / width);
-            add(imgLogout.getLayoutY() / height);}});
+        imageViews.put(imgLogo, new ArrayList<>(){{
+            add(imgLogo.getFitWidth() / width);
+            add(imgLogo.getFitHeight() / height);
+            add(imgLogo.getLayoutX() / width);
+            add(imgLogo.getLayoutY() / height);}});
 
         fillMap(windowContent, width, height);
         mainContent = FXCollections.observableArrayList();
         mainContent.addAll(viewPanel.getChildren());
-        mainContent.remove(dataPane);
+        //mainContent.remove(dataPane);
 
         // indsæt bruger ;)
         lblUserName.setText(ControllerManager.getCurrentUser().getUsername());
-        lblUserRole.setText(ControllerManager.getCurrentUser().getUserRole().toString());
+        lblUserRole.setText(ControllerManager.getCurrentUser().getUserRole().toString().toLowerCase());
 
         buttonHandling(ControllerManager.getCurrentUser().getUserRole());
 
@@ -284,8 +291,7 @@ public class MainWindowController extends Controller {
                             Button delButton = new Button("Del");
                             delButton.setOnAction((event) -> {
                                 Event e = getTableView().getItems().get(getIndex());
-                                if (ShowAlerts.displayWarning("Sletning af event!", "Vil du gerne slette eventet: " + e.getName()))
-                                    removeEvent(e);
+                                removeEvent(e);
                             });
                             setGraphic(delButton);
                         }
@@ -318,8 +324,8 @@ public class MainWindowController extends Controller {
         try {
             tblEvent.setItems(manager.getEventModel().getEventsForUser(ControllerManager.getCurrentUser()));
         } catch (Exception e) {
-            // TODO : indsæt noget
-            System.out.println(e.getMessage());
+            ShowAlerts.displayMessage("Event Error", "Could not fetch events for current user\n" + e.getMessage(), Alert.AlertType.ERROR);
+            //System.out.println(e.getMessage());
         }
 
     }
@@ -362,10 +368,10 @@ public class MainWindowController extends Controller {
         viewController.initializeComponents(1920, 972);
         viewController.resizeItems(viewPanel.getWidth(), viewPanel.getHeight());
         viewController.setControllerRoot(this);
-        if (!addedThing){
+        if (!resizeableListenerAdded){
             viewPanel.widthProperty().addListener((observable, oldValue, newValue) -> {viewController.resizeItems(newValue.doubleValue(), viewPanel.getHeight());});
             viewPanel.heightProperty().addListener(((observable, oldValue, newValue) -> {viewController.resizeItems(viewPanel.getWidth(), newValue.doubleValue());}));
-            addedThing = true;
+            resizeableListenerAdded = true;
         }
 
         viewPanel.getChildren().add(pane);
@@ -378,7 +384,7 @@ public class MainWindowController extends Controller {
             setPane("NewEvent.fxml");
         }
         catch (Exception e){
-            // TODO : Find et eller andet og putte her
+            ShowAlerts.displayMessage("Window Error", "Could not load window\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -388,7 +394,7 @@ public class MainWindowController extends Controller {
             setPane("NewUser.fxml");
         }
         catch (Exception e){
-            // TODO : Find et eller andet og putte her
+            ShowAlerts.displayMessage("Window Error", "Could not load window\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -398,7 +404,7 @@ public class MainWindowController extends Controller {
             setPane("ManageCoupons.fxml");
         }
         catch (Exception e){
-            // TODO : Find et eller andet og putte her
+            ShowAlerts.displayMessage("Window Error", "Could not load window\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -413,9 +419,9 @@ public class MainWindowController extends Controller {
     }
 
     @FXML
-    private void logout(MouseEvent mouseEvent) {
+    private void logout(ActionEvent mouseEvent) {
         try{
-            manager.setStage("Login Screen.fxml");
+            manager.setStage(Screens.LOGIN_WINDOW);
         }
         catch (Exception e){
             // noget het
@@ -428,11 +434,13 @@ public class MainWindowController extends Controller {
     }
 
     private void removeEvent(Event event) {
-        // TODO : confirmation message
+        if (!ShowAlerts.displayWarning("Sletning af event!", "Vil du gerne slette eventet: " + event.getName()))
+            return;
+
         try {
             manager.getEventModel().deleteEvent(event);
         } catch (Exception ex) {
-            // TODO : indsæt noget
+            ShowAlerts.displayMessage("Event Error", "Could not remove event\n" + ex.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -442,7 +450,7 @@ public class MainWindowController extends Controller {
             setPane("NewEvent.fxml");
         } catch (IOException e) {
             editEvent = null;
-            throw new RuntimeException(e);
+            ShowAlerts.displayMessage("Window Error", "Could not load window\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -464,4 +472,9 @@ public class MainWindowController extends Controller {
         else if (userRole == UserRole.ADMIN)
             newEvent.setVisible(false);
         }
+
+    @FXML
+    private void toMainMenu(MouseEvent mouseEvent) {
+        reload();
+    }
 }

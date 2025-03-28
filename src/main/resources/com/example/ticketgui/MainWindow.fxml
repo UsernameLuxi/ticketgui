@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitMenuButton?>
@@ -16,32 +17,34 @@
    <children>
       <AnchorPane id="topBar" fx:id="menuBar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="108.0" prefWidth="1920.0">
          <children>
-            <AnchorPane fx:id="userInformation" layoutX="1620.0" layoutY="32.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="279.0">
+            <AnchorPane fx:id="userInformation" layoutX="1514.0" layoutY="29.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="279.0">
                <children>
                   <ImageView fx:id="imgUserImage" fitHeight="44.0" fitWidth="44.0" layoutX="6.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@symbols/User.png" />
                      </image></ImageView>
-                  <Label fx:id="lblUserName" layoutX="63.0" layoutY="4.0" prefHeight="18.0" prefWidth="210.0" styleClass="smallText" text="Brugernavn" />
-                  <Label fx:id="lblUserRole" layoutX="63.0" layoutY="28.0" prefHeight="18.0" prefWidth="210.0" styleClass="smallText" text="Rolle" />
+                  <Label fx:id="lblUserName" layoutX="63.0" layoutY="1.0" prefHeight="18.0" prefWidth="210.0" styleClass="smallText" text="Brugernavn">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <Label fx:id="lblUserRole" layoutX="63.0" layoutY="23.0" prefHeight="18.0" prefWidth="210.0" styleClass="smallText" text="Rolle">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
                </children>
             </AnchorPane>
-            <ImageView fx:id="imgLogout" fitHeight="108.0" fitWidth="110.0" onMouseClicked="#logout" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgLogo" fitHeight="164.0" fitWidth="318.0" layoutY="-20.0" onMouseClicked="#toMainMenu" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@symbols/logout.png" />
+                  <Image url="@symbols/EASYDVEST_negativ.png" />
                </image></ImageView>
+            <Button fx:id="btnLogout" layoutX="1793.0" layoutY="29.0" mnemonicParsing="false" onAction="#logout" prefHeight="44.0" prefWidth="110.0" text="Log out" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="viewPanel" layoutY="108.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="972.0" prefWidth="1920.0">
          <children>
             <AnchorPane id="sideMenu" fx:id="sideMenu" minHeight="-Infinity" minWidth="-Infinity" prefHeight="974.0" prefWidth="355.0">
                <children>
-                  <Label fx:id="lblMenuTitle" alignment="CENTER" layoutY="20.0" prefHeight="55.0" prefWidth="355.0" styleClass="bigText" text="Menu" textAlignment="CENTER">
-                     <font>
-                        <Font size="38.0" />
-                     </font>
-                  </Label>
-                  <AnchorPane fx:id="newEvent" layoutY="126.0" onMouseClicked="#newEventClick" prefHeight="60.0" prefWidth="355.0">
+                  <AnchorPane fx:id="newEvent" layoutY="76.0" onMouseClicked="#newEventClick" prefHeight="60.0" prefWidth="355.0">
                      <children>
                         <ImageView fx:id="imgNewEvent" fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;">
                            <image>
@@ -55,7 +58,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="newUser" layoutY="216.0" onMouseClicked="#newUserClick" prefHeight="60.0" prefWidth="355.0">
+                  <AnchorPane fx:id="newUser" layoutY="166.0" onMouseClicked="#newUserClick" prefHeight="60.0" prefWidth="355.0">
                      <children>
                         <ImageView fx:id="imgNewUser" fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;">
                            <image>
@@ -68,7 +71,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="manageCupons" layoutY="300.0" onMouseClicked="#manageCouponClick" prefHeight="60.0" prefWidth="355.0">
+                  <AnchorPane fx:id="manageCupons" layoutY="250.0" onMouseClicked="#manageCouponClick" prefHeight="60.0" prefWidth="355.0">
                      <children>
                         <ImageView fx:id="imgManageCupons" fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;">
                            <image>
@@ -83,27 +86,9 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="dataPane" layoutX="355.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="368.0" prefWidth="1948.0" styleClass="backgroundMain">
+            <AnchorPane fx:id="dataPane" layoutX="355.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="368.0" prefWidth="1567.0" styleClass="backgroundMain">
                <children>
-                  <AnchorPane fx:id="data1" layoutX="180.0" layoutY="70.0" styleClass="dataItem">
-                     <children>
-                        <Label fx:id="lblData1Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" text="Aktive Events" textAlignment="CENTER">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                           <styleClass>
-                              <String fx:value="dataItemTitle" />
-                              <String fx:value="normalText" />
-                           </styleClass>
-                        </Label>
-                        <Label fx:id="lblData1data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" styleClass="normalText" text="Label">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane fx:id="data2" layoutX="610.0" layoutY="70.0" styleClass="dataItem">
+                  <AnchorPane fx:id="data2" layoutX="267.0" layoutY="198.0" styleClass="dataItem">
                      <children>
                         <Label fx:id="lvlData2Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" text="Events denne måned" textAlignment="CENTER">
                            <font>
@@ -114,14 +99,14 @@
                               <String fx:value="normalText" />
                            </styleClass>
                         </Label>
-                        <Label fx:id="lblData2data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" styleClass="normalText" text="Label">
+                        <Label fx:id="lblData2data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="50.0" prefWidth="314.0" styleClass="normalText" text="Label">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="data3" layoutX="1040.0" layoutY="70.0" styleClass="dataItem">
+                  <AnchorPane fx:id="data3" layoutX="982.0" layoutY="70.0" prefHeight="95.0" prefWidth="318.0" styleClass="dataItem">
                      <children>
                         <Label fx:id="lblData3Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" text="Events denne uge" textAlignment="CENTER">
                            <font>
@@ -132,14 +117,32 @@
                               <String fx:value="normalText" />
                            </styleClass>
                         </Label>
-                        <Label fx:id="lblData3data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" styleClass="normalText" text="Label">
+                        <Label fx:id="lblData3data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="50.0" prefWidth="314.0" styleClass="normalText" text="Label">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="data4" layoutX="1470.0" layoutY="70.0" prefWidth="139.0" styleClass="dataItem">
+                  <AnchorPane fx:id="data1" layoutX="267.0" layoutY="68.0" styleClass="dataItem">
+                     <children>
+                        <Label fx:id="lblData1Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" text="Aktive Events" textAlignment="CENTER">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="dataItemTitle" />
+                              <String fx:value="normalText" />
+                           </styleClass>
+                        </Label>
+                        <Label fx:id="lblData1data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="50.0" prefWidth="314.0" styleClass="normalText" text="Label">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="data4" layoutX="982.0" layoutY="188.0" prefWidth="139.0" styleClass="dataItem">
                      <children>
                         <Label fx:id="lblData4Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" text="Aktive Kuponer" textAlignment="CENTER">
                            <font>
@@ -150,7 +153,7 @@
                               <String fx:value="normalText" />
                            </styleClass>
                         </Label>
-                        <Label fx:id="lblData4data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="184.0" prefWidth="314.0" styleClass="normalText" text="Label">
+                        <Label fx:id="lblData4data" alignment="CENTER" layoutX="3.0" layoutY="51.0" prefHeight="50.0" prefWidth="314.0" styleClass="normalText" text="Label">
                            <font>
                               <Font size="24.0" />
                            </font>

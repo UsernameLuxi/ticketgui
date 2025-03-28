@@ -118,12 +118,14 @@ public class UserDataAccess implements IUserAccess {
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()){
-                return getById(rs.getInt(1)); // TODO : måske indsæt egen ting så 2 sql kald ikke forekommer
+                // idé til refactoring; måske indsæt egen SQL sætning så 2 sql kald ikke forekommer
+                // Dette blev lavet fordi det sparede tid - men det andet vil helt klart være bedre
+                return getById(rs.getInt(1));
             }
             else
                 return null;
         } catch (Exception e) {
-            throw new Exception("Couldn't fetch password");
+            throw new Exception("Couldn't fetch user " + username);
         }
     }
 

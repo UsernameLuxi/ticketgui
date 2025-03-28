@@ -16,63 +16,63 @@
 
 <AnchorPane fx:id="eventPane" prefHeight="972.0" prefWidth="1920.0" styleClass="backgroundOther" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ticketgui.GUI.Controller.EventController">
    <children>
-      <Label layoutX="60.0" layoutY="317.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Event navn:">
+      <Label layoutX="60.0" layoutY="200.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Event navn:">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <TextField fx:id="txtEventName" layoutX="60.0" layoutY="367.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" styleClass="normalText">
+      <TextField fx:id="txtEventName" layoutX="60.0" layoutY="250.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" styleClass="normalText">
          <font>
             <Font size="24.0" />
          </font></TextField>
-      <Label layoutX="60.0" layoutY="437.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Pris:">
+      <Label layoutX="60.0" layoutY="320.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Pris:">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <TextField fx:id="txtEventPrice" layoutX="60.0" layoutY="487.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" styleClass="normalText">
+      <TextField fx:id="txtEventPrice" layoutX="60.0" layoutY="370.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" styleClass="normalText">
          <font>
             <Font size="24.0" />
          </font></TextField>
-      <Label layoutX="60.0" layoutY="557.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Dato:">
+      <Label layoutX="60.0" layoutY="440.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Start date:">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <Label layoutX="60.0" layoutY="677.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Tidspunkt:">
+      <Label layoutX="60.0" layoutY="560.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Start time:">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <TextField fx:id="txtLocation" layoutX="627.0" layoutY="367.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" promptText="postnummer, gade" styleClass="normalText">
+      <TextField fx:id="txtPostnummer" layoutX="620.0" layoutY="250.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" promptText="Ex: 6700" styleClass="normalText">
          <font>
             <Font size="24.0" />
          </font></TextField>
-      <Label layoutX="627.0" layoutY="317.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Lokation:">
+      <Label layoutX="620.0" layoutY="200.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Postal code:">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <TextField fx:id="txtTime" layoutX="60.0" layoutY="727.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" promptText="09:00" styleClass="normalText">
+      <TextField fx:id="txtTime" layoutX="60.0" layoutY="610.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" promptText="09:00" styleClass="normalText">
          <font>
             <Font size="24.0" />
          </font></TextField>
-      <Label layoutX="627.0" layoutY="437.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Type:">
+      <Label layoutX="620.0" layoutY="440.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Type:">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <Label layoutX="627.0" layoutY="557.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Beskrivelse:">
+      <Label layoutX="620.0" layoutY="560.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Beskrivelse:">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <Button layoutX="627.0" layoutY="809.0" mnemonicParsing="false" onAction="#saveEvent" prefHeight="67.0" prefWidth="232.0" styleClass="normalText" text="Gem">
+      <Button layoutX="620.0" layoutY="800.0" mnemonicParsing="false" onAction="#saveEvent" prefHeight="67.0" prefWidth="232.0" styleClass="normalText" text="Gem">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Button fx:id="btnBack" alignment="CENTER" layoutX="80.0" layoutY="60.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#loadMain" prefHeight="80.0" prefWidth="210.0" text="Tilbage">
+      <Button fx:id="btnBack" alignment="CENTER" layoutX="60.0" layoutY="60.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#loadMain" prefHeight="80.0" prefWidth="210.0" text="Tilbage">
          <font>
             <Font size="32.0" />
          </font>
@@ -88,13 +88,13 @@
             <String fx:value="bigText" />
          </styleClass>
       </Button>
-      <TextArea fx:id="txtEventDesc" layoutX="627.0" layoutY="607.0" prefHeight="124.0" prefWidth="400.0" styleClass="normalText">
+      <TextArea fx:id="txtEventDesc" layoutX="620.0" layoutY="610.0" prefHeight="124.0" prefWidth="400.0" styleClass="normalText">
          <font>
             <Font size="24.0" />
          </font>
       </TextArea>
-      <DatePicker fx:id="datePicker" layoutX="60.0" layoutY="607.0" prefHeight="50.0" prefWidth="400.0" promptText="dd/mm/yyyy" styleClass="normalText" />
-      <SplitMenuButton fx:id="smbType" layoutX="627.0" layoutY="487.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" styleClass="normalText" text="SplitMenuButton">
+      <DatePicker fx:id="datePicker" layoutX="60.0" layoutY="490.0" prefHeight="50.0" prefWidth="400.0" promptText="dd/mm/yyyy" styleClass="normalText" />
+      <SplitMenuButton fx:id="smbType" layoutX="620.0" layoutY="490.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" styleClass="normalText" text="SplitMenuButton">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
           <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -130,5 +130,31 @@
             <Font size="32.0" />
          </font>
       </Label>
+      <TextField fx:id="txtGade" layoutX="620.0" layoutY="370.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" promptText="Sneum Kirkevej 20" styleClass="normalText">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <Label layoutX="620.0" layoutY="320.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Street:">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <Label layoutX="60.0" layoutY="690.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="End date:">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <Label layoutX="60.0" layoutY="810.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="End time:">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtTimeEnd" layoutX="60.0" layoutY="860.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" promptText="09:00" styleClass="normalText">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <DatePicker fx:id="datePickerEnd" layoutX="60.0" layoutY="740.0" prefHeight="50.0" prefWidth="400.0" promptText="dd/mm/yyyy" styleClass="normalText" />
    </children>
 </AnchorPane>

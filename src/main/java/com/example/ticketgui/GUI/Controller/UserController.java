@@ -4,6 +4,7 @@ import com.example.ticketgui.BE.User;
 import com.example.ticketgui.BE.UserRole;
 import com.example.ticketgui.GUI.ControllerManager;
 import com.example.ticketgui.GUI.Model.UserModel;
+import com.example.ticketgui.GUI.util.ShowAlerts;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -40,6 +41,8 @@ public class UserController extends Controller {
     private TableColumn<User, String> colBrugernavn;
     @FXML
     private TableColumn<User, UserRole> colRolle;
+    @FXML
+    private Label lblFeedback;
 
 
     @Override
@@ -71,9 +74,9 @@ public class UserController extends Controller {
             tblBrugere.setItems(userModel.getUsers());
         }
         catch (Exception e){
-            // TODO : indsæt håndtering hvis man ikke kan lave modellen eller få brugerne
+            ShowAlerts.displayMessage("Error", "Could not load users\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
-        // lav rollerne til menutingen
+        // laver rollerne til menutingen
         List<MenuItem> items = new ArrayList<>();
         for (UserRole ur : UserRole.values()) {
             MenuItem mi = new MenuItem(ur.name());
@@ -127,9 +130,13 @@ public class UserController extends Controller {
             userModel.createUser(u, txtPassword.getText().trim());
             txtUsername.clear();
             txtPassword.clear();
+
+            lblFeedback.setText(u.getUsername() + "->" + " Created");
+            lblFeedback.setStyle("-fx-text-fill: green;");
         }
         catch (Exception e){
-            // TODO : indsæt exception-håndtering
+            lblFeedback.setText("An error occurred while creating user");
+            lblFeedback.setStyle("-fx-text-fill: red;");
         }
     }
 
@@ -143,11 +150,13 @@ public class UserController extends Controller {
                 userModel.deleteUser(selctedUser);
             }
             catch (Exception e){
-                // TODO : der skete noget med sletningen - imp noget
+                lblFeedback.setText("Could not delete user");
+                lblFeedback.setStyle("-fx-text-fill: red;");
             }
         }
         else{
-            // TODO : null giv måske en advarsel eller noget information i form a label ?
+            lblFeedback.setText("You must select a user!");
+            lblFeedback.setStyle("-fx-text-fill: red;");
         }
     }
 }
