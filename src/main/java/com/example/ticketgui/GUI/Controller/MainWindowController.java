@@ -347,20 +347,19 @@ public class MainWindowController extends Controller {
     }
 
 
-    // TODO : Måske panes som enum?
-    private void setPane(String file) throws IOException {
+    private void setPane(Screens screen) throws IOException {
         viewPanel.getChildren().clear();
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource(file));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource(screen.getFile()));
         AnchorPane pane = loader.load();
 
         viewController = loader.getController();
         viewController.setManager(manager);
-        if (file.equals("NewEvent.fxml") && editEvent != null){
+        if (screen == Screens.EVENT_WINDOW && editEvent != null){
             EventController ev = (EventController) viewController;
             ev.setEdit(editEvent);
         }
 
-        if (file.equals("Print Event.fxml") && eventToPrint != null){
+        if (screen == Screens.PRINT_EVENT && eventToPrint != null){
             PrintEventController ev = (PrintEventController) viewController;
             ev.setEvent(eventToPrint);
         }
@@ -381,7 +380,7 @@ public class MainWindowController extends Controller {
     @FXML
     private void newEventClick(MouseEvent mouseEvent) {
         try{
-            setPane("NewEvent.fxml");
+            setPane(Screens.EVENT_WINDOW);
         }
         catch (Exception e){
             ShowAlerts.displayMessage("Window Error", "Could not load window\n" + e.getMessage(), Alert.AlertType.ERROR);
@@ -391,7 +390,7 @@ public class MainWindowController extends Controller {
     @FXML
     private void newUserClick(MouseEvent mouseEvent) {
         try{
-            setPane("NewUser.fxml");
+            setPane(Screens.USER_WINDOW);
         }
         catch (Exception e){
             ShowAlerts.displayMessage("Window Error", "Could not load window\n" + e.getMessage(), Alert.AlertType.ERROR);
@@ -401,7 +400,7 @@ public class MainWindowController extends Controller {
     @FXML
     private void manageCouponClick(MouseEvent mouseEvent) {
         try{
-            setPane("ManageCoupons.fxml");
+            setPane(Screens.MANAGE_COUPONS);
         }
         catch (Exception e){
             ShowAlerts.displayMessage("Window Error", "Could not load window\n" + e.getMessage(), Alert.AlertType.ERROR);
@@ -447,7 +446,7 @@ public class MainWindowController extends Controller {
     private void editEvent(Event event){
         editEvent = event;
         try {
-            setPane("NewEvent.fxml");
+            setPane(Screens.EVENT_WINDOW);
         } catch (IOException e) {
             editEvent = null;
             ShowAlerts.displayMessage("Window Error", "Could not load window\n" + e.getMessage(), Alert.AlertType.ERROR);
@@ -457,7 +456,7 @@ public class MainWindowController extends Controller {
     private void printEvent(Event event){
         eventToPrint = event;
         try {
-            setPane("Print Event.fxml");
+            setPane(Screens.PRINT_EVENT);
         } catch (IOException e) {
             eventToPrint = null;
             throw new RuntimeException(e);
