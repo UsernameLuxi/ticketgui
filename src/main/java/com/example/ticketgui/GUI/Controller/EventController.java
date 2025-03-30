@@ -200,7 +200,6 @@ public class EventController extends Controller {
 
     @FXML
     private void saveEvent(ActionEvent actionEvent) {
-        // TODO : lav tjek på tidspunkt at den er valid
         // TODO : lav tjek på lokationen - måske eller på et tidspunkt brug google maps api?
         String name = txtEventName.getText();
         String desc = txtEventDesc.getText();
@@ -220,7 +219,14 @@ public class EventController extends Controller {
         }
 
         String street = txtGade.getText().trim();
-        Location location = new Location(-1, postInt, street.trim()); // TODO : tjek lige om den allerede er i db!
+        Location location = null;
+        try {
+            location = getLocation(postInt, street.trim());
+        } catch (Exception e) {
+            lblFeedback.setText("Could not fetch location from database. Try again later!");
+            lblFeedback.setStyle("-fx-text-fill: red");
+            return;
+        }
 
         // pris
         try {
@@ -234,6 +240,9 @@ public class EventController extends Controller {
         }
 
         //String dateTime = datePicker.getValue().toString() + " (" + txtTime.getText() + ")";
+        if (!verifyTime(txtTime.getText()) || !verifyTime(txtTimeEnd.getText())){
+            // todo : ikke valid tid gør noget
+        }
         String dateTime = datePicker.getValue().getDayOfMonth() + "-"+ datePicker.getValue().getMonthValue() + "-" + datePicker.getValue().getYear() + " (" + txtTime.getText() + ")";
         String dateTimeEnd = datePickerEnd.getValue().getDayOfMonth() + "-"+ datePickerEnd.getValue().getMonthValue() + "-" + datePickerEnd.getValue().getYear() + " (" + txtTimeEnd.getText() + ")";
 
@@ -273,6 +282,19 @@ public class EventController extends Controller {
         }
     }
 
+    private Location getLocation(int postInt, String street) throws Exception {
+        List<Location> locationList = manager.getLocationModel().getLocations().getOrDefault(postInt, new ArrayList<>());
+        if (!locationList.isEmpty()){
+            for (Location loc : locationList){
+                if (loc.getStreet().equalsIgnoreCase(street)){
+                    return loc;
+                }
+            }
+
+        }
+        return new Location(-1, postInt, street);
+    }
+
     @FXML
     private void addKoor(ActionEvent actionEvent) {
         User selUser = lstUnassigned.getSelectionModel().getSelectedItem();
@@ -298,6 +320,27 @@ public class EventController extends Controller {
                 lstEventUser.getItems().remove(selUser);
             }
         }
+    }
+    
+    private boolean verifyTime(String time){
+        String[] timeArr = time.split(":");
+        if (timeArr.length != 2){
+            return false;
+        }
+        try{
+            int hours = Integer.parseInt(timeArr[0]);
+            int minutes = Integer.parseInt(timeArr[1]);
+            if (hours >= 24 || hours < 0){
+                return false;
+            }
+            if (minutes >= 60 || minutes < 0){
+                return false;
+            }
+        }
+        catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
     public void setEdit(Event event){

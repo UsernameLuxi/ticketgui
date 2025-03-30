@@ -68,6 +68,7 @@ public class PrintEventController extends Controller {
 
         fillMap(windowContent, width, height);
 
+        /*
         btnPrint.setOnAction(event -> {
             try {
                 printTicket();
@@ -75,8 +76,11 @@ public class PrintEventController extends Controller {
                 throw new RuntimeException(e);
             }
         });
+
+         */
     }
 
+    /*
     private void printTicket() throws WriterException, IOException {
         String data = editEvent.getId() + "-" + "salgId???";
         BitMatrix bitMatrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, 200, 200);
@@ -98,6 +102,7 @@ public class PrintEventController extends Controller {
 
         document.close();
     }
+     */
 
     public void fillMap(List<Region> items, double width, double height){
         for (Region item : items) {

@@ -16,7 +16,7 @@ public class Ticket {
         eventTitle = e.getName();
         description = e.getDescription();
         startDate = e.getDateTime();
-        // endDate = e.getEndDate; <- ikke lavet endnu men den kommer
+        endDate = e.getEndDateTime();
         location = e.getLocation();
 
     }
