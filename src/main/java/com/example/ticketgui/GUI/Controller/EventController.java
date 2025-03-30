@@ -4,6 +4,7 @@ import com.example.ticketgui.BE.*;
 import com.example.ticketgui.GUI.ControllerManager;
 import com.example.ticketgui.GUI.Model.EventModel;
 import com.example.ticketgui.GUI.util.ShowAlerts;
+import com.example.ticketgui.GUI.util.VerifyTime;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -240,7 +241,7 @@ public class EventController extends Controller {
         }
 
         //String dateTime = datePicker.getValue().toString() + " (" + txtTime.getText() + ")";
-        if (!verifyTime(txtTime.getText()) || !verifyTime(txtTimeEnd.getText())){
+        if (!VerifyTime.verifyTime(txtTime.getText()) || !VerifyTime.verifyTime(txtTimeEnd.getText())){
             // todo : ikke valid tid gør noget
         }
         String dateTime = datePicker.getValue().getDayOfMonth() + "-"+ datePicker.getValue().getMonthValue() + "-" + datePicker.getValue().getYear() + " (" + txtTime.getText() + ")";
@@ -320,27 +321,6 @@ public class EventController extends Controller {
                 lstEventUser.getItems().remove(selUser);
             }
         }
-    }
-    
-    private boolean verifyTime(String time){
-        String[] timeArr = time.split(":");
-        if (timeArr.length != 2){
-            return false;
-        }
-        try{
-            int hours = Integer.parseInt(timeArr[0]);
-            int minutes = Integer.parseInt(timeArr[1]);
-            if (hours >= 24 || hours < 0){
-                return false;
-            }
-            if (minutes >= 60 || minutes < 0){
-                return false;
-            }
-        }
-        catch (Exception e){
-            return false;
-        }
-        return true;
     }
 
     public void setEdit(Event event){
