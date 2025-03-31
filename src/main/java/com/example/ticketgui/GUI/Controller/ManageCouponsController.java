@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
@@ -39,7 +40,7 @@ public class ManageCouponsController extends Controller {
     @FXML
     private Label lblDate;
     @FXML
-    private TableView tblCoupons;
+    private TableView<Coupon> tblCoupons;
     @FXML
     private Label lblCouponsTable;
     @FXML
@@ -58,6 +59,10 @@ public class ManageCouponsController extends Controller {
     private DatePicker txtExpirDate;
     @FXML
     private Label txtFeedback;
+    @FXML
+    private TableColumn<Coupon, String> colTitle;
+    @FXML
+    private TableColumn<Coupon, String> colExpir;
 
     @Override
     // samme koncept som i main controlleren
@@ -101,6 +106,16 @@ public class ManageCouponsController extends Controller {
             }
         } catch (Exception e) {
             ShowAlerts.displayMessage("Event loading", "Could not fetch database information\n" + e.getMessage(), Alert.AlertType.ERROR);
+        }
+
+        try {
+            colTitle.setCellValueFactory(new PropertyValueFactory<>("name"));
+            colExpir.setCellValueFactory(new PropertyValueFactory<>("expiryDate"));
+
+            tblCoupons.getItems().clear();
+            tblCoupons.getItems().addAll(couponModel.getCoupons());
+        } catch (Exception e) {
+            ShowAlerts.displayMessage("Coupon Loading", "Could not fetch database information\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 

@@ -32,8 +32,8 @@
       </Label>
       <TableView fx:id="tblCoupons" layoutX="1195.0" layoutY="141.0" prefHeight="720.0" prefWidth="680.0">
         <columns>
-          <TableColumn prefWidth="441.5999755859375" text="Title" />
-          <TableColumn minWidth="0.0" prefWidth="175.199951171875" text="Expiration date" />
+          <TableColumn fx:id="colTitle" prefWidth="441.5999755859375" text="Title" />
+          <TableColumn fx:id="colExpir" minWidth="0.0" prefWidth="175.199951171875" text="Expiration date" />
             <TableColumn minWidth="0.0" prefWidth="63.2000732421875" text="Print" />
         </columns>
       </TableView>

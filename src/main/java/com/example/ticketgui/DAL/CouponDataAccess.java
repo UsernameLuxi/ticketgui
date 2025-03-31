@@ -1,18 +1,37 @@
 package com.example.ticketgui.DAL;
 
 import com.example.ticketgui.BE.Coupon;
+import com.example.ticketgui.BE.Event;
 import com.example.ticketgui.DAL.Interfaces.ICouponAccess;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CouponDataAccess implements ICouponAccess {
     @Override
     public List<Coupon> getAll() throws Exception {
-        return List.of();
+        String sql = """
+                SELECT Cupons.ID, Cupons.Name, Cupons.Price, Cupons.Expirationdate, Events.ID, Events.Name
+                FROM Cupons
+                INNER JOIN Events ON Events.ID = Cupons.ID;
+                """; // måske lave om
+        DBConnector db = new DBConnector();
+        try(Connection conn = db.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+            List<Coupon> coupons = new ArrayList<Coupon>();
+            while(rs.next()) {
+                Coupon c = new Coupon(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), new Event(rs.getInt(5), rs.getString(6)));
+                coupons.add(c);
+            }
+
+            return coupons;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
     @Override
