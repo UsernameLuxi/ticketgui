@@ -5,21 +5,20 @@ public class Coupon {
     private String name; // eller titel - det kommer an på hvordan man ser på det
     private int price;
     private String expiryDate;
-    private int eventID = 0;
+    private Event event = null;
 
-    public Coupon(int id, String name, int price, String expiryDate, int eventID) {
+    public Coupon(int id, String name, int price, String expiryDate, Event event) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.expiryDate = expiryDate;
-        this.eventID = eventID;
+        this.event = event;
     }
 
-    public Coupon(String name, int price, String expiryDate, int eventID) {
+    public Coupon(String name, int price, String expiryDate) {
         this.name = name;
         this.price = price;
         this.expiryDate = expiryDate;
-        this.eventID = eventID;
     }
 
     public int getId(){
@@ -50,11 +49,11 @@ public class Coupon {
         this.expiryDate = expiryDate;
     }
 
-    public int getEventID() {
-        return eventID;
+    public Event getEvent() {
+        return event;
     }
 
-    public void setEventID(int eventID) {
-        this.eventID = eventID;
+    public void setEvent(Event event) {
+        this.event = event;
     }
 }

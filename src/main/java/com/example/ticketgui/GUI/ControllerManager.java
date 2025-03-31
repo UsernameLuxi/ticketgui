@@ -2,6 +2,7 @@ package com.example.ticketgui.GUI;
 
 import com.example.ticketgui.BE.User;
 import com.example.ticketgui.GUI.Controller.IController;
+import com.example.ticketgui.GUI.Model.CouponModel;
 import com.example.ticketgui.GUI.Model.EventModel;
 import com.example.ticketgui.GUI.Model.LocationModel;
 import com.example.ticketgui.GUI.Model.UserModel;
@@ -22,6 +23,7 @@ public class ControllerManager {
     private EventModel eventModel;
     private UserModel userModel;
     private LocationModel locationModel;
+    private CouponModel couponModel;
     // TODO : overvej om currentUser skal være static -> btw det skal den ikke lav lige om tak
     private static User currentUser = null; // null -> igen logget ind ;)
     private Stage rootstage;
@@ -38,10 +40,12 @@ public class ControllerManager {
             eventModel = new EventModel();
             userModel = new UserModel();
             locationModel = new LocationModel();
+            couponModel = new CouponModel();
 
             userModel.loadUsersDB();
             userModel.loadEventKoordinatorsDB();
             locationModel.loadLocations();
+            couponModel.loadCoupons();
         } catch (Exception e) {
             ShowAlerts.displayMessage("Load", "Could not fetch database information!\n" + e.getMessage(), Alert.AlertType.ERROR);
             //System.out.println(e.getMessage());
@@ -91,6 +95,9 @@ public class ControllerManager {
     }
     public LocationModel getLocationModel(){
         return locationModel;
+    }
+    public CouponModel getCouponModel(){
+        return couponModel;
     }
 
 }

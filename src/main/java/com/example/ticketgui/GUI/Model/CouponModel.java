@@ -24,4 +24,8 @@ public class CouponModel {
         Coupon c = logic.createCoupon(coupon);
         coupons.add(c);
     }
+
+    public void loadCoupons() throws Exception {
+        getCoupons();
+    }
 }

@@ -25,12 +25,16 @@ public class CouponDataAccess implements ICouponAccess {
             ps.setString(1, coupon.getName());
             ps.setInt(2, coupon.getPrice());
             ps.setString(3, coupon.getExpiryDate());
-            ps.setInt(4, coupon.getEventID());
+            if (coupon.getEvent() == null)
+               ps.setNull(4, java.sql.Types.INTEGER);
+            else
+                ps.setInt(4, coupon.getEvent().getId());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next())
-                return new Coupon(rs.getInt(1), coupon.getName(), coupon.getPrice(), coupon.getExpiryDate(), coupon.getEventID());
+                return new Coupon(rs.getInt(1), coupon.getName(), coupon.getPrice(), coupon.getExpiryDate(), coupon.getEvent());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new Exception(e.getMessage());
         }
         return null;
