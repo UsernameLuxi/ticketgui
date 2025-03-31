@@ -3,6 +3,7 @@ package com.example.ticketgui.GUI;
 import com.example.ticketgui.BE.User;
 import com.example.ticketgui.GUI.Controller.IController;
 import com.example.ticketgui.GUI.Model.EventModel;
+import com.example.ticketgui.GUI.Model.LocationModel;
 import com.example.ticketgui.GUI.Model.UserModel;
 import com.example.ticketgui.GUI.util.Screens;
 import com.example.ticketgui.GUI.util.ShowAlerts;
@@ -17,11 +18,12 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class ControllerManager {
-    // TODO : overvej om alle modellerne skal gemmes her?
+    // modellerne gemmes her
     private EventModel eventModel;
     private UserModel userModel;
-    // TODO : overvej om currentUser skal være static
-    private static User currentUser = null; // null igen logget ind ;)
+    private LocationModel locationModel;
+    // TODO : overvej om currentUser skal være static -> btw det skal den ikke lav lige om tak
+    private static User currentUser = null; // null -> igen logget ind ;)
     private Stage rootstage;
     private IController mainController;
     private boolean resizeTingen = false;
@@ -31,12 +33,15 @@ public class ControllerManager {
         rootstage.setWidth(1920);
         rootstage.setHeight(1080);
 
-        // models?
+        // models
         try {
             eventModel = new EventModel();
             userModel = new UserModel();
+            locationModel = new LocationModel();
+
             userModel.loadUsersDB();
             userModel.loadEventKoordinatorsDB();
+            locationModel.loadLocations();
         } catch (Exception e) {
             ShowAlerts.displayMessage("Load", "Could not fetch database information!\n" + e.getMessage(), Alert.AlertType.ERROR);
             //System.out.println(e.getMessage());
@@ -83,6 +88,9 @@ public class ControllerManager {
     }
     public UserModel getUserModel(){
         return userModel;
+    }
+    public LocationModel getLocationModel(){
+        return locationModel;
     }
 
 }

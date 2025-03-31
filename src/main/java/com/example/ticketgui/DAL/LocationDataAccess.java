@@ -7,13 +7,26 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LocationDataAccess implements IDataAccess<Location> {
-    // TODO : implement
+
     @Override
     public List<Location> getAll() throws Exception {
-        return List.of();
+        String sql = "SELECT ID, PostNummer, Vej FROM Location";
+        DBConnector db = new DBConnector();
+        try(Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            List<Location> list = new ArrayList<Location>();
+            while(rs.next()) {
+                list.add(new Location(rs.getInt(1), rs.getInt(2), rs.getString(3)));
+            }
+            return list;
+        }
+        catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
     @Override
