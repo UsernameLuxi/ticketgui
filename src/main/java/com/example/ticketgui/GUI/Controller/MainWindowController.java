@@ -1,9 +1,6 @@
 package com.example.ticketgui.GUI.Controller;
 
-import com.example.ticketgui.BE.Event;
-import com.example.ticketgui.BE.EventType;
-import com.example.ticketgui.BE.Location;
-import com.example.ticketgui.BE.UserRole;
+import com.example.ticketgui.BE.*;
 import com.example.ticketgui.GUI.ControllerManager;
 import com.example.ticketgui.GUI.util.Screens;
 import com.example.ticketgui.GUI.util.ShowAlerts;
@@ -113,8 +110,6 @@ public class MainWindowController extends Controller {
     @FXML
     private Label lblCupons;
     @FXML
-    private TableView tblCupons;
-    @FXML
     private AnchorPane viewPanel;
     @FXML
     private ImageView imgLogo;
@@ -133,6 +128,16 @@ public class MainWindowController extends Controller {
     @FXML private TableColumn<Event, String> colEdit;
     @FXML private TableColumn<Event, String> colPrint;
     @FXML private TableColumn<Event, String> colDel;
+
+    /**
+     * COUPON TABLE CONTENT
+     */
+    @FXML
+    private TableView<Coupon> tblCupons;
+    @FXML
+    private TableColumn<Coupon, String> colCouponTilte;
+    @FXML
+    private TableColumn<Coupon, Button> colCouponPrint;
 
     /*
     public ScrollPane createScrollpaneForDatapane() {
@@ -325,6 +330,13 @@ public class MainWindowController extends Controller {
             tblEvent.setItems(manager.getEventModel().getEventsForUser(ControllerManager.getCurrentUser()));
         } catch (Exception e) {
             ShowAlerts.displayMessage("Event Error", "Could not fetch events for current user\n" + e.getMessage(), Alert.AlertType.ERROR);
+            //System.out.println(e.getMessage());
+        }
+        try {
+            colCouponTilte.setCellValueFactory(new PropertyValueFactory<>("name"));
+            tblCupons.setItems(manager.getCouponModel().getCoupons());
+        } catch (Exception e) {
+            ShowAlerts.displayMessage("Coupon Error", "Could not fetch coupons for current user\n" + e.getMessage(), Alert.AlertType.ERROR);
             //System.out.println(e.getMessage());
         }
 
