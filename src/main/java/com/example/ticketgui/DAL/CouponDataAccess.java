@@ -15,9 +15,9 @@ public class CouponDataAccess implements ICouponAccess {
     @Override
     public List<Coupon> getAll() throws Exception {
         String sql = """
-                SELECT Cupons.ID, Cupons.Name, Cupons.Price, Cupons.Expirationdate, Events.ID, Events.Name
+                SELECT Cupons.ID, Cupons.Name, Cupons.Price, Cupons.Expirationdate, EventID, Events.Name
                 FROM Cupons
-                INNER JOIN Events ON Events.ID = Cupons.ID;
+                FULL OUTER JOIN Events ON Events.ID = EventID;
                 """; // måske lave om
         DBConnector db = new DBConnector();
         try(Connection conn = db.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
