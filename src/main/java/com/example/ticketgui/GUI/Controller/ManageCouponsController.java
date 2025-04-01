@@ -154,7 +154,14 @@ public class ManageCouponsController extends Controller {
         int price = 0;
         String name = txtcoupon.getText().trim();
         String expire;
-
+        if (txtcoupon.getText().trim().isEmpty()){
+            txtFeedback.setText("Coupon title empty!");
+            return;
+        }
+        if (txtExpirDate.getValue() == null){
+            txtFeedback.setText("Date missing!");
+            return;
+        }
         try{
             price = Integer.parseInt(txtPrice.getText());
         } catch (Exception e) {
