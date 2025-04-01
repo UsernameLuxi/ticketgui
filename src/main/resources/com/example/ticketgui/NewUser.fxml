@@ -15,7 +15,7 @@
 
 <AnchorPane fx:id="newUserPane" prefHeight="972.0" prefWidth="1920.0" styleClass="backgroundOther" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ticketgui.GUI.Controller.UserController">
    <children>
-      <Label layoutX="760.0" layoutY="185.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Brugernavn:">
+      <Label layoutX="760.0" layoutY="185.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Username:">
          <font>
             <Font size="32.0" />
          </font>
@@ -24,17 +24,17 @@
          <font>
             <Font size="24.0" />
          </font></TextField>
-      <Label layoutX="760.0" layoutY="450.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Bruger rolle:">
+      <Label layoutX="760.0" layoutY="450.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="User role:">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <Button layoutX="857.0" layoutY="617.0" mnemonicParsing="false" onAction="#createUser" prefHeight="67.0" prefWidth="185.0" styleClass="normalText" text="Opret bruger">
+      <Button layoutX="857.0" layoutY="617.0" mnemonicParsing="false" onAction="#createUser" prefHeight="67.0" prefWidth="185.0" styleClass="normalText" text="Create user">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Button fx:id="btnBack" alignment="CENTER" layoutX="60.0" layoutY="70.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#loadMain" prefHeight="80.0" prefWidth="210.0" text="Tilbage">
+      <Button fx:id="btnBack" alignment="CENTER" layoutX="60.0" layoutY="70.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#loadMain" prefHeight="80.0" prefWidth="210.0" text="Back">
          <font>
             <Font size="32.0" />
          </font>
@@ -69,15 +69,15 @@
             <Font size="24.0" />
          </font>
       </TextField>
-      <Label layoutX="1290.0" layoutY="160.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Brugere:">
+      <Label layoutX="1290.0" layoutY="160.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Users:">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
       <TableView fx:id="tblBrugere" layoutX="1290.0" layoutY="210.0" prefHeight="614.0" prefWidth="572.0">
         <columns>
-          <TableColumn fx:id="colBrugernavn" prefWidth="427.199951171875" text="Bruger Navn" />
-          <TableColumn fx:id="colRolle" minWidth="0.0" prefWidth="135.199951171875" text="Rolle" />
+          <TableColumn fx:id="colBrugernavn" prefWidth="427.199951171875" text="Username" />
+          <TableColumn fx:id="colRolle" minWidth="0.0" prefWidth="135.199951171875" text="Role" />
         </columns>
       </TableView>
       <Button layoutX="1483.0" layoutY="845.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="67.0" prefWidth="185.0" styleClass="normalText" text="Slet bruger">

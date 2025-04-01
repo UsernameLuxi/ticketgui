@@ -16,7 +16,7 @@
 
 <AnchorPane fx:id="eventPane" prefHeight="972.0" prefWidth="1920.0" styleClass="backgroundOther" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ticketgui.GUI.Controller.EventController">
    <children>
-      <Label layoutX="60.0" layoutY="200.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Event navn:">
+      <Label layoutX="60.0" layoutY="200.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Event name:">
          <font>
             <Font size="32.0" />
          </font>
@@ -25,7 +25,7 @@
          <font>
             <Font size="24.0" />
          </font></TextField>
-      <Label layoutX="60.0" layoutY="320.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Pris:">
+      <Label layoutX="60.0" layoutY="320.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Price:">
          <font>
             <Font size="32.0" />
          </font>
@@ -62,7 +62,7 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <Label layoutX="620.0" layoutY="560.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Beskrivelse:">
+      <Label layoutX="620.0" layoutY="560.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Description">
          <font>
             <Font size="32.0" />
          </font>
@@ -72,7 +72,7 @@
             <Font size="24.0" />
          </font>
       </Button>
-      <Button fx:id="btnBack" alignment="CENTER" layoutX="60.0" layoutY="60.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#loadMain" prefHeight="80.0" prefWidth="210.0" text="Tilbage">
+      <Button fx:id="btnBack" alignment="CENTER" layoutX="60.0" layoutY="60.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#loadMain" prefHeight="80.0" prefWidth="210.0" text="Back">
          <font>
             <Font size="32.0" />
          </font>
@@ -103,12 +103,12 @@
             <Font size="24.0" />
          </font>
       </SplitMenuButton>
-      <Label layoutX="1111.0" layoutY="317.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Tildelte Koordinators:">
+      <Label layoutX="1111.0" layoutY="317.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Assigned:">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <Label layoutX="1511.0" layoutY="317.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Frie Koordinators:">
+      <Label layoutX="1511.0" layoutY="317.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Available:">
          <font>
             <Font size="32.0" />
          </font>
