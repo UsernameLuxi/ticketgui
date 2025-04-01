@@ -71,6 +71,17 @@ public class CouponDataAccess implements ICouponAccess {
 
     @Override
     public void delete(Coupon coupon) throws Exception {
+        String sql = """
+                DELETE FROM Cupons WHERE ID = ?;
+                """;
+        DBConnector db = new DBConnector();
+        try(Connection conn = db.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, coupon.getId());
+            pstmt.executeUpdate();
+        }
+        catch(Exception e) {
+            throw new Exception(e.getMessage());
+        }
 
     }
 }

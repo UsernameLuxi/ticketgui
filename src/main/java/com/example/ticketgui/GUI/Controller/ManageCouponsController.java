@@ -34,8 +34,6 @@ public class ManageCouponsController extends Controller {
     @FXML
     private TextField txtcoupon;
     @FXML
-    private TextField txtDate;
-    @FXML
     private Label lblcoupon;
     @FXML
     private Label lblDate;
@@ -113,7 +111,7 @@ public class ManageCouponsController extends Controller {
             colExpir.setCellValueFactory(new PropertyValueFactory<>("expiryDate"));
 
             tblCoupons.getItems().clear();
-            tblCoupons.getItems().addAll(couponModel.getCoupons());
+            tblCoupons.setItems(couponModel.getCoupons());
         } catch (Exception e) {
             ShowAlerts.displayMessage("Coupon Loading", "Could not fetch database information\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
@@ -172,16 +170,35 @@ public class ManageCouponsController extends Controller {
             couponModel.createCoupon(c);
 
             txtcoupon.setText("");
-            txtDate.setText("");
+            txtExpirDate.setValue(null);
             txtPrice.setText("");
             txtFeedback.setText("Coupon created!");
         }
         catch (Exception e) {
             txtFeedback.setText("Coupon creation failed");
+            System.out.println(e.getMessage());
         }
     }
 
     @FXML
     private void deleteCoupon(ActionEvent actionEvent) {
+        selectedCoupon = tblCoupons.getSelectionModel().getSelectedItem();
+        if (selectedCoupon != null){
+            if (ShowAlerts.displayWarning("Deletion of Coupon", "Are you sure that you want to delete this coupon?:\n" + selectedCoupon.getName())) {
+                try {
+                    couponModel.delete(selectedCoupon);
+                    txtFeedback.setText("Coupon deleted!");
+                } catch (Exception e) {
+                    txtFeedback.setText("Could not delete the coupon. Try again later!");
+                }
+            }
+            else{
+                return;
+            }
+
+        }
+        else{
+            txtFeedback.setText("Select a coupon to delete it!");
+        }
     }
 }

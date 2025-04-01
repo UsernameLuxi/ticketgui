@@ -20,4 +20,8 @@ public class CouponLogic {
     public List<Coupon> getAllCoupons() throws Exception {
         return couponAccess.getAll();
     }
+
+    public void delete(Coupon coupon) throws Exception {
+        couponAccess.delete(coupon);
+    }
 }

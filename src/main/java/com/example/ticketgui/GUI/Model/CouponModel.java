@@ -28,4 +28,14 @@ public class CouponModel {
     public void loadCoupons() throws Exception {
         getCoupons();
     }
+
+    public void delete(Coupon coupon) throws Exception {
+        logic.delete(coupon);
+        for (Coupon c : coupons) { // idk om man kan bruge .remove()
+            if (c.getId() == coupon.getId()) {
+                coupons.remove(c);
+                break;
+            }
+        }
+    }
 }
