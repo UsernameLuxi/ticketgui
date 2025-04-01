@@ -14,7 +14,6 @@ import java.util.List;
 public class EventModel {
     private EventLogic logic;
     private ObservableList<Event> events;
-    private FilteredList<Event> filteredEvents;
     public EventModel() {
         this.logic = new EventLogic();
         events = FXCollections.observableArrayList();
@@ -42,7 +41,6 @@ public class EventModel {
             return events;
         }
         events.addAll(logic.getEventAccess(user));
-        filteredEvents.setAll(events);
         return events;
     }
 
@@ -61,10 +59,5 @@ public class EventModel {
                 break;
             }
         }
-    }
-    public void searchEventTitle(String title){
-        List<Event> filteredEvents = logic.searchEvents(events, title);
-        events.clear();
-        events.addAll(filteredEvents);
     }
 }

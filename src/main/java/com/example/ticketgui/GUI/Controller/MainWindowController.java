@@ -7,6 +7,7 @@ import com.example.ticketgui.GUI.util.ShowAlerts;
 import com.example.ticketgui.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -326,8 +327,36 @@ public class MainWindowController extends Controller {
                 };
             }
         });
+
         try {
-            tblEvent.setItems(manager.getEventModel().getEventsForUser(ControllerManager.getCurrentUser()));
+            List<EventType> eventTypes = manager.getEventModel().getEventTypes();
+            cbEventType.getItems().clear();
+            MenuItem none = new MenuItem("None");
+            none.setOnAction(event -> {
+                cbEventType.setText("None");
+            });
+            for (EventType eventType : eventTypes) {
+                MenuItem item = new MenuItem(eventType.getName());
+                item.setOnAction(event -> {
+                    cbEventType.setText(eventType.getName());
+                    cbEventType.fire();
+                });
+                cbEventType.getItems().add(item);
+            }
+        } catch (Exception e) {
+            ShowAlerts.displayMessage("Event Types Error", "Could not fetch event type\n" + e.getMessage(), Alert.AlertType.ERROR);
+        }
+
+        try {
+            FilteredList<Event> filteredEvents = new FilteredList<>(manager.getEventModel().getEventsForUser(ControllerManager.getCurrentUser()), e -> true);
+            txtEventTitle.textProperty().addListener((observable, oldValue, newValue) -> {
+                filteredEvents.setPredicate(event -> verifyEvent(event, newValue));
+
+            });
+            cbEventType.setOnAction(event -> {
+                filteredEvents.setPredicate(e -> verifyEvent(e, txtEventTitle.getText()));
+            });
+            tblEvent.setItems(filteredEvents);
         } catch (Exception e) {
             ShowAlerts.displayMessage("Event Error", "Could not fetch events for current user\n" + e.getMessage(), Alert.AlertType.ERROR);
             //System.out.println(e.getMessage());
@@ -487,5 +516,20 @@ public class MainWindowController extends Controller {
     @FXML
     private void toMainMenu(MouseEvent mouseEvent) {
         reload();
+    }
+    private boolean verifyEvent(Event event, String query) {
+        if (!event.getEventType().getName().equals(cbEventType.getText()) && !cbEventType.getText().equals("None")){
+            return false;
+        }
+
+        if (query == null || query.isEmpty()) {
+            return true;
+        }
+        String lowerCaseFilter = query.toLowerCase();
+        if (event.getName().toLowerCase().contains(lowerCaseFilter)) {
+            return true;
+        }
+        return false;
+
     }
 }

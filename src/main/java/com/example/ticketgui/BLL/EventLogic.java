@@ -3,7 +3,6 @@ package com.example.ticketgui.BLL;
 import com.example.ticketgui.BE.Event;
 import com.example.ticketgui.BE.EventType;
 import com.example.ticketgui.BE.User;
-import com.example.ticketgui.BLL.util.SearchFilter;
 import com.example.ticketgui.DAL.EventDataAccess;
 import com.example.ticketgui.DAL.EventTypeDataAccess;
 import com.example.ticketgui.DAL.Interfaces.IDataAccess;
@@ -41,8 +40,5 @@ public class EventLogic {
     }
     public void updateEvent(Event event) throws Exception{
         eventDataAccess.update(event);
-    }
-    public List<Event> searchEvents(List<Event> events, String query)  {
-        return SearchFilter.searchEvents(events, query);
     }
 }
