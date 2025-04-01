@@ -24,4 +24,8 @@ public class CouponLogic {
     public void delete(Coupon coupon) throws Exception {
         couponAccess.delete(coupon);
     }
+
+    public void update(Coupon coupon) throws Exception {
+        couponAccess.update(coupon);
+    }
 }

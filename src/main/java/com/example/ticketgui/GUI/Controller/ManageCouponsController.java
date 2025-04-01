@@ -12,14 +12,12 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ManageCouponsController extends Controller {
     private ControllerManager manager;
@@ -112,6 +110,17 @@ public class ManageCouponsController extends Controller {
 
             tblCoupons.getItems().clear();
             tblCoupons.setItems(couponModel.getCoupons());
+
+            /*
+            tblCoupons.getSelectionModel().selectedItemProperty().addListener((observable, oldVal, newVal) -> {
+                        setCoupon(newVal);
+                    });
+
+             */
+            tblCoupons.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                Coupon select =  tblCoupons.getSelectionModel().getSelectedItem();
+                setCoupon(select);
+            });
         } catch (Exception e) {
             ShowAlerts.displayMessage("Coupon Loading", "Could not fetch database information\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
@@ -185,6 +194,33 @@ public class ManageCouponsController extends Controller {
             txtFeedback.setText("Coupon creation failed");
             System.out.println(e.getMessage());
         }
+    }
+
+    private void setCoupon(Coupon coupon){
+        if (selectedCoupon != null && selectedCoupon.getId() == coupon.getId()){
+            selectedCoupon = null;
+            tblCoupons.getSelectionModel().clearSelection();
+            txtExpirDate.setValue(null);
+            txtPrice.setText("");
+            txtcoupon.setText("");
+            return;
+        }
+        selectedCoupon = coupon;
+        txtcoupon.setText(coupon.getName());
+        txtPrice.setText(coupon.getPrice() + "");
+        smbEvents.setText(coupon.getEvent() == null ? "All events" : coupon.getEvent().getName());
+
+        String[] date = coupon.getExpiryDate().split("-");
+        try {
+            int year = Integer.parseInt(date[2]);
+            int month = Integer.parseInt(date[1]);
+            int day = Integer.parseInt(date[0]);
+
+            txtExpirDate.setValue(LocalDate.of(year, month, day));
+        } catch (NumberFormatException e) {
+            ShowAlerts.displayMessage("Event Error", "Could not read the date!\n" + e.getMessage(), Alert.AlertType.ERROR);
+        }
+
     }
 
     @FXML

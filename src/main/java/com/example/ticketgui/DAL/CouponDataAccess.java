@@ -66,6 +66,25 @@ public class CouponDataAccess implements ICouponAccess {
 
     @Override
     public void update(Coupon coupon) throws Exception {
+        String sql = """
+                UPDATE Cupons SET Name = ?, Price = ?, Expirationdate = ?, EventID = ? WHERE ID = ?;
+                """;
+        DBConnector db = new DBConnector();
+        try(Connection conn = db.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, coupon.getName());
+            stmt.setInt(2, coupon.getPrice());
+            stmt.setString(3, coupon.getExpiryDate());
+            if (coupon.getEvent() == null)
+                stmt.setNull(4, java.sql.Types.INTEGER);
+            else
+                stmt.setInt(4, coupon.getEvent().getId());
+
+            stmt.setInt(5, coupon.getId());
+            stmt.executeUpdate();
+        }
+        catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
 
     }
 

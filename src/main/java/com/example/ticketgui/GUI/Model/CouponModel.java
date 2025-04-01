@@ -29,6 +29,18 @@ public class CouponModel {
         getCoupons();
     }
 
+    public void updateCoupon(Coupon coupon) throws Exception {
+        logic.update(coupon);
+
+        for (Coupon c : coupons) {
+            if (c.getId() == coupon.getId()) {
+                coupons.remove(c);
+                coupons.add(coupon);
+                break;
+            }
+        }
+    }
+
     public void delete(Coupon coupon) throws Exception {
         logic.delete(coupon);
         for (Coupon c : coupons) { // idk om man kan bruge .remove()
