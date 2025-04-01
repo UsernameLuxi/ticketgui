@@ -517,6 +517,7 @@ public class MainWindowController extends Controller {
     private void toMainMenu(MouseEvent mouseEvent) {
         reload();
     }
+    //TODO: Empty tableview -> behold stregerne
     private boolean verifyEvent(Event event, String query) {
         if (!event.getEventType().getName().equals(cbEventType.getText()) && !cbEventType.getText().equals("None")){
             return false;
