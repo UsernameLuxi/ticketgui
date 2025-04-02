@@ -200,6 +200,7 @@ public class ManageCouponsController extends Controller {
             txtcoupon.setText("");
             txtExpirDate.setValue(null);
             txtPrice.setText("");
+            selectedCoupon = null;
         }
         catch (Exception e) {
             txtFeedback.setText("Coupon creation failed");
