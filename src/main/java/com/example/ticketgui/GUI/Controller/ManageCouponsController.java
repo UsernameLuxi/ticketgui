@@ -183,12 +183,23 @@ public class ManageCouponsController extends Controller {
         c.setEvent(currentEvent);
 
         try{
-            couponModel.createCoupon(c);
+            if (selectedCoupon == null){
+                couponModel.createCoupon(c);
+                txtFeedback.setText("Coupon created!");
+            }
+            else{
+                selectedCoupon.setEvent(c.getEvent());
+                selectedCoupon.setPrice(c.getPrice());
+                selectedCoupon.setName(c.getName());
+                selectedCoupon.setExpiryDate(c.getExpiryDate());
+                couponModel.updateCoupon(selectedCoupon);
+                txtFeedback.setText("Coupon: " + selectedCoupon.getName() + " -> updated!");
+            }
+
 
             txtcoupon.setText("");
             txtExpirDate.setValue(null);
             txtPrice.setText("");
-            txtFeedback.setText("Coupon created!");
         }
         catch (Exception e) {
             txtFeedback.setText("Coupon creation failed");
@@ -203,11 +214,13 @@ public class ManageCouponsController extends Controller {
             txtExpirDate.setValue(null);
             txtPrice.setText("");
             txtcoupon.setText("");
+            currentEvent = null;
             return;
         }
         selectedCoupon = coupon;
         txtcoupon.setText(coupon.getName());
         txtPrice.setText(coupon.getPrice() + "");
+        currentEvent = coupon.getEvent();
         smbEvents.setText(coupon.getEvent().getName() == null ? "All events" : coupon.getEvent().getName());
 
         String[] date = coupon.getExpiryDate().split("-");
