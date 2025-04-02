@@ -7,7 +7,6 @@ import com.example.ticketgui.BE.UserRole;
 import com.example.ticketgui.BLL.EventLogic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -60,6 +59,10 @@ public class EventModel {
                 break;
             }
         }
+    }
+
+    public int incrementSale(Event event) throws Exception {
+        return logic.incrementSale(event);
     }
 
     public int getEventsForThisMonth(){
