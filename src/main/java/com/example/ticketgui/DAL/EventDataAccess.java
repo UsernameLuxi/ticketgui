@@ -231,34 +231,31 @@ public class EventDataAccess implements IEventDataAccess {
 
     @Override
     public int incrementSale(Event event) throws Exception {
-        String sql = "UPDATE Events SET Sales = ? WHERE ID = ?";
+        String updateSql = "UPDATE Events SET Sales = Sales + 1 WHERE ID = ?";
+        String selectSql = "SELECT Sales FROM Events WHERE ID = ?";
         DBConnector db = new DBConnector();
-        int newCount = getSales(event) + 1;
-        try(Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
-            ps.setInt(1, newCount);
-            ps.setInt(2, event.getId());
-            ps.executeUpdate();
-            return newCount;
-        }
-        catch (Exception e) {
+
+        try (Connection conn = db.getConnection();
+             PreparedStatement updatePs = conn.prepareStatement(updateSql);
+             PreparedStatement selectPs = conn.prepareStatement(selectSql)) {
+
+            updatePs.setInt(1, event.getId());
+            int rowsAffected = updatePs.executeUpdate();
+
+            if (rowsAffected > 0) {
+                selectPs.setInt(1, event.getId());
+                try (ResultSet rs = selectPs.executeQuery()) {
+                    if (rs.next()) {
+                        return rs.getInt("Sales");
+                    }
+                }
+            } else {
+                throw new Exception("No rows updated, event not found");
+            }
+        } catch (Exception e) {
             throw new Exception("Couldn't increment sales: " + e.getMessage());
         }
-    }
 
-    @Override
-    public int getSales(Event event) throws Exception {
-        String sql = "SELECT Sales FROM Events WHERE ID = ?";
-        DBConnector db = new DBConnector();
-        try(Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)){
-            ps.setInt(1, event.getId());
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()){
-                return rs.getInt(1);
-            }
-        }catch (Exception e) {
-            throw new Exception("Couldn't retrieve sales: " + e.getMessage());
-        }
-
-        return -1;
+        throw new Exception("Sales value not found");
     }
 }
