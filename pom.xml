@@ -51,7 +51,7 @@
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>io</artifactId>
-            <version>9.1.0</version>
+            <version>8.0.2</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.itextpdf/layout -->
         <dependency>
