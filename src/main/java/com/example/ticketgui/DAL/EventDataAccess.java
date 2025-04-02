@@ -249,10 +249,9 @@ public class EventDataAccess implements IEventDataAccess {
     public int getSales(Event event) throws Exception {
         String sql = "SELECT Sales FROM Events WHERE ID = ?";
         DBConnector db = new DBConnector();
-        try(Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+        try(Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setInt(1, event.getId());
-            ps.executeQuery();
-            ResultSet rs = ps.getGeneratedKeys();
+            ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 return rs.getInt(1);
             }
