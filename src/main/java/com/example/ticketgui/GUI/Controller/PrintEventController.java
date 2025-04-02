@@ -2,6 +2,7 @@ package com.example.ticketgui.GUI.Controller;
 
 import com.example.ticketgui.BE.Event;
 import com.example.ticketgui.GUI.ControllerManager;
+import com.example.ticketgui.GUI.Model.EventModel;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
@@ -29,6 +30,8 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +40,7 @@ import java.util.Map;
 public class PrintEventController extends Controller {
     private ControllerManager manager;
     private IController root;
+    private EventModel model;
     private Event editEvent = null;
     private Map<Region, List<Double>> windowItems = new HashMap<>();
     private Map<ImageView, List<Double>> imageViews = new HashMap<>();
@@ -53,6 +57,7 @@ public class PrintEventController extends Controller {
     @Override
     public void initializeComponents(double width, double height) {
         List<Region> windowContent = new ArrayList<>();
+        model = manager.getEventModel();
         // fordi der ikke er nogle sub-panes - så kan dette gøres ;)
         for (Node n : printEvent.getChildren()){
             if (n instanceof Region r){
@@ -72,7 +77,7 @@ public class PrintEventController extends Controller {
         btnPrint.setOnAction(event -> {
             try {
                 printTicket();
-            } catch (WriterException | IOException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         });
@@ -81,8 +86,12 @@ public class PrintEventController extends Controller {
     }
 
 
-    private void printTicket() throws WriterException, IOException {
-        String data = editEvent.getId() + "-" + "salgId???";
+    private void printTicket() throws Exception {
+        int sales = model.incrementSale(editEvent);
+        String data = editEvent.getId() + "-" + sales;
+
+        Files.deleteIfExists(Path.of("QRCode.pdf"));
+
         BitMatrix bitMatrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, 200, 200);
         BufferedImage qrImage = MatrixToImageWriter.toBufferedImage(bitMatrix);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -94,11 +103,11 @@ public class PrintEventController extends Controller {
         PdfDocument pdf = new PdfDocument(writer);
         Document document = new Document(pdf);
 
-        document.add(new Paragraph("et eller andet tekst").setBold().setFontSize(14));
+        document.add(new Paragraph(editEvent.getName()).setBold().setFontSize(14));
         ImageData imageData = ImageDataFactory.create(qrImageBytes);
         Image qrCodeImage = new Image(imageData);
         document.add(qrCodeImage);
-        document.add(new Paragraph("sovs 2").setItalic().setFontSize(12));
+        document.add(new Paragraph("Billet ID: " + String.valueOf(sales)).setItalic().setFontSize(12));
 
         document.close();
     }

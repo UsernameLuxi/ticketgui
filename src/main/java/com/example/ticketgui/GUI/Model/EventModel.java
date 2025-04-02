@@ -59,4 +59,8 @@ public class EventModel {
             }
         }
     }
+
+    public int incrementSale(Event event) throws Exception {
+        return logic.incrementSale(event);
+    }
 }

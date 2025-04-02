@@ -228,4 +228,38 @@ public class EventDataAccess implements IEventDataAccess {
         }
         return eventList;
     }
+
+    @Override
+    public int incrementSale(Event event) throws Exception {
+        String sql = "UPDATE Events SET Sales = ? WHERE ID = ?";
+        DBConnector db = new DBConnector();
+        int newCount = getSales(event) + 1;
+        try(Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+            ps.setInt(1, newCount);
+            ps.setInt(2, event.getId());
+            ps.executeUpdate();
+            return newCount;
+        }
+        catch (Exception e) {
+            throw new Exception("Couldn't increment sales: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public int getSales(Event event) throws Exception {
+        String sql = "SELECT Sales FROM Events WHERE ID = ?";
+        DBConnector db = new DBConnector();
+        try(Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+            ps.setInt(1, event.getId());
+            ps.executeQuery();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()){
+                return rs.getInt(1);
+            }
+        }catch (Exception e) {
+            throw new Exception("Couldn't retrieve sales: " + e.getMessage());
+        }
+
+        return -1;
+    }
 }

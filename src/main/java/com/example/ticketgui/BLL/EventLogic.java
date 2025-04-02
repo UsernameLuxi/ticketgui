@@ -41,4 +41,8 @@ public class EventLogic {
     public void updateEvent(Event event) throws Exception{
         eventDataAccess.update(event);
     }
+
+    public int incrementSale(Event event) throws Exception{
+        return eventDataAccess.incrementSale(event);
+    }
 }
