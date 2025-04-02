@@ -298,6 +298,7 @@ public class MainWindowController extends Controller {
                             delButton.setOnAction((event) -> {
                                 Event e = getTableView().getItems().get(getIndex());
                                 removeEvent(e);
+                                loadDataObjects();
                             });
                             setGraphic(delButton);
                         }
@@ -368,6 +369,8 @@ public class MainWindowController extends Controller {
             ShowAlerts.displayMessage("Coupon Error", "Could not fetch coupons for current user\n" + e.getMessage(), Alert.AlertType.ERROR);
             //System.out.println(e.getMessage());
         }
+
+        loadDataObjects();
 
     }
 
@@ -456,6 +459,7 @@ public class MainWindowController extends Controller {
     @Override
     public void reload() {
         viewPanel.getChildren().setAll(mainContent);
+        loadDataObjects();
     }
 
     @FXML
@@ -532,5 +536,12 @@ public class MainWindowController extends Controller {
         }
         return false;
 
+    }
+
+    private void loadDataObjects(){
+        lblData1data.setText(tblEvent.getItems().size() + "");
+
+
+        lblData4data.setText(tblCupons.getItems().size() + "");
     }
 }
