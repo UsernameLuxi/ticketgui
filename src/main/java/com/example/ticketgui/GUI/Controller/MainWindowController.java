@@ -540,8 +540,8 @@ public class MainWindowController extends Controller {
 
     private void loadDataObjects(){
         lblData1data.setText(tblEvent.getItems().size() + "");
-
-
+        lblData2data.setText(manager.getEventModel().getEventsForThisMonth() + "");
+        lblData3data.setText(manager.getEventModel().getEventsForThisWeek() + "");
         lblData4data.setText(tblCupons.getItems().size() + "");
     }
 }
