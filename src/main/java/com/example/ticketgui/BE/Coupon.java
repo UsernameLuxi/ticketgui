@@ -61,4 +61,9 @@ public class Coupon {
     public void setEvent(Event event) {
         this.event = event;
     }
+
+    @Override
+    public String toString(){
+        return name;
+    }
 }

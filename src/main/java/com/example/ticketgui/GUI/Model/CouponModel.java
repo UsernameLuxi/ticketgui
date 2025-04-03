@@ -5,6 +5,8 @@ import com.example.ticketgui.BLL.CouponLogic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.List;
+
 public class CouponModel {
     private ObservableList<Coupon> coupons;
     private CouponLogic logic;
@@ -49,5 +51,9 @@ public class CouponModel {
                 break;
             }
         }
+    }
+
+    public List<Coupon> getCouponsByEventID(int id) throws Exception {
+        return logic.getCouponsByEventID(id);
     }
 }
