@@ -42,6 +42,7 @@ public class PrintEventController extends Controller {
     private IController root;
     private EventModel model;
     private Event editEvent = null;
+    private int totalPrice = 0;
     private Map<Region, List<Double>> windowItems = new HashMap<>();
     private Map<ImageView, List<Double>> imageViews = new HashMap<>();
     @FXML
@@ -52,6 +53,10 @@ public class PrintEventController extends Controller {
     private Button btnPrint;
     @FXML
     private Label txtEvent;
+    @FXML
+    private Label lblPrice;
+    @FXML
+    private Label lblTotPrice;
 
 
     @Override
@@ -82,7 +87,9 @@ public class PrintEventController extends Controller {
             }
         });
 
-
+        lblPrice.setText("Event price: " + editEvent.getPrice());
+        totalPrice = editEvent.getPrice();
+        lblTotPrice.setText("Total price: " + totalPrice);
     }
 
 
@@ -146,6 +153,6 @@ public class PrintEventController extends Controller {
 
     public void setEvent(Event event) {
         editEvent = event;
-        txtEvent.setText("Event/Cuponer: " + event.getName());
+        txtEvent.setText("Event: " + event.getName());
     }
 }
