@@ -3,6 +3,7 @@ package com.example.ticketgui.GUI.Controller;
 import com.example.ticketgui.BE.Coupon;
 import com.example.ticketgui.BE.Event;
 import com.example.ticketgui.BE.Ticket;
+import com.example.ticketgui.BE.User;
 import com.example.ticketgui.GUI.ControllerManager;
 import com.example.ticketgui.GUI.Model.EventModel;
 import com.example.ticketgui.GUI.util.ShowAlerts;
@@ -18,12 +19,14 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.properties.HorizontalAlignment;
 import com.itextpdf.layout.properties.TextAlignment;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
@@ -64,6 +67,26 @@ public class PrintEventController extends Controller {
     private Label lblPrice;
     @FXML
     private Label lblTotPrice;
+
+    /**
+     * Available Coupons Table
+     */
+    @FXML
+    private TableView<Coupon> tblCouponsAvailable;
+    @FXML
+    private TableColumn<Coupon, Integer> colAvailPrice;
+    @FXML
+    private TableColumn<Coupon, String> colAvailTitle;
+
+    /**
+     * Selected Coupons Table
+     */
+    @FXML
+    private TableView<Coupon> tblCouponsSelected;
+    @FXML
+    private TableColumn<Coupon, String> colSelectTitle;
+    @FXML
+    private TableColumn<Coupon, Integer> colSelectPrice;
 
 
     @Override
@@ -201,9 +224,54 @@ public class PrintEventController extends Controller {
     private void loadCouponsForEvent(Event event){
         try {
             List<Coupon> coupons = manager.getCouponModel().getCouponsByEventID(event.getId());
+            loadCouponsAvailable(coupons);
+            loadCouponsSelected(new ArrayList<>());
 
         } catch (Exception e) {
             ShowAlerts.displayMessage("Coupon Error", "Database error:\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
+    }
+
+    @FXML
+    private void addCoupon(ActionEvent actionEvent) {
+        Coupon selCoupon = tblCouponsAvailable.getSelectionModel().getSelectedItem();
+        if (selCoupon != null && !selCoupon.getName().isEmpty()) {
+            tblCouponsSelected.getItems().add(selCoupon);
+            tblCouponsAvailable.getItems().remove(selCoupon);
+            totalPrice += selCoupon.getPrice();
+            lblTotPrice.setText("Total price: " + totalPrice);
+            if (tblCouponsAvailable.getItems().isEmpty()) {
+                tblCouponsAvailable.getItems().add(new Coupon("", 0, ""));
+            }
+        }
+    }
+
+    @FXML
+    private void removeEvent(ActionEvent actionEvent){
+        Coupon selCoupon = tblCouponsSelected.getSelectionModel().getSelectedItem();
+        if (selCoupon != null){
+            if (tblCouponsAvailable.getItems().getFirst().getName().isEmpty()){
+                tblCouponsAvailable.getItems().clear();
+            }
+            tblCouponsAvailable.getItems().add(selCoupon);
+            tblCouponsSelected.getItems().remove(selCoupon);
+            totalPrice -= selCoupon.getPrice();
+            lblTotPrice.setText("Total price: " + totalPrice);
+        }
+    }
+
+    private void loadCouponsAvailable(List<Coupon> coupons) {
+        colAvailPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        colAvailTitle.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tblCouponsAvailable.setItems(FXCollections.observableArrayList());
+        tblCouponsAvailable.getItems().addAll(coupons);
+
+    }
+    private void loadCouponsSelected(List<Coupon> coupons) {
+        colSelectPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        colSelectTitle.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tblCouponsSelected.setItems(FXCollections.observableArrayList());
+        tblCouponsSelected.getItems().addAll(coupons);
+
     }
 }

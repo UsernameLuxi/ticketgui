@@ -48,11 +48,37 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TableView layoutX="1580.0" layoutY="230.0" prefHeight="200.0" prefWidth="200.0" visible="false">
+      <TableView fx:id="tblCouponsAvailable" layoutX="1653.0" layoutY="238.0" prefHeight="302.0" prefWidth="235.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Coupon title" />
-          <TableColumn prefWidth="75.0" text="Price" />
+          <TableColumn fx:id="colAvailTitle" prefWidth="118.39990234375" text="Coupon title" />
+          <TableColumn fx:id="colAvailPrice" prefWidth="114.4000244140625" text="Price" />
         </columns>
       </TableView>
+      <TableView fx:id="tblCouponsSelected" layoutX="1266.0" layoutY="238.0" prefHeight="302.0" prefWidth="235.0">
+         <columns>
+            <TableColumn fx:id="colSelectTitle" prefWidth="118.39990234375" text="Coupon title" />
+            <TableColumn fx:id="colSelectPrice" prefWidth="114.4000244140625" text="Price" />
+         </columns>
+      </TableView>
+      <Button layoutX="1545.0" layoutY="308.0" mnemonicParsing="false" onAction="#addCoupon" prefHeight="27.0" prefWidth="71.0" styleClass="normalText" text="←">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button layoutX="1545.0" layoutY="419.0" mnemonicParsing="false" onAction="#removeEvent" prefHeight="27.0" prefWidth="71.0" styleClass="normalText" text="→">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Label layoutX="1266.0" layoutY="202.0" prefHeight="35.0" prefWidth="235.0" styleClass="normalText" text="Assigned:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="1653.0" layoutY="202.0" prefHeight="35.0" prefWidth="235.0" styleClass="normalText" text="Available:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
