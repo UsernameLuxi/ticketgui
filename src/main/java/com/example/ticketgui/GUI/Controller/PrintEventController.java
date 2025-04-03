@@ -1,6 +1,8 @@
 package com.example.ticketgui.GUI.Controller;
 
+import com.example.ticketgui.BE.Coupon;
 import com.example.ticketgui.BE.Event;
+import com.example.ticketgui.BE.Ticket;
 import com.example.ticketgui.GUI.ControllerManager;
 import com.example.ticketgui.GUI.Model.EventModel;
 import com.google.zxing.MultiFormatWriter;
@@ -13,6 +15,8 @@ import com.itextpdf.io.source.ByteArrayOutputStream;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.properties.HorizontalAlignment;
+import com.itextpdf.layout.properties.TextAlignment;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -27,8 +31,10 @@ import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Image;
 
 import javax.imageio.ImageIO;
+import javax.swing.text.Element;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -78,10 +84,11 @@ public class PrintEventController extends Controller {
 
         fillMap(windowContent, width, height);
 
+        Ticket ticket = new Ticket(editEvent);
 
         btnPrint.setOnAction(event -> {
             try {
-                printTicket();
+                printTicket(ticket);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -92,31 +99,62 @@ public class PrintEventController extends Controller {
         lblTotPrice.setText("Total price: " + totalPrice);
     }
 
-
-    private void printTicket() throws Exception {
-        int sales = model.incrementSale(editEvent);
-        String data = editEvent.getId() + "-" + sales;
-
-        Files.deleteIfExists(Path.of("QRCode.pdf"));
-
+    private Image createQrCodeImage(String data) throws Exception {
         BitMatrix bitMatrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, 200, 200);
         BufferedImage qrImage = MatrixToImageWriter.toBufferedImage(bitMatrix);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ImageIO.write(qrImage, "png", byteArrayOutputStream);
         byte[] qrImageBytes = byteArrayOutputStream.toByteArray();
+        ImageData imageData = ImageDataFactory.create(qrImageBytes);
+
+        return new Image(imageData);
+    }
+
+    private void printTicket(Ticket ticket) throws Exception {
+        int sales = model.incrementSale(editEvent);
+        String data = editEvent.getId() + "-" + sales;
+
+        Files.deleteIfExists(Path.of("QRCode.pdf"));
+
+        Image qrCodeImage = createQrCodeImage(data);
 
         String pdfPath = "QRCode.pdf";
         PdfWriter writer = new PdfWriter(pdfPath);
         PdfDocument pdf = new PdfDocument(writer);
         Document document = new Document(pdf);
 
-        document.add(new Paragraph(editEvent.getName()).setBold().setFontSize(14));
-        ImageData imageData = ImageDataFactory.create(qrImageBytes);
-        Image qrCodeImage = new Image(imageData);
+        Paragraph textOver = new Paragraph(
+                editEvent.getName() +
+                        "\n Location: " + ticket.getLocation() +
+                        "\n Start Date: " + ticket.getStartDate() +
+                        "\n End Date: " + ticket.getEndDate() +
+                        "\n Description: " + ticket.getDescription() + "\n "
+        ).setBold().setFontSize(14);
+        textOver.setTextAlignment(TextAlignment.CENTER);
+
+        qrCodeImage.setHorizontalAlignment(HorizontalAlignment.CENTER);
+
+        Paragraph textUnder = new Paragraph("Billet ID: " + String.valueOf(sales)).setItalic().setFontSize(12);
+        textUnder.setTextAlignment(TextAlignment.CENTER);
+
+        document.add(textOver);
         document.add(qrCodeImage);
-        document.add(new Paragraph("Billet ID: " + String.valueOf(sales)).setItalic().setFontSize(12));
+        document.add(textUnder);
+
+        for (Coupon coupon : ticket.getCouponList()) {
+            Paragraph text = new Paragraph(coupon.getName());
+            text.setTextAlignment(TextAlignment.CENTER);
+            document.add(text);
+
+            Image qrCode = createQrCodeImage(coupon.getId() + "-" + coupon.getExpiryDate());
+            qrCodeImage.setHorizontalAlignment(HorizontalAlignment.CENTER);
+            document.add(qrCodeImage);
+
+        }
 
         document.close();
+
+        Desktop.getDesktop().open(new File(pdfPath));
     }
 
     public void fillMap(List<Region> items, double width, double height){
