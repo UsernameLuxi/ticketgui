@@ -138,7 +138,11 @@ public class PrintEventController extends Controller {
     private void printTicket(Ticket ticket) throws Exception {
         int sales = model.incrementSale(editEvent);
 
-        ticket.setCouponList(tblCouponsSelected.getItems());
+        if (tblCouponsSelected.getItems().getFirst().getName().isEmpty())
+            // do nothing or something
+            ticket.setCouponList(new ArrayList<>());
+        else
+            ticket.setCouponList(tblCouponsSelected.getItems());
 
         String data = editEvent.getId() + "-" + sales + "-" + UUID.randomUUID();
         //TODO : data SEND NED
