@@ -230,7 +230,7 @@ public class ManageCouponsController extends Controller {
         txtcoupon.setText(coupon.getName());
         txtPrice.setText(coupon.getPrice() + "");
         currentEvent = coupon.getEvent();
-        smbEvents.setText(coupon.getEvent().getName() == null ? "All events" : coupon.getEvent().getName());
+        smbEvents.setText((coupon.getEvent() == null || coupon.getEvent().getName() == null) ? "All events" : coupon.getEvent().getName());
 
         String[] date = coupon.getExpiryDate().split("-");
         try {
