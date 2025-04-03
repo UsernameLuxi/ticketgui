@@ -5,6 +5,7 @@ import com.example.ticketgui.BE.Event;
 import com.example.ticketgui.BE.Ticket;
 import com.example.ticketgui.GUI.ControllerManager;
 import com.example.ticketgui.GUI.Model.EventModel;
+import com.example.ticketgui.GUI.util.ShowAlerts;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
@@ -20,6 +21,7 @@ import com.itextpdf.layout.properties.TextAlignment;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -97,6 +99,7 @@ public class PrintEventController extends Controller {
         lblPrice.setText("Event price: " + editEvent.getPrice());
         totalPrice = editEvent.getPrice();
         lblTotPrice.setText("Total price: " + totalPrice);
+        loadCouponsForEvent(editEvent);
     }
 
     private Image createQrCodeImage(String data) throws Exception {
@@ -192,5 +195,13 @@ public class PrintEventController extends Controller {
     public void setEvent(Event event) {
         editEvent = event;
         txtEvent.setText("Event: " + event.getName());
+    }
+
+    private void loadCouponsForEvent(Event event){
+        try {
+            List<Coupon> coupons = manager.getCouponModel().getCouponsByEventID(event.getId());
+        } catch (Exception e) {
+            ShowAlerts.displayMessage("Coupon Error", "Database error:\n" + e.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 }

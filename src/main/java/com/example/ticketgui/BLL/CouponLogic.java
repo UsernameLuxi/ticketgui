@@ -4,6 +4,7 @@ import com.example.ticketgui.BE.Coupon;
 import com.example.ticketgui.DAL.CouponDataAccess;
 import com.example.ticketgui.DAL.Interfaces.ICouponAccess;
 
+import java.io.IOException;
 import java.util.List;
 
 public class CouponLogic {
@@ -27,5 +28,10 @@ public class CouponLogic {
 
     public void update(Coupon coupon) throws Exception {
         couponAccess.update(coupon);
+    }
+
+    public List<Coupon> getCouponsByEventID(int id) throws IOException {
+        return couponAccess.getCouponsByEventID(id);
+
     }
 }

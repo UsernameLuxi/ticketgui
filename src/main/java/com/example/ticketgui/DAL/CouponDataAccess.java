@@ -4,6 +4,8 @@ import com.example.ticketgui.BE.Coupon;
 import com.example.ticketgui.BE.Event;
 import com.example.ticketgui.DAL.Interfaces.ICouponAccess;
 
+import java.io.IOException;
+import java.rmi.server.ExportException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -102,5 +104,30 @@ public class CouponDataAccess implements ICouponAccess {
             throw new Exception(e.getMessage());
         }
 
+    }
+
+    @Override
+    public List<Coupon> getCouponsByEventID(int id) throws IOException {
+        List<Coupon> coupons = new ArrayList<>();
+        String sql = """
+                    SELECT Cupons.ID, Cupons.Name, Cupons.Price, Cupons.Expirationdate, EventID, Events.Name
+                FROM Cupons
+                FULL OUTER JOIN Events ON Events.ID = EventID
+                WHERE EventID = ? OR EventID IS NULL;
+                """;
+        DBConnector db = new DBConnector();
+
+        try(Connection conn = db.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()) {
+                Coupon c = new Coupon(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), new Event(rs.getInt(5), rs.getString(6)));
+                coupons.add(c);
+            }
+        } catch (Exception e) {
+            throw new ExportException("Could not fetch Coupons for event: " + e.getMessage());
+        }
+
+        return coupons;
     }
 }
