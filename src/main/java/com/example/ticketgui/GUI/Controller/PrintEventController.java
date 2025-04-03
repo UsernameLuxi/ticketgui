@@ -40,10 +40,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 public class PrintEventController extends Controller {
     private ControllerManager manager;
@@ -115,7 +113,9 @@ public class PrintEventController extends Controller {
 
     private void printTicket(Ticket ticket) throws Exception {
         int sales = model.incrementSale(editEvent);
-        String data = editEvent.getId() + "-" + sales;
+
+        String data = editEvent.getId() + "-" + sales + "-" + UUID.randomUUID();
+        //TODO : data SEND NED
 
         Files.deleteIfExists(Path.of("QRCode.pdf"));
 
@@ -150,8 +150,8 @@ public class PrintEventController extends Controller {
             document.add(text);
 
             Image qrCode = createQrCodeImage(coupon.getId() + "-" + coupon.getExpiryDate());
-            qrCodeImage.setHorizontalAlignment(HorizontalAlignment.CENTER);
-            document.add(qrCodeImage);
+            qrCode.setHorizontalAlignment(HorizontalAlignment.CENTER);
+            document.add(qrCode);
 
         }
 
