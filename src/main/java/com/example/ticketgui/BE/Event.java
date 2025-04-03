@@ -83,7 +83,7 @@ public class Event {
     }
 
     public List<User> getEventKoordinators() {
-        return eventKoordinators;
+        return eventKoordinators == null ? new ArrayList<>() : eventKoordinators;
     }
     public void setEventKoordinators(List<User> eventKoordinators) {
         this.eventKoordinators = eventKoordinators;
