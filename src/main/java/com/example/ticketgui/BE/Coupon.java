@@ -6,6 +6,7 @@ public class Coupon {
     private int price;
     private String expiryDate;
     private Event event = null;
+    private String eventString;
 
     public Coupon(int id, String name, int price, String expiryDate, Event event) {
         this.id = id;
@@ -51,6 +52,10 @@ public class Coupon {
 
     public Event getEvent() {
         return event;
+    }
+
+    public String getEventString(){
+        return (event == null || event.getId() == 0) ? "All events" : event.getName();
     }
 
     public void setEvent(Event event) {

@@ -139,6 +139,8 @@ public class MainWindowController extends Controller {
     private TableColumn<Coupon, String> colCouponTilte;
     @FXML
     private TableColumn<Coupon, Button> colCouponPrint;
+    @FXML
+    private TableColumn<Coupon, String> colCouponEvent;
 
     /*
     public ScrollPane createScrollpaneForDatapane() {
@@ -364,6 +366,7 @@ public class MainWindowController extends Controller {
         }
         try {
             colCouponTilte.setCellValueFactory(new PropertyValueFactory<>("name"));
+            colCouponEvent.setCellValueFactory(new PropertyValueFactory<>("eventString"));
             tblCupons.setItems(manager.getCouponModel().getCoupons());
         } catch (Exception e) {
             ShowAlerts.displayMessage("Coupon Error", "Could not fetch coupons for current user\n" + e.getMessage(), Alert.AlertType.ERROR);

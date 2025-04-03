@@ -218,6 +218,9 @@ public class ManageCouponsController extends Controller {
             currentEvent = null;
             return;
         }
+        if (coupon == null && selectedCoupon == null){
+            return;
+        }
         selectedCoupon = coupon;
         txtcoupon.setText(coupon.getName());
         txtPrice.setText(coupon.getPrice() + "");
