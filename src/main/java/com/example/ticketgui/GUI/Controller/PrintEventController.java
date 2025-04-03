@@ -138,6 +138,8 @@ public class PrintEventController extends Controller {
     private void printTicket(Ticket ticket) throws Exception {
         int sales = model.incrementSale(editEvent);
 
+        ticket.setCouponList(tblCouponsSelected.getItems());
+
         String data = editEvent.getId() + "-" + sales + "-" + UUID.randomUUID();
         //TODO : data SEND NED
 
@@ -225,7 +227,7 @@ public class PrintEventController extends Controller {
         try {
             List<Coupon> coupons = manager.getCouponModel().getCouponsByEventID(event.getId());
             loadCouponsAvailable(coupons);
-            loadCouponsSelected(new ArrayList<>());
+            loadCouponsSelected(new ArrayList<>(List.of(new Coupon("", 0, ""))));
 
         } catch (Exception e) {
             ShowAlerts.displayMessage("Coupon Error", "Database error:\n" + e.getMessage(), Alert.AlertType.ERROR);
@@ -236,6 +238,9 @@ public class PrintEventController extends Controller {
     private void addCoupon(ActionEvent actionEvent) {
         Coupon selCoupon = tblCouponsAvailable.getSelectionModel().getSelectedItem();
         if (selCoupon != null && !selCoupon.getName().isEmpty()) {
+            if (tblCouponsSelected.getItems().getFirst().getName().isEmpty()){
+                tblCouponsSelected.getItems().clear();
+            }
             tblCouponsSelected.getItems().add(selCoupon);
             tblCouponsAvailable.getItems().remove(selCoupon);
             totalPrice += selCoupon.getPrice();
@@ -257,6 +262,10 @@ public class PrintEventController extends Controller {
             tblCouponsSelected.getItems().remove(selCoupon);
             totalPrice -= selCoupon.getPrice();
             lblTotPrice.setText("Total price: " + totalPrice);
+
+            if (tblCouponsSelected.getItems().isEmpty()) {
+                tblCouponsSelected.getItems().add(new Coupon("", 0, ""));
+            }
         }
     }
 
