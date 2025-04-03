@@ -48,7 +48,7 @@ public class PrintEventController extends Controller {
     private IController root;
     private EventModel model;
     private Event editEvent = null;
-    private Ticket printTicket = null;
+    private Ticket printTicket = null; // TODO : fjern hvis den ikke bliver brugt
     private int totalPrice = 0;
     private Map<Region, List<Double>> windowItems = new HashMap<>();
     private Map<ImageView, List<Double>> imageViews = new HashMap<>();
@@ -86,7 +86,7 @@ public class PrintEventController extends Controller {
         fillMap(windowContent, width, height);
 
         printTicket = new Ticket(editEvent);
-        loadCouponsForEvent(printTicket);
+        loadCouponsForEvent(editEvent);
         btnPrint.setOnAction(event -> {
             try {
                 printTicket(printTicket);
@@ -98,7 +98,7 @@ public class PrintEventController extends Controller {
         lblPrice.setText("Event price: " + editEvent.getPrice());
         totalPrice = editEvent.getPrice();
         lblTotPrice.setText("Total price: " + totalPrice);
-        loadCouponsForEvent(printTicket);
+        loadCouponsForEvent(editEvent);
     }
 
     private Image createQrCodeImage(String data) throws Exception {
@@ -198,10 +198,10 @@ public class PrintEventController extends Controller {
         txtEvent.setText("Event: " + event.getName());
     }
 
-    private void loadCouponsForEvent(Ticket ticket){
+    private void loadCouponsForEvent(Event event){
         try {
-            List<Coupon> coupons = manager.getCouponModel().getCouponsByEventID(editEvent.getId());
-            ticket.setCouponList(coupons);
+            List<Coupon> coupons = manager.getCouponModel().getCouponsByEventID(event.getId());
+
         } catch (Exception e) {
             ShowAlerts.displayMessage("Coupon Error", "Database error:\n" + e.getMessage(), Alert.AlertType.ERROR);
         }
