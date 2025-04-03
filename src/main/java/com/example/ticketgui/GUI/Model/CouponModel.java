@@ -36,6 +36,7 @@ public class CouponModel {
 
         for (Coupon c : coupons) {
             if (c.getId() == coupon.getId()) {
+                System.out.println("updated" + c);
                 coupons.remove(c);
                 coupons.add(coupon);
                 break;

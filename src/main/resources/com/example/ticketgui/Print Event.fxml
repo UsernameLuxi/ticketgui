@@ -3,6 +3,8 @@
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -46,5 +48,11 @@
             <Font size="24.0" />
          </font>
       </Label>
+      <TableView layoutX="1580.0" layoutY="230.0" prefHeight="200.0" prefWidth="200.0" visible="false">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Coupon title" />
+          <TableColumn prefWidth="75.0" text="Price" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

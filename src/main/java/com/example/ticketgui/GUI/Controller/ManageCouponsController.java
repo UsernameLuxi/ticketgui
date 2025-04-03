@@ -5,6 +5,7 @@ import com.example.ticketgui.BE.Event;
 import com.example.ticketgui.GUI.ControllerManager;
 import com.example.ticketgui.GUI.Model.CouponModel;
 import com.example.ticketgui.GUI.util.ShowAlerts;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -196,6 +197,7 @@ public class ManageCouponsController extends Controller {
                 selectedCoupon.setName(c.getName());
                 selectedCoupon.setExpiryDate(c.getExpiryDate());
                 couponModel.updateCoupon(selectedCoupon);
+                tblCoupons.refresh();
                 txtFeedback.setText("Coupon: " + selectedCoupon.getName() + " -> updated!");
             }
 

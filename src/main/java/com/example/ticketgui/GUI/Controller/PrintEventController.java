@@ -87,7 +87,6 @@ public class PrintEventController extends Controller {
 
         printTicket = new Ticket(editEvent);
         loadCouponsForEvent(printTicket);
-
         btnPrint.setOnAction(event -> {
             try {
                 printTicket(printTicket);
