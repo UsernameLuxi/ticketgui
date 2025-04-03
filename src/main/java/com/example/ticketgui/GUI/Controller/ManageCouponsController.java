@@ -59,6 +59,8 @@ public class ManageCouponsController extends Controller {
     private TableColumn<Coupon, String> colTitle;
     @FXML
     private TableColumn<Coupon, String> colExpir;
+    @FXML
+    private TableColumn<Coupon, String> colEvent;
 
     @Override
     // samme koncept som i main controlleren
@@ -107,6 +109,7 @@ public class ManageCouponsController extends Controller {
         try {
             colTitle.setCellValueFactory(new PropertyValueFactory<>("name"));
             colExpir.setCellValueFactory(new PropertyValueFactory<>("expiryDate"));
+            colEvent.setCellValueFactory(new PropertyValueFactory<>("eventString"));
 
             tblCoupons.getItems().clear();
             tblCoupons.setItems(couponModel.getCoupons());
