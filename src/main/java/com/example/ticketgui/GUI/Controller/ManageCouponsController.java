@@ -226,6 +226,10 @@ public class ManageCouponsController extends Controller {
         if (coupon == null && selectedCoupon == null){
             return;
         }
+        if (coupon == null){
+            tblCoupons.getSelectionModel().clearSelection();
+            return;
+        }
         selectedCoupon = coupon;
         txtcoupon.setText(coupon.getName());
         txtPrice.setText(coupon.getPrice() + "");
