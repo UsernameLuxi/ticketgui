@@ -129,6 +129,7 @@ public class EventController extends Controller {
         txtGade.setText(editEvent.getLocation().getStreet());
         txtPostnummer.setText(editEvent.getLocation().getPostalCode() + "");
         smbType.setText(editEvent.getEventType().getName());
+        currentEventType = editEvent.getEventType();
         // users
         lstEventUser.getItems().clear();
         lstEventUser.getItems().addAll(editEvent.getEventKoordinators());
