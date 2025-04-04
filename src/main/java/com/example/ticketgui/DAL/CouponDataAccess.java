@@ -19,7 +19,8 @@ public class CouponDataAccess implements ICouponAccess {
         String sql = """
                 SELECT Cupons.ID, Cupons.Name, Cupons.Price, Cupons.Expirationdate, EventID, Events.Name
                 FROM Cupons
-                FULL OUTER JOIN Events ON Events.ID = EventID;
+                FULL OUTER JOIN Events ON Events.ID = EventID
+                WHERE Cupons.ID IS NOT NULL;
                 """; // måske lave om
         DBConnector db = new DBConnector();
         try(Connection conn = db.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -113,7 +114,8 @@ public class CouponDataAccess implements ICouponAccess {
                     SELECT Cupons.ID, Cupons.Name, Cupons.Price, Cupons.Expirationdate, EventID, Events.Name
                 FROM Cupons
                 FULL OUTER JOIN Events ON Events.ID = EventID
-                WHERE EventID = ? OR EventID IS NULL;
+                WHERE Cupons.ID IS NOT NULL AND
+                (EventID = ? OR EventID IS NULL);
                 """;
         DBConnector db = new DBConnector();
 

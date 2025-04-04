@@ -231,7 +231,7 @@ public class PrintEventController extends Controller {
         try {
             List<Coupon> coupons = manager.getCouponModel().getCouponsByEventID(event.getId());
             loadCouponsAvailable(coupons);
-            loadCouponsSelected(new ArrayList<>(List.of(new Coupon("", 0, ""))));
+            loadCouponsSelected(new ArrayList<>(List.of(/*new Coupon("", 0, "")*/)));
 
         } catch (Exception e) {
             ShowAlerts.displayMessage("Coupon Error", "Database error:\n" + e.getMessage(), Alert.AlertType.ERROR);
