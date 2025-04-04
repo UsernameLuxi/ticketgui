@@ -146,6 +146,11 @@ public class UserController extends Controller {
     private void deleteUser(ActionEvent actionEvent) {
         User selctedUser = tblBrugere.getSelectionModel().getSelectedItem();
         if (selctedUser != null){
+            if (selctedUser.getId() == manager.getCurrentUser().getId()){
+                lblFeedback.setText("You cannot delete yourself!");
+                lblFeedback.setStyle("-fx-text-fill: red;");
+                return;
+            }
             if (ShowAlerts.displayWarning("Deletion of User", "Are you sure that you want to delete this User?:\n" + selctedUser.getName())) {
                 try {
                     userModel.deleteUser(selctedUser);
@@ -153,7 +158,7 @@ public class UserController extends Controller {
                 } catch (Exception e) {
                     txtFeedback.setText("Could not delete the user. Try again later!");
                 }
-            // TODO : måske lidt verificering af brugerens valg
+
 
             }
         }
