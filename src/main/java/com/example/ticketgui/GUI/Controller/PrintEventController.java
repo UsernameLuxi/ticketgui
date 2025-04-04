@@ -53,6 +53,7 @@ public class PrintEventController extends Controller {
     private Event editEvent = null;
     private Ticket printTicket = null; // TODO : fjern hvis den ikke bliver brugt
     private int totalPrice = 0;
+    private static final String valutaSuffix = ",-";
     private Map<Region, List<Double>> windowItems = new HashMap<>();
     private Map<ImageView, List<Double>> imageViews = new HashMap<>();
     @FXML
@@ -118,9 +119,9 @@ public class PrintEventController extends Controller {
             }
         });
 
-        lblPrice.setText("Event price: " + editEvent.getPrice());
+        lblPrice.setText("Event price: " + editEvent.getPrice() + valutaSuffix);
         totalPrice = editEvent.getPrice();
-        lblTotPrice.setText("Total price: " + totalPrice);
+        lblTotPrice.setText("Total price: " + totalPrice + valutaSuffix);
         loadCouponsForEvent(editEvent);
     }
 
@@ -250,7 +251,7 @@ public class PrintEventController extends Controller {
             tblCouponsSelected.getItems().add(selCoupon);
             tblCouponsAvailable.getItems().remove(selCoupon);
             totalPrice += selCoupon.getPrice();
-            lblTotPrice.setText("Total price: " + totalPrice);
+            lblTotPrice.setText("Total price: " + totalPrice + valutaSuffix);
             if (tblCouponsAvailable.getItems().isEmpty()) {
                // tblCouponsAvailable.getItems().add(new Coupon("", 0, ""));
             }
@@ -269,7 +270,7 @@ public class PrintEventController extends Controller {
             tblCouponsAvailable.getItems().add(selCoupon);
             tblCouponsSelected.getItems().remove(selCoupon);
             totalPrice -= selCoupon.getPrice();
-            lblTotPrice.setText("Total price: " + totalPrice);
+            lblTotPrice.setText("Total price: " + totalPrice + valutaSuffix);
 
             if (tblCouponsSelected.getItems().isEmpty()) {
                 //tblCouponsSelected.getItems().add(new Coupon(" ", 0, ""));
