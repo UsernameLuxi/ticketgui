@@ -80,7 +80,7 @@
           <TableColumn fx:id="colRolle" minWidth="0.0" prefWidth="135.199951171875" text="Role" />
         </columns>
       </TableView>
-      <Button layoutX="1483.0" layoutY="845.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="67.0" prefWidth="185.0" styleClass="normalText" text="Slet bruger">
+      <Button layoutX="1483.0" layoutY="845.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="67.0" prefWidth="185.0" styleClass="normalText" text="Delete user">
          <font>
             <Font size="24.0" />
          </font>

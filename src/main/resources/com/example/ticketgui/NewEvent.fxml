@@ -67,7 +67,7 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <Button layoutX="620.0" layoutY="800.0" mnemonicParsing="false" onAction="#saveEvent" prefHeight="67.0" prefWidth="232.0" styleClass="normalText" text="Gem">
+      <Button layoutX="620.0" layoutY="800.0" mnemonicParsing="false" onAction="#saveEvent" prefHeight="67.0" prefWidth="232.0" styleClass="normalText" text="Save">
          <font>
             <Font size="24.0" />
          </font>
