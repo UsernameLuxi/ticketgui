@@ -74,7 +74,7 @@ public class PrintEventController extends Controller {
     @FXML
     private TableView<Coupon> tblCouponsAvailable;
     @FXML
-    private TableColumn<Coupon, Integer> colAvailPrice;
+    private TableColumn<Coupon, String> colAvailPrice;
     @FXML
     private TableColumn<Coupon, String> colAvailTitle;
 
@@ -86,7 +86,7 @@ public class PrintEventController extends Controller {
     @FXML
     private TableColumn<Coupon, String> colSelectTitle;
     @FXML
-    private TableColumn<Coupon, Integer> colSelectPrice;
+    private TableColumn<Coupon, String> colSelectPrice;
 
 
     @Override
@@ -242,15 +242,17 @@ public class PrintEventController extends Controller {
     private void addCoupon(ActionEvent actionEvent) {
         Coupon selCoupon = tblCouponsAvailable.getSelectionModel().getSelectedItem();
         if (selCoupon != null && !selCoupon.getName().isEmpty()) {
+            /*
             if (tblCouponsSelected.getItems().getFirst().getName().isEmpty()){
                 tblCouponsSelected.getItems().clear();
             }
+             */
             tblCouponsSelected.getItems().add(selCoupon);
             tblCouponsAvailable.getItems().remove(selCoupon);
             totalPrice += selCoupon.getPrice();
             lblTotPrice.setText("Total price: " + totalPrice);
             if (tblCouponsAvailable.getItems().isEmpty()) {
-                tblCouponsAvailable.getItems().add(new Coupon("", 0, ""));
+               // tblCouponsAvailable.getItems().add(new Coupon("", 0, ""));
             }
         }
     }
@@ -259,16 +261,18 @@ public class PrintEventController extends Controller {
     private void removeEvent(ActionEvent actionEvent){
         Coupon selCoupon = tblCouponsSelected.getSelectionModel().getSelectedItem();
         if (selCoupon != null){
+            /*
             if (tblCouponsAvailable.getItems().getFirst().getName().isEmpty()){
                 tblCouponsAvailable.getItems().clear();
             }
+             */
             tblCouponsAvailable.getItems().add(selCoupon);
             tblCouponsSelected.getItems().remove(selCoupon);
             totalPrice -= selCoupon.getPrice();
             lblTotPrice.setText("Total price: " + totalPrice);
 
             if (tblCouponsSelected.getItems().isEmpty()) {
-                tblCouponsSelected.getItems().add(new Coupon("", 0, ""));
+                //tblCouponsSelected.getItems().add(new Coupon(" ", 0, ""));
             }
         }
     }
