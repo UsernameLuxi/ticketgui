@@ -43,8 +43,7 @@ public class UserController extends Controller {
     private TableColumn<User, UserRole> colRolle;
     @FXML
     private Label lblFeedback;
-    @FXML
-    private Label txtFeedback;
+
 
 
     @Override
@@ -154,9 +153,9 @@ public class UserController extends Controller {
             if (ShowAlerts.displayWarning("Deletion of User", "Are you sure that you want to delete this User?:\n" + selctedUser.getName())) {
                 try {
                     userModel.deleteUser(selctedUser);
-                    txtFeedback.setText("User deleted!");
+                    lblFeedback.setText("User deleted!");
                 } catch (Exception e) {
-                    txtFeedback.setText("Could not delete the user. Try again later!");
+                    lblFeedback.setText("Could not delete the user. Try again later!");
                 }
 
 
