@@ -64,7 +64,7 @@ public class ControllerManager {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(screen.getFile()));
         Scene scene = new Scene(fxmlLoader.load(), rootstage.getWidth(), rootstage.getHeight());
         //scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("stylesheet.css")).toExternalForm()); // <-- denne er nok ikke nødvendig fordi der er allerede tilføjet et stylesheet på vinduet ;) - men den producere også en exception - så den er bare dejligt
-        rootstage.setTitle("TICKET GUI");
+        rootstage.setTitle("Event Tickets");
         rootstage.setScene(scene);
         rootstage.show();
         mainController = fxmlLoader.getController();
