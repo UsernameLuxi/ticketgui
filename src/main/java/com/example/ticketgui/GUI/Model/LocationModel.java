@@ -3,6 +3,7 @@ package com.example.ticketgui.GUI.Model;
 import com.example.ticketgui.BE.Location;
 import com.example.ticketgui.BLL.LocationLogic;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,5 +24,18 @@ public class LocationModel {
 
     public void loadLocations() throws Exception {
         locations = locLogic.getLocations();
+    }
+
+    public Location createLocation(Location location) throws Exception {
+        Location loc = locLogic.createLocation(location);
+        if (locations.containsKey(loc.getPostalCode())){
+            locations.get(loc.getPostalCode()).add(loc);
+        }
+        else{
+            List<Location> l = new ArrayList<>();
+            l.add(loc);
+            locations.put(loc.getPostalCode(), l);
+        }
+        return loc;
     }
 }

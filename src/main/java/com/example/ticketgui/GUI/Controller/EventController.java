@@ -243,7 +243,8 @@ public class EventController extends Controller {
 
         //String dateTime = datePicker.getValue().toString() + " (" + txtTime.getText() + ")";
         if (!VerifyTime.verifyTime(txtTime.getText()) || !VerifyTime.verifyTime(txtTimeEnd.getText())){
-            // todo : ikke valid tid gør noget
+            lblFeedback.setText("Invalid time!");
+            return;
         }
         String dateTime = datePicker.getValue().getDayOfMonth() + "-"+ datePicker.getValue().getMonthValue() + "-" + datePicker.getValue().getYear() + " (" + txtTime.getText() + ")";
         String dateTimeEnd = datePickerEnd.getValue().getDayOfMonth() + "-"+ datePickerEnd.getValue().getMonthValue() + "-" + datePickerEnd.getValue().getYear() + " (" + txtTimeEnd.getText() + ")";
@@ -271,9 +272,11 @@ public class EventController extends Controller {
             txtEventPrice.clear();
             txtEventPrice.setStyle("-fx-border-color: transparent");
             datePicker.setValue(null);
+            datePickerEnd.setValue(null);
             txtGade.clear();
             txtPostnummer.clear();
             txtTime.clear();
+            txtTimeEnd.clear();
             
             // reset formatering på textfields
             txtEventPrice.setStyle("-fx-border-color: transparent");
@@ -294,7 +297,15 @@ public class EventController extends Controller {
             }
 
         }
-        return new Location(-1, postInt, street);
+        Location newLocation = new Location(-1, postInt, street);
+        try{
+            newLocation = manager.getLocationModel().createLocation(newLocation);
+        }
+        catch (Exception e){
+            lblFeedback.setText("Could not create new location");
+        }
+
+        return newLocation;
     }
 
     @FXML

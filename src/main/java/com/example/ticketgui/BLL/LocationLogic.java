@@ -30,4 +30,8 @@ public class LocationLogic {
         }
         return locations;
     }
+
+    public Location createLocation(Location location) throws Exception {
+        return locationDataAccess.create(location);
+    }
 }
