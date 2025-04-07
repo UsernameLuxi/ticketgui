@@ -67,10 +67,14 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <Button layoutX="620.0" layoutY="800.0" mnemonicParsing="false" onAction="#saveEvent" prefHeight="67.0" prefWidth="232.0" styleClass="normalText" text="Save">
+      <Button layoutX="620.0" layoutY="800.0" mnemonicParsing="false" onAction="#saveEvent" prefHeight="67.0" prefWidth="232.0" text="Save">
          <font>
             <Font size="24.0" />
          </font>
+         <styleClass>
+            <String fx:value="normalText" />
+            <String fx:value="whiteText" />
+         </styleClass>
       </Button>
       <Button fx:id="btnBack" alignment="CENTER" layoutX="60.0" layoutY="60.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#loadMain" prefHeight="80.0" prefWidth="210.0" text="Back">
          <font>
@@ -115,15 +119,23 @@
       </Label>
       <ListView fx:id="lstEventUser" layoutX="1111.0" layoutY="367.0" prefHeight="367.0" prefWidth="301.0" />
       <ListView fx:id="lstUnassigned" layoutX="1511.0" layoutY="367.0" prefHeight="367.0" prefWidth="301.0" />
-      <Button layoutX="1427.0" layoutY="436.0" mnemonicParsing="false" onAction="#addKoor" prefHeight="27.0" prefWidth="71.0" styleClass="normalText" text="←">
+      <Button layoutX="1427.0" layoutY="436.0" mnemonicParsing="false" onAction="#addKoor" prefHeight="27.0" prefWidth="71.0" text="←">
          <font>
             <Font size="24.0" />
          </font>
+         <styleClass>
+            <String fx:value="normalText" />
+            <String fx:value="whiteText" />
+         </styleClass>
       </Button>
-      <Button layoutX="1427.0" layoutY="556.0" mnemonicParsing="false" onAction="#removeKoor" prefHeight="27.0" prefWidth="71.0" styleClass="normalText" text="→">
+      <Button layoutX="1427.0" layoutY="556.0" mnemonicParsing="false" onAction="#removeKoor" prefHeight="27.0" prefWidth="71.0" text="→">
          <font>
             <Font size="24.0" />
          </font>
+         <styleClass>
+            <String fx:value="normalText" />
+            <String fx:value="whiteText" />
+         </styleClass>
       </Button>
       <Label fx:id="lblFeedback" layoutX="571.0" layoutY="140.0" prefHeight="50.0" prefWidth="1216.0" styleClass="bigText">
          <font>

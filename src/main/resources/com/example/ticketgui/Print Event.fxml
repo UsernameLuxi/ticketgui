@@ -17,10 +17,14 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <Button fx:id="btnPrint" layoutX="817.0" layoutY="471.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="350.0" styleClass="normalText" text="Print Ticket">
+      <Button fx:id="btnPrint" layoutX="817.0" layoutY="471.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="350.0" text="Print Ticket">
          <font>
             <Font size="24.0" />
          </font>
+         <styleClass>
+            <String fx:value="normalText" />
+            <String fx:value="whiteText" />
+         </styleClass>
       </Button>
       <Button fx:id="btnBack" alignment="CENTER" layoutX="60.0" layoutY="60.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#loadMain" prefHeight="80.0" prefWidth="210.0" text="Back">
          <font>
@@ -60,15 +64,23 @@
             <TableColumn fx:id="colSelectPrice" prefWidth="114.4000244140625" text="Price" />
          </columns>
       </TableView>
-      <Button layoutX="1545.0" layoutY="308.0" mnemonicParsing="false" onAction="#addCoupon" prefHeight="27.0" prefWidth="71.0" styleClass="normalText" text="←">
+      <Button layoutX="1545.0" layoutY="308.0" mnemonicParsing="false" onAction="#addCoupon" prefHeight="27.0" prefWidth="71.0" text="←">
          <font>
             <Font size="24.0" />
          </font>
+         <styleClass>
+            <String fx:value="normalText" />
+            <String fx:value="whiteText" />
+         </styleClass>
       </Button>
-      <Button layoutX="1545.0" layoutY="419.0" mnemonicParsing="false" onAction="#removeEvent" prefHeight="27.0" prefWidth="71.0" styleClass="normalText" text="→">
+      <Button layoutX="1545.0" layoutY="419.0" mnemonicParsing="false" onAction="#removeEvent" prefHeight="27.0" prefWidth="71.0" text="→">
          <font>
             <Font size="24.0" />
          </font>
+         <styleClass>
+            <String fx:value="normalText" />
+            <String fx:value="whiteText" />
+         </styleClass>
       </Button>
       <Label layoutX="1266.0" layoutY="202.0" prefHeight="35.0" prefWidth="235.0" styleClass="normalText" text="Assigned:">
          <font>

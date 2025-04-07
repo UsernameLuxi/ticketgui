@@ -29,10 +29,14 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <Button layoutX="857.0" layoutY="617.0" mnemonicParsing="false" onAction="#createUser" prefHeight="67.0" prefWidth="185.0" styleClass="normalText" text="Create user">
+      <Button layoutX="857.0" layoutY="617.0" mnemonicParsing="false" onAction="#createUser" prefHeight="67.0" prefWidth="185.0" text="Create user">
          <font>
             <Font size="24.0" />
          </font>
+         <styleClass>
+            <String fx:value="normalText" />
+            <String fx:value="whiteText" />
+         </styleClass>
       </Button>
       <Button fx:id="btnBack" alignment="CENTER" layoutX="60.0" layoutY="70.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#loadMain" prefHeight="80.0" prefWidth="210.0" text="Back">
          <font>
@@ -80,10 +84,14 @@
           <TableColumn fx:id="colRolle" minWidth="0.0" prefWidth="135.199951171875" text="Role" />
         </columns>
       </TableView>
-      <Button layoutX="1483.0" layoutY="845.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="67.0" prefWidth="185.0" styleClass="normalText" text="Delete user">
+      <Button layoutX="1483.0" layoutY="845.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="67.0" prefWidth="185.0" text="Delete user">
          <font>
             <Font size="24.0" />
          </font>
+         <styleClass>
+            <String fx:value="normalText" />
+            <String fx:value="whiteText" />
+         </styleClass>
       </Button>
       <Label fx:id="lblFeedback" alignment="CENTER" layoutX="650.0" layoutY="707.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="600.0" styleClass="normalText" textAlignment="CENTER">
          <font>

@@ -13,6 +13,10 @@
     -fx-text-fill: #588157;
 }
 
+.text-field{
+    -fx-text-fill: black;
+}
+
 .table-view *.scroll-bar:horizontal *.increment-button,
 .table-view *.scroll-bar:horizontal *.decrement-button {
     -fx-background-color: null;
@@ -76,6 +80,10 @@
 .bigText{
     /*-fx-font-size: 32px;*/
     -fx-text-fill: #2a3d34;
+}
+
+.whiteText{
+    -fx-text-fill: #DAD7CD;
 }
 
 #topBar{

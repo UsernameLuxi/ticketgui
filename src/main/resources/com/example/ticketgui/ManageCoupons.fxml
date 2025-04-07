@@ -43,15 +43,23 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <Button fx:id="btnDelete" layoutX="1195.0" layoutY="876.0" mnemonicParsing="false" onAction="#deleteCoupon" prefHeight="67.0" prefWidth="232.0" styleClass="normalText" text="Delete">
+      <Button fx:id="btnDelete" layoutX="1195.0" layoutY="876.0" mnemonicParsing="false" onAction="#deleteCoupon" prefHeight="67.0" prefWidth="232.0" text="Delete">
          <font>
             <Font size="24.0" />
          </font>
+         <styleClass>
+            <String fx:value="normalText" />
+            <String fx:value="whiteText" />
+         </styleClass>
       </Button>
-      <Button fx:id="btnSave" layoutX="555.0" layoutY="590.0" mnemonicParsing="false" onAction="#saveCoupon" prefHeight="67.0" prefWidth="232.0" styleClass="normalText" text="Save">
+      <Button fx:id="btnSave" layoutX="555.0" layoutY="590.0" mnemonicParsing="false" onAction="#saveCoupon" prefHeight="67.0" prefWidth="232.0" text="Save">
          <font>
             <Font size="24.0" />
          </font>
+         <styleClass>
+            <String fx:value="normalText" />
+            <String fx:value="whiteText" />
+         </styleClass>
       </Button>
       <Button fx:id="btnBack" alignment="CENTER" layoutX="60.0" layoutY="50.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#loadMain" prefHeight="80.0" prefWidth="210.0" text="Back">
          <font>
