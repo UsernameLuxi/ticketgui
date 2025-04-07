@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
@@ -37,6 +38,9 @@
             <String fx:value="normalText" />
             <String fx:value="whiteText" />
          </styleClass>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="btnBack" alignment="CENTER" layoutX="60.0" layoutY="70.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#loadMain" prefHeight="80.0" prefWidth="210.0" text="Back">
          <font>
@@ -53,6 +57,9 @@
             <String fx:value="backbutton" />
             <String fx:value="bigText" />
          </styleClass>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <SplitMenuButton fx:id="smbUserRole" layoutX="760.0" layoutY="500.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" styleClass="normalText" text="None">
         <items>
@@ -62,6 +69,9 @@
          <font>
             <Font size="24.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </SplitMenuButton>
       <Label layoutX="760.0" layoutY="322.0" prefHeight="50.0" prefWidth="400.0" styleClass="bigText" text="Password:">
          <font>
@@ -80,8 +90,8 @@
       </Label>
       <TableView fx:id="tblBrugere" layoutX="1290.0" layoutY="210.0" prefHeight="614.0" prefWidth="572.0">
         <columns>
-          <TableColumn fx:id="colBrugernavn" prefWidth="427.199951171875" text="Username" />
-          <TableColumn fx:id="colRolle" minWidth="0.0" prefWidth="135.199951171875" text="Role" />
+          <TableColumn fx:id="colBrugernavn" prefWidth="353.5999755859375" text="Username" />
+          <TableColumn fx:id="colRolle" minWidth="0.0" prefWidth="208.7999267578125" text="Role" />
         </columns>
       </TableView>
       <Button layoutX="1483.0" layoutY="845.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="67.0" prefWidth="185.0" text="Delete user">
@@ -92,6 +102,9 @@
             <String fx:value="normalText" />
             <String fx:value="whiteText" />
          </styleClass>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Label fx:id="lblFeedback" alignment="CENTER" layoutX="650.0" layoutY="707.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="600.0" styleClass="normalText" textAlignment="CENTER">
          <font>

@@ -8,9 +8,11 @@ import com.example.ticketgui.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -142,27 +144,6 @@ public class MainWindowController extends Controller {
     @FXML
     private TableColumn<Coupon, String> colCouponEvent;
 
-    /*
-    public ScrollPane createScrollpaneForDatapane() {
-        ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setLayoutX(dataPane.getLayoutX());
-        scrollPane.setLayoutY(dataPane.getLayoutY());
-        scrollPane.setContent(dataPane);
-        scrollPane.setPrefViewportHeight(dataPane.getHeight());
-        scrollPane.setPrefViewportWidth(dataPane.getWidth());
-
-        // nok på en anden måde
-        scrollPane.setStyle("-fx-background-color: #7766DD;");
-
-        //double length = Stage.getWindows().getFirst().getWidth() - sideMenu.getWidth();
-        double length = 1920 - sideMenu.getWidth();
-        scrollPane.setPrefSize(length, dataPane.getHeight());
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        viewPanel.getChildren().add(scrollPane);
-        return scrollPane;
-    }
-     */
-
     // erhmmm ja... man kunne også bare give hvert pane et fxId og .getChildren() - hilsen Casper -> but also made by Casper... træls (root.getChildren() for each)
     // update note - det kan man ikke - fordi root childen har ikke nok children (7 currently ift. 40)
     @Override
@@ -206,17 +187,6 @@ public class MainWindowController extends Controller {
         tblCupons,
         btnLogout));
 
-        // special case:
-        //ScrollPane scrollPane = createScrollpaneForDatapane();
-        /*
-        windowItems.put(scrollPane, new ArrayList<>(){{
-            add(scrollPane.getPrefWidth() / width);
-            add(scrollPane.getPrefHeight() / height);
-            add(scrollPane.getLayoutX() / width);
-            add(scrollPane.getLayoutY() / height);}}
-        );
-         */
-
         // også et specielt tilfælde
         imageViews.put(imgManageCupons, new ArrayList<>(){{
             add(imgManageCupons.getFitWidth() / width);
@@ -244,6 +214,8 @@ public class MainWindowController extends Controller {
             add(imgLogo.getLayoutX() / width);
             add(imgLogo.getLayoutY() / height);}});
 
+        buttonHandling(ControllerManager.getCurrentUser().getUserRole());
+
         fillMap(windowContent, width, height);
         mainContent = FXCollections.observableArrayList();
         mainContent.addAll(viewPanel.getChildren());
@@ -253,13 +225,16 @@ public class MainWindowController extends Controller {
         lblUserName.setText(ControllerManager.getCurrentUser().getUsername());
         lblUserRole.setText(ControllerManager.getCurrentUser().getUserRole().toString().toLowerCase());
 
-        buttonHandling(ControllerManager.getCurrentUser().getUserRole());
 
         // indsæt events TODO - spørgsmålet er om det skal gå gennem manageren og så til modellerne
         colTitle.setCellValueFactory(new PropertyValueFactory<>("name"));
+
         colType.setCellValueFactory(new PropertyValueFactory<>("eventType"));
+
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+
         colLoc.setCellValueFactory(new PropertyValueFactory<>("location"));
+
         colTime.setCellValueFactory(new PropertyValueFactory<>("dateTime"));
 
         colEdit.setCellFactory(new Callback<>() {
@@ -278,6 +253,7 @@ public class MainWindowController extends Controller {
                             editButton.setOnAction(event -> {
                                 editEvent(getTableView().getItems().get(getIndex()));
                             });
+                            editButton.setCursor(Cursor.HAND);
                             setGraphic(editButton);
                         }
                     }
@@ -302,6 +278,7 @@ public class MainWindowController extends Controller {
                                 removeEvent(e);
                                 loadDataObjects();
                             });
+                            delButton.setCursor(Cursor.HAND);
                             setGraphic(delButton);
                         }
                     }
@@ -324,6 +301,7 @@ public class MainWindowController extends Controller {
                             printButton.setOnAction(event -> {
                                 printEvent(getTableView().getItems().get(getIndex()));
                             });
+                            printButton.setCursor(Cursor.HAND);
                             setGraphic(printButton);
                         }
                     }
@@ -337,7 +315,9 @@ public class MainWindowController extends Controller {
             MenuItem none = new MenuItem("None");
             none.setOnAction(event -> {
                 cbEventType.setText("None");
+                cbEventType.fire();
             });
+            cbEventType.getItems().add(none);
             for (EventType eventType : eventTypes) {
                 MenuItem item = new MenuItem(eventType.getName());
                 item.setOnAction(event -> {
@@ -359,7 +339,11 @@ public class MainWindowController extends Controller {
             cbEventType.setOnAction(event -> {
                 filteredEvents.setPredicate(e -> verifyEvent(e, txtEventTitle.getText()));
             });
-            tblEvent.setItems(filteredEvents);
+
+            SortedList<Event> sortedList = new SortedList<>(filteredEvents);
+            sortedList.comparatorProperty().bind(tblEvent.comparatorProperty());
+
+            tblEvent.setItems(sortedList);
         } catch (Exception e) {
             ShowAlerts.displayMessage("Event Error", "Could not fetch events for current user\n" + e.getMessage(), Alert.AlertType.ERROR);
             //System.out.println(e.getMessage());
@@ -515,10 +499,18 @@ public class MainWindowController extends Controller {
     public void buttonHandling(UserRole userRole) {
         if (userRole == UserRole.EVENT_KOORDINATOR) {
             newUser.setVisible(false);
+            // flyt other buttons
+            newEvent.setLayoutY(75);
+            manageCupons.setLayoutY(165);
         }
-        else if (userRole == UserRole.ADMIN)
+        else if (userRole == UserRole.ADMIN) {
             newEvent.setVisible(false);
+            // flyt buttons
+            newUser.setLayoutY(75);
+            manageCupons.setLayoutY(165);
+            System.out.println(newUser.getLayoutY());
         }
+    }
 
     @FXML
     private void toMainMenu(MouseEvent mouseEvent) {
