@@ -59,19 +59,19 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TableView fx:id="tblCouponsAvailable" layoutX="1653.0" layoutY="238.0" prefHeight="302.0" prefWidth="235.0">
+      <TableView fx:id="tblCouponsAvailable" layoutX="447.0" layoutY="256.0" prefHeight="302.0" prefWidth="270.0">
         <columns>
           <TableColumn fx:id="colAvailTitle" prefWidth="118.39990234375" text="Coupon title" />
           <TableColumn fx:id="colAvailPrice" prefWidth="114.4000244140625" text="Price" />
         </columns>
       </TableView>
-      <TableView fx:id="tblCouponsSelected" layoutX="1266.0" layoutY="238.0" prefHeight="302.0" prefWidth="235.0">
+      <TableView fx:id="tblCouponsSelected" layoutX="60.0" layoutY="256.0" prefHeight="302.0" prefWidth="270.0">
          <columns>
             <TableColumn fx:id="colSelectTitle" prefWidth="118.39990234375" text="Coupon title" />
             <TableColumn fx:id="colSelectPrice" prefWidth="114.4000244140625" text="Price" />
          </columns>
       </TableView>
-      <Button layoutX="1545.0" layoutY="308.0" mnemonicParsing="false" onAction="#addCoupon" prefHeight="27.0" prefWidth="71.0" text="←">
+      <Button layoutX="355.0" layoutY="325.0" mnemonicParsing="false" onAction="#addCoupon" prefHeight="27.0" prefWidth="71.0" text="←">
          <font>
             <Font size="24.0" />
          </font>
@@ -83,7 +83,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="1545.0" layoutY="419.0" mnemonicParsing="false" onAction="#removeEvent" prefHeight="27.0" prefWidth="71.0" text="→">
+      <Button layoutX="355.0" layoutY="435.0" mnemonicParsing="false" onAction="#removeEvent" prefHeight="27.0" prefWidth="71.0" text="→">
          <font>
             <Font size="24.0" />
          </font>
@@ -95,12 +95,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label layoutX="1266.0" layoutY="202.0" prefHeight="35.0" prefWidth="235.0" styleClass="normalText" text="Assigned:">
+      <Label layoutX="60.0" layoutY="220.0" prefHeight="35.0" prefWidth="270.0" styleClass="normalText" text="Assigned:">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="1653.0" layoutY="202.0" prefHeight="35.0" prefWidth="235.0" styleClass="normalText" text="Available:">
+      <Label layoutX="447.0" layoutY="220.0" prefHeight="35.0" prefWidth="270.0" styleClass="normalText" text="Available:">
          <font>
             <Font size="24.0" />
          </font>

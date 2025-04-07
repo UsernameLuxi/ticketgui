@@ -508,7 +508,6 @@ public class MainWindowController extends Controller {
             // flyt buttons
             newUser.setLayoutY(75);
             manageCupons.setLayoutY(165);
-            System.out.println(newUser.getLayoutY());
         }
     }
 
