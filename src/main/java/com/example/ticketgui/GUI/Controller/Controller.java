@@ -38,6 +38,7 @@ public abstract class Controller implements IController {
                 case TextField txt -> txt.setFont(getFont(txt.getStyleClass(), width, height));
                 case TextArea txt -> txt.setFont(getFont(txt.getStyleClass(), width, height));
                 case SplitMenuButton smb -> smb.setFont(getFont(smb.getStyleClass(), width, height));
+                case DatePicker dp -> dp.setStyle("-fx-font-size:" + getFont(dp.getStyleClass(), width, height).getSize() +"px;");
                 default -> {
                 }
             }
