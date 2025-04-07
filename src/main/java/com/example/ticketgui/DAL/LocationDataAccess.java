@@ -31,6 +31,7 @@ public class LocationDataAccess implements IDataAccess<Location> {
 
     @Override
     public Location create(Location location) throws Exception {
+        // TODO : når det er så kan man godt undlade at gemme Postnummer i Locations tabellen -> fordi den er gemt ved cities tabellen
         String sql = "INSERT INTO Location (PostNummer, Vej) Values (?, ?)";
         DBConnector db = new DBConnector();
         try(Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {

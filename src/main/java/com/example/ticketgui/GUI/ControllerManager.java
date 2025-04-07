@@ -12,6 +12,7 @@ import com.example.ticketgui.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -51,6 +52,7 @@ public class ControllerManager {
             //System.out.println(e.getMessage());
         }
 
+        rootstage.getIcons().add(new Image(String.valueOf(Main.class.getResource("symbols/Ea-letters.png"))));
 
         try{
             setStage(Screens.LOGIN_WINDOW);
