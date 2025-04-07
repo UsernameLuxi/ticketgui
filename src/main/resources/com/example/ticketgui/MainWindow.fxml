@@ -44,7 +44,7 @@
          <children>
             <AnchorPane id="sideMenu" fx:id="sideMenu" minHeight="-Infinity" minWidth="-Infinity" prefHeight="974.0" prefWidth="355.0">
                <children>
-                  <AnchorPane fx:id="newEvent" layoutY="76.0" onMouseClicked="#newEventClick" prefHeight="60.0" prefWidth="355.0">
+                  <AnchorPane fx:id="newEvent" layoutX="15.0" layoutY="76.0" onMouseClicked="#newEventClick" prefHeight="60.0" prefWidth="335.0">
                      <children>
                         <ImageView fx:id="imgNewEvent" fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;">
                            <image>
@@ -62,7 +62,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="newUser" layoutY="166.0" onMouseClicked="#newUserClick" prefHeight="60.0" prefWidth="355.0">
+                  <AnchorPane fx:id="newUser" layoutX="15.0" layoutY="164.0" onMouseClicked="#newUserClick" prefHeight="60.0" prefWidth="335.0">
                      <children>
                         <ImageView fx:id="imgNewUser" fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;">
                            <image>
@@ -79,7 +79,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="manageCupons" layoutY="250.0" onMouseClicked="#manageCouponClick" prefHeight="60.0" prefWidth="355.0">
+                  <AnchorPane fx:id="manageCupons" layoutX="15.0" layoutY="248.0" onMouseClicked="#manageCouponClick" prefHeight="60.0" prefWidth="335.0">
                      <children>
                         <ImageView fx:id="imgManageCupons" fitHeight="56.0" fitWidth="56.0" layoutX="10.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: Blue;">
                            <image>
