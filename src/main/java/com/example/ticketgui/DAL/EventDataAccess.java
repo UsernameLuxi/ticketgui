@@ -157,7 +157,7 @@ public class EventDataAccess implements IEventDataAccess {
                 }
                 psReAddUsers.executeBatch();
 
-                // opdatere lokationen
+                // opdatere lokationen TODO : nok ikke nødvendig længere
                 if (event.getLocation().getId() == -1){
                     // laver lokationen i databasen hvis den ikke eksistere
                     event.setLocation(locDataAccess.create(event.getLocation()));
@@ -175,13 +175,14 @@ public class EventDataAccess implements IEventDataAccess {
                 psUp.setInt(8, event.getId());
                 psUp.executeUpdate();
 
-
                 conn.commit(); // committer ændringer
-                conn.setAutoCommit(true); // tilbage til gamle sættings
             } catch (Exception e) {
                 conn.rollback();
-                conn.setAutoCommit(true);
                 throw new Exception(e.getMessage());
+            }
+            finally{
+                // for at være sikker på at den bliver sat tilbage -> hvis nu den fejler osv.
+                conn.setAutoCommit(true);
             }
         }
         catch (Exception e) {
