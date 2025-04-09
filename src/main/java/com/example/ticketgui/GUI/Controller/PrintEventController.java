@@ -88,6 +88,8 @@ public class PrintEventController extends Controller {
     private TableColumn<Coupon, String> colSelectTitle;
     @FXML
     private TableColumn<Coupon, String> colSelectPrice;
+    @FXML
+    private ImageView imgEvent;
 
 
     @Override
@@ -106,6 +108,12 @@ public class PrintEventController extends Controller {
             add(imgBtnBack.getFitHeight() / height);
             add(imgBtnBack.getLayoutX() / width);
             add(imgBtnBack.getLayoutY() / height);}});
+
+        imageViews.put(imgEvent, new ArrayList<>(){{
+            add(imgEvent.getFitWidth() / width);
+            add(imgEvent.getFitHeight() / height);
+            add(imgEvent.getLayoutX() / width);
+            add(imgEvent.getLayoutY() / height);}});
 
         fillMap(windowContent, width, height);
 
