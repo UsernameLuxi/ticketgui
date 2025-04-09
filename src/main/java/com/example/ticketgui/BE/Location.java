@@ -36,6 +36,6 @@ public class Location {
 
     @Override
     public String toString() {
-        return street + ", " + postalCode + city;
+        return street + ", " + postalCode + " " + city;
     }
 }

@@ -139,7 +139,7 @@ public class PrintEventController extends Controller {
     private void printTicket(Ticket ticket) throws Exception {
         int sales = model.incrementSale(editEvent);
 
-        if (tblCouponsSelected.getItems().getFirst().getName().isEmpty())
+        if (tblCouponsSelected.getItems().isEmpty() || tblCouponsSelected.getItems().getFirst().getName().isEmpty())
             // do nothing or something
             ticket.setCouponList(new ArrayList<>());
         else

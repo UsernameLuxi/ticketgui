@@ -14,10 +14,11 @@ public class EventDataAccess implements IEventDataAccess {
     @Override
     public List<Event> getAll() throws Exception {
         String sql = "SELECT Events.ID, Events.Name, Events.Price, Events.Type, Category.Name, " +
-                "Events.DateTime, Events.Location, Location.PostNummer, Location.Vej, Events.Description, Events.EndDateTime " +
+                "Events.DateTime, Events.Location, Location.PostNummer, Location.Vej, Cities.CityName, Events.Description, Events.EndDateTime " +
                 "FROM Events " +
                 "INNER JOIN Category ON Events.Type = Category.ID " +
-                "INNER JOIN Location ON Events.Location = Location.ID;";
+                "INNER JOIN Location ON Events.Location = Location.ID " +
+                "INNER JOIN Cities ON Location.CityID = Cities.ID;";
 
         DBConnector dbConnector = new DBConnector();
         try(Connection conn = dbConnector.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -41,6 +42,7 @@ public class EventDataAccess implements IEventDataAccess {
         e.setEventType(new EventType(rs.getInt("Type"), rs.getString(5)));
         e.setDateTime(rs.getString("DateTime"));
         e.setLocation(new Location(rs.getInt("Location"), rs.getInt("PostNummer"), rs.getString("Vej")));
+        e.getLocation().setCity(rs.getString("CityName"));
         e.setDescription(rs.getString("Description"));
         e.setEndDateTime(rs.getString("EndDateTime"));
         e.setEventKoordinators(eventUsers);
@@ -208,11 +210,12 @@ public class EventDataAccess implements IEventDataAccess {
     @Override
     public List<Event> getEventAccess(User user) throws Exception {
         List<Event> eventList = new ArrayList<>();
-        String sql = "SELECT Events.ID, Events.Name, Events.Price, Events.Type, Category.Name, Events.DateTime, Events.Location, Location.PostNummer, Location.Vej, Events.Description, Events.EndDateTime" +
+        String sql = "SELECT Events.ID, Events.Name, Events.Price, Events.Type, Category.Name, Events.DateTime, Events.Location, Location.PostNummer, Location.Vej, Cities.CityName, Events.Description, Events.EndDateTime" +
                 " FROM EventAssignment" +
                 " INNER JOIN Events ON EventAssignment.EventID = Events.ID" +
                 " INNER JOIN Category ON Events.Type = Category.ID" +
                 " INNER JOIN Location ON Events.Location = Location.ID" +
+                " INNER JOIN Cities ON Location.CityID = Cities.ID" +
                 " WHERE UserID = ?;";
         DBConnector db = new DBConnector();
         try(Connection conn = db.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)){
