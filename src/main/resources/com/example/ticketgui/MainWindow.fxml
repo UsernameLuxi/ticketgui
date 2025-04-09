@@ -116,7 +116,7 @@
             </AnchorPane>
             <AnchorPane fx:id="dataPane" layoutX="355.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="368.0" prefWidth="1567.0" styleClass="backgroundMain">
                <children>
-                  <AnchorPane fx:id="data2" layoutX="267.0" layoutY="198.0" styleClass="dataItem">
+                  <AnchorPane fx:id="data2" layoutX="425.0" layoutY="70.0" styleClass="dataItem">
                      <children>
                         <Label fx:id="lvlData2Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" text="Events this month" textAlignment="CENTER">
                            <font>
@@ -139,7 +139,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="data3" layoutX="982.0" layoutY="70.0" prefHeight="95.0" prefWidth="318.0" styleClass="dataItem">
+                  <AnchorPane fx:id="data3" layoutX="805.0" layoutY="70.0" prefHeight="95.0" prefWidth="318.0" styleClass="dataItem">
                      <children>
                         <Label fx:id="lblData3Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" text="Events this week" textAlignment="CENTER">
                            <font>
@@ -162,7 +162,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="data1" layoutX="267.0" layoutY="68.0" styleClass="dataItem">
+                  <AnchorPane fx:id="data1" layoutX="45.0" layoutY="70.0" styleClass="dataItem">
                      <children>
                         <Label fx:id="lblData1Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" text="Active Events" textAlignment="CENTER">
                            <font>
@@ -185,7 +185,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="data4" layoutX="982.0" layoutY="188.0" prefWidth="139.0" styleClass="dataItem">
+                  <AnchorPane fx:id="data4" layoutX="1185.0" layoutY="70.0" prefWidth="139.0" styleClass="dataItem">
                      <children>
                         <Label fx:id="lblData4Title" alignment="CENTER" prefHeight="48.0" prefWidth="318.0" text="Active coupons" textAlignment="CENTER">
                            <font>
@@ -212,7 +212,7 @@
             </AnchorPane>
             <AnchorPane fx:id="eventOverview" layoutX="355.0" layoutY="368.0" prefHeight="606.0" prefWidth="1136.0" styleClass="backgroundMain">
                <children>
-                  <TableView fx:id="tblEvent" layoutX="26.0" layoutY="160.0" prefHeight="400.0" prefWidth="1109.0">
+                  <TableView fx:id="tblEvent" layoutX="26.0" layoutY="-3.0" prefHeight="565.0" prefWidth="1110.0">
                     <columns>
                       <TableColumn fx:id="colTitle" prefWidth="125.5999755859375" text="Event title" />
                       <TableColumn fx:id="colType" minWidth="0.0" prefWidth="75.99996948242188" text="Type" />
@@ -224,27 +224,27 @@
                         <TableColumn fx:id="colDel" minWidth="24.0" prefWidth="138.13330078125" text="Delete" />
                     </columns>
                   </TableView>
-                  <Label fx:id="lblEvent" layoutX="26.0" layoutY="83.0" prefHeight="47.0" prefWidth="199.0" styleClass="bigText" text="Events:">
+                  <Label fx:id="lblEvent" layoutX="26.0" layoutY="-80.0" prefHeight="47.0" prefWidth="199.0" styleClass="bigText" text="Events:">
                      <font>
                         <Font size="32.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lvlEventSearch" layoutX="235.0" layoutY="35.0" prefHeight="35.0" prefWidth="199.0" styleClass="normalText" text="Event title">
+                  <Label fx:id="lvlEventSearch" layoutX="235.0" layoutY="-128.0" prefHeight="35.0" prefWidth="199.0" styleClass="normalText" text="Event title">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblEventTypeSearch" layoutX="450.0" layoutY="35.0" prefHeight="35.0" prefWidth="200.0" styleClass="normalText" text="Event type">
+                  <Label fx:id="lblEventTypeSearch" layoutX="450.0" layoutY="-128.0" prefHeight="35.0" prefWidth="200.0" styleClass="normalText" text="Event type">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtEventTitle" layoutX="235.0" layoutY="83.0" prefHeight="50.0" prefWidth="200.0" styleClass="normalText">
+                  <TextField fx:id="txtEventTitle" layoutX="235.0" layoutY="-80.0" prefHeight="50.0" prefWidth="200.0" styleClass="normalText">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <SplitMenuButton fx:id="cbEventType" layoutX="450.0" layoutY="83.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" styleClass="normalText" text="None">
+                  <SplitMenuButton fx:id="cbEventType" layoutX="450.0" layoutY="-80.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" styleClass="normalText" text="None">
                     <items>
                       <MenuItem mnemonicParsing="false" text="Action 1" />
                       <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -260,12 +260,12 @@
             </AnchorPane>
             <AnchorPane fx:id="cuponsPane" layoutX="1489.0" layoutY="368.0" prefHeight="606.0" prefWidth="431.0" styleClass="backgroundMain">
                <children>
-                  <Label fx:id="lblCupons" layoutX="40.0" layoutY="65.0" prefHeight="47.0" prefWidth="350.0" styleClass="bigText" text="Coupons">
+                  <Label fx:id="lblCupons" layoutX="40.0" layoutY="-80.0" prefHeight="47.0" prefWidth="350.0" styleClass="bigText" text="Coupons:">
                      <font>
                         <Font size="32.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="tblCupons" layoutX="40.0" layoutY="160.0" prefHeight="400.0" prefWidth="350.0">
+                  <TableView fx:id="tblCupons" layoutX="40.0" layoutY="-3.0" prefHeight="565.0" prefWidth="350.0">
                     <columns>
                       <TableColumn fx:id="colCouponTilte" prefWidth="138.400146484375" text="Title" />
                         <TableColumn fx:id="colCouponEvent" prefWidth="133.60009765625" text="Event" />
