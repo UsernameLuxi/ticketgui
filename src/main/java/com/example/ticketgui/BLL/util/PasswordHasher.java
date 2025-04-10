@@ -11,10 +11,10 @@ public class PasswordHasher implements IHashing{
         byte[] hash = md.digest(input.getBytes(StandardCharsets.UTF_8));
         StringBuilder hexString = new StringBuilder();
         for (byte b : hash) {
-            //  This masks the byte b with 0xff (which is 11111111 in binary).
-            //  This operation ensures that the byte is treated as an unsigned value by discarding
-            //  any negative sign (since in Java, a byte is signed and can range from -128 to 127).
-            //  - allegedly
+            //  Dette masker byte-værdien b med 0xff (som er 11111111 i binær).
+            //  Denne operation sikrer, at byten behandles som en usigneret værdi ved at fjerne
+            //  et eventuelt negativt fortegn (da en byte i Java er signeret og kan have værdier fra -128 til 127).
+            //  - angiveligt
             String hex = Integer.toHexString(0xff & b);
             hexString.append(hex.length() == 1 ? "0" + hex : hex); // hvis det er 9 som kommer ud -> så bliver det 09 ;)
         }
